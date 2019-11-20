@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Volunter = db.define('volunteer', {
+const Volunteer = db.define('volunteer', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -35,6 +35,11 @@ const Volunter = db.define('volunteer', {
     type: Sequelize.ARRAY(Sequelize.STRING)
   },
   profilePic: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    validate: {
+      isUrl: true
+    }
   }
 })
+
+module.exports = Volunteer
