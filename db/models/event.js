@@ -1,60 +1,26 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Organization = db.define('organization', {
-  name: {
+const Event = db.define('event', {
+  title: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       isEmpty: false
     }
   },
-  contactFirstName: {
-    type: Sequelize.STRING,
+  startTime: {
+    type: Sequelize.DATE,
     allowNull: false,
     validate: {
       isEmpty: false
     }
   },
-  contactLastName: {
-    type: Sequelize.STRING,
+  endTime: {
+    type: Sequelize.DATE,
     allowNull: false,
     validate: {
       isEmpty: false
-    }
-  },
-  contactEmail: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true
-    }
-  },
-  contactPhone: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
-  },
-  missionStatement: {
-    type: Sequelize.TEXT,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
-  },
-  webUrl: {
-    type: Sequelize.STRING,
-    validate: {
-      isUrl: true
-    }
-  },
-  orgImage: {
-    type: Sequelize.STRING,
-    validate: {
-      isUrl: true
     }
   },
   address: {
@@ -63,7 +29,24 @@ const Organization = db.define('organization', {
     validate: {
       isEmpty: false
     }
+  },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    validate: {
+      isEmpty: false
+    }
+  },
+  volunteerTargetNum: {
+    type: Sequelize.INTEGER
+  },
+  eventImage: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isUrl: true
+    }
   }
 })
 
-module.exports = Organization
+module.exports = Event
