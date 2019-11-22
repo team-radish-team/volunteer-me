@@ -42,3 +42,22 @@ const createVolunteer = async () => {
     console.log(error)
   }
 }
+
+const createCategory = async () => {
+  try {
+    for (let i = 0; i < categories.length; i++) {
+      await Category.create({
+        name: categories[i]
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const createOrganization = async () => {
+  try {
+  } catch (error) {
+    console.log(error)
+  }
+}
