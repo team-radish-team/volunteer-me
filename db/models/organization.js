@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const crypto = require('crypto')
 
 const Organization = db.define('organization', {
   name: {
@@ -63,7 +64,62 @@ const Organization = db.define('organization', {
     validate: {
       isEmpty: false
     }
+  },
+  password: {
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('password')
+    }
+  },
+  salt: {
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('salt')
+    }
   }
+})
+
+/**
+ * instanceMethods
+ */
+Volunteer.prototype.correctPassword = function(candidatePwd) {
+  return (
+    Volunteer.encryptPassword(candidatePwd, this.salt()) === this.password()
+  )
+}
+
+/**
+ * classMethods
+ */
+Organization.generateSalt = function() {
+  return crypto.randomBytes(16).toString('base64')
+}
+
+Organization.encryptPassword = function(plainText, salt) {
+  return crypto
+    .createHash('RSA-SHA256')
+    .update(plainText)
+    .update(salt)
+    .digest('hex')
+}
+
+/**
+ * hooks
+ */
+const setSaltAndPassword = organization => {
+  if (organization.changed('password')) {
+    organization.salt = Organization.generateSalt()
+    organization.password = Organization.encryptPassword(
+      organization.password(),
+      organization.salt()
+    )
+  }
+}
+
+Organization.beforeCreate(setSaltAndPassword)
+Organization.beforeUpdate(setSaltAndPassword)
+Organization.beforeBulkCreate(organizations => {
+  organizations.forEach(setSaltAndPassword)
 })
 
 module.exports = Organization
