@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const crypto = require('crypto')
 
 const Volunteer = db.define('volunteer', {
   firstName: {
@@ -39,7 +40,62 @@ const Volunteer = db.define('volunteer', {
     validate: {
       isUrl: true
     }
+  },
+  password: {
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('password')
+    }
+  },
+  salt: {
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('salt')
+    }
   }
+})
+
+/**
+ * instanceMethods
+ */
+Volunteer.prototype.correctPassword = function(candidatePwd) {
+  return (
+    Volunteer.encryptPassword(candidatePwd, this.salt()) === this.password()
+  )
+}
+
+/**
+ * classMethods
+ */
+Volunteer.generateSalt = function() {
+  return crypto.randomBytes(16).toString('base64')
+}
+
+Volunteer.encryptPassword = function(plainText, salt) {
+  return crypto
+    .createHash('RSA-SHA256')
+    .update(plainText)
+    .update(salt)
+    .digest('hex')
+}
+
+/**
+ * hooks
+ */
+const setSaltAndPassword = volunteer => {
+  if (volunteer.changed('password')) {
+    volunteer.salt = Volunteer.generateSalt()
+    volunteer.password = Volunteer.encryptPassword(
+      volunteer.password(),
+      volunteer.salt()
+    )
+  }
+}
+
+Volunteer.beforeCreate(setSaltAndPassword)
+Volunteer.beforeUpdate(setSaltAndPassword)
+Volunteer.beforeBulkCreate(volunteers => {
+  volunteers.forEach(setSaltAndPassword)
 })
 
 module.exports = Volunteer
