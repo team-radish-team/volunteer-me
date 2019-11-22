@@ -4,10 +4,10 @@ const db = require('../db')
 const Category = db.define('category', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   }
 })
 

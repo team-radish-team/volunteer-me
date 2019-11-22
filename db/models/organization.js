@@ -5,24 +5,24 @@ const crypto = require('crypto')
 const Organization = db.define('organization', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   },
   contactFirstName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   },
   contactLastName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   },
   contactEmail: {
     type: Sequelize.STRING,
@@ -34,17 +34,17 @@ const Organization = db.define('organization', {
   },
   contactPhone: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   },
   missionStatement: {
     type: Sequelize.TEXT,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   },
   webUrl: {
     type: Sequelize.STRING,
@@ -60,10 +60,10 @@ const Organization = db.define('organization', {
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   },
   password: {
     type: Sequelize.STRING,
@@ -82,7 +82,7 @@ const Organization = db.define('organization', {
 /**
  * instanceMethods
  */
-Volunteer.prototype.correctPassword = function(candidatePwd) {
+Organization.prototype.correctPassword = function(candidatePwd) {
   return (
     Volunteer.encryptPassword(candidatePwd, this.salt()) === this.password()
   )
