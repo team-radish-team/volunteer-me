@@ -5,17 +5,17 @@ const crypto = require('crypto')
 const Volunteer = db.define('volunteer', {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   },
   email: {
     type: Sequelize.STRING,
@@ -27,10 +27,10 @@ const Volunteer = db.define('volunteer', {
   },
   phone: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
+    // validate: {
+    //   isEmpty: false
+    // }
   },
   interests: {
     type: Sequelize.ARRAY(Sequelize.STRING)
