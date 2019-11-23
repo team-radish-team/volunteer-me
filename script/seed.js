@@ -9,7 +9,11 @@ const {
   photoUrls
 } = require('./customSeedArrays/customOrganizationSeed')
 
-const {titleArr, descriptionArr} = require('./customSeedArrays/customEventSeed')
+const {
+  titleArr,
+  descriptionArr,
+  addressArr
+} = require('./customSeedArrays/customEventSeed')
 
 faker.seed(100)
 
@@ -74,7 +78,7 @@ async function seed() {
         0,
         0
       ),
-      address: 'meh',
+      address: addressArr[i],
       description: descriptionArr[i],
       volunteerTargetNum: faker.random.number({min: 3, max: 25})
     })

@@ -1,7 +1,3 @@
-let datePtr
-let hourNum
-const faker = require('faker')
-
 const titleArr = [
   "Professional Linebacker Nick Kwiatkosi's Care for Real Toy Drive at the Shops at North Bridge",
   'Chicago Youth Symphony Orchestras\' 2020 Gala; "An American in Paris"',
@@ -52,34 +48,108 @@ const descriptionArr = [
   "Complete with lemon yellow ties, heartwarming speeches by kids fighting cancer and fond remembrance of Alex Scott's lasting legacy, this annual event has inspired attendees since 2006."
 ]
 
-// const eventArr = [
-//   {
-//     startTime: new Date(
-//       `November 22, 2019 ${(datePtr = faker.random.number({
-//         min: 8,
-//         max: 20
-//       }))}:00:00`
-//     ),
-//     endTime: new Date(
-//       `November 22, 2019 ${datePtr +
-//         faker.random.number({min: 1, max: 3})}:00:00`
-//     ),
-//     address: 'wee',
-//     volunteerTargetNum: faker.random.number({min: 3, max: 25})
-//   },
-//   {
-//     startTime: (datePtr = faker.date
-//       .future(0.02, this.createdAt)
-//       .setHours((hourNum = faker.random.number({min: 8, max: 20})), 0, 0, 0)),
-//     endTime: new Date(datePtr).setHours(
-//       hourNum + faker.random.number({min: 1, max: 3}),
-//       0,
-//       0,
-//       0
-//     ),
-//     address: 'bleh',
-//     volunteerTargetNum: faker.random.number({min: 3, max: 25})
-//   }
-// ]
+const addressArr = [
+  '4250 N Saint Louis Ave',
+  '3711 W Douglas Blvd',
+  '3244 W Ainslie St',
+  '11710 S Morgan St',
+  '644 W 71st St',
+  '5625 N McVicker Ave',
+  '1104 W 31st St',
+  '620 N Sawyer Ave',
+  '955 W Garfield Blvd',
+  '720 N Lorel Ave',
+  '8905 S Crandon Ave',
+  '4247 W 15th St',
+  '3849 W 69th Pl',
+  '749 S Oakley Blvd',
+  '1340 W Harrison St',
+  '3149 N Wolcott Ave',
+  '5650 N Mozart St',
+  '3030 W Harrison St',
+  '1420 W 17th St',
+  '5608 W Washington Blvd',
+  '1420 S Albany Ave',
+  '1746 S Miller St',
+  '9241 S Leavitt St',
+  '6450 S Lowe Ave',
+  '6700 N Greenview Ave',
+  '5625 S Mobile Ave',
+  '4647 W 47th St',
+  '9351 S Lowe Ave',
+  '1501 N Greenview Ave',
+  '936 E 54th St',
+  '1734 N Orleans St',
+  '3500 W Douglas Blvd',
+  '1424 N Cleaver St',
+  '1431 N Leamington Ave',
+  '5300 S Loomis Blvd',
+  '615 W Kemper Pl',
+  '3221 N Sacramento Ave',
+  '2103 N Lamon Ave',
+  '2828 N Oak Park Ave',
+  '6333 W Bloomingdale Ave',
+  '3320 W Hirsch St',
+  '2941 N McVicker Ave',
+  '7433 S Dorchester Ave',
+  '1420 N Hudson Ave',
+  '8050 S Chappel Ave',
+  '6727 S California Ave',
+  '6550 S Richmond St',
+  '9822 S Exchange Ave',
+  '4217 W 18th St',
+  '2250 N Clifton Ave',
+  '3527 S Wallace St',
+  '6936 S Hermitage Ave',
+  '2712 S Sawyer Ave',
+  '4865 N Sheridan Rd',
+  '8801 S Indiana Ave',
+  '6901 S Fairfield Ave',
+  '4728 N Wolcott Ave',
+  '3937 W Wilcox St',
+  '2233 W Ohio St',
+  '4415 S Dr Martin L King Jr Dr',
+  '3651 W Schubert Ave',
+  '1711 N California Ave',
+  '6011 S Rockwell St',
+  '851 W Waveland Ave',
+  '5235 W Belden St',
+  '10841 S Homan Ave',
+  '10540 S Morgan St',
+  '2200 N Hamlin Ave',
+  '3539 W Grace St',
+  '5335 S Kenwood Ave',
+  '12607 S Union Ave',
+  '4837 W Erie St',
+  '8555 S Michigan Ave',
+  '11816 S Indiana Ave',
+  '3252 N Broadway St',
+  '700 W Willow St',
+  '901 E 133rd Pl',
+  '5250 S Rockwell St',
+  '2121 N Keeler Ave',
+  '4127 W Hirsch St',
+  '5900 N Nina Ave',
+  '24 W Walton St',
+  '7646 S Green St',
+  '6940 S Merrill Ave',
+  '6634 W Raven St',
+  '5424 N Oketo Ave',
+  '1040 N Keeler Ave',
+  '525 N Armour St',
+  '6550 S Seeley Ave',
+  '8247 S Christiana Ave',
+  '3711 W Douglas Blvd',
+  '5051 N Kenneth Ave',
+  '6800 S Stewart Ave',
+  '7037 S Rhodes Ave',
+  '6938 S East End Ave',
+  '5825 S Kostner Ave',
+  '3826 W 58th St',
+  '1423 W Bryn Mawr Ave',
+  '1616 S Avers Ave',
+  '9130 S University Ave',
+  '3200 S Calumet Ave'
+]
 
-module.exports = {descriptionArr, titleArr}
+module.exports = {descriptionArr, titleArr, addressArr}
