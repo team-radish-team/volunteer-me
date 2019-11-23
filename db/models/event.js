@@ -4,48 +4,26 @@ const db = require('../db')
 const Event = db.define('event', {
   title: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
   },
   startTime: {
     type: Sequelize.DATE,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
   },
   endTime: {
     type: Sequelize.DATE,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
+    allowNull: false
   },
   volunteerTargetNum: {
     type: Sequelize.INTEGER
-  },
-  eventImage: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isUrl: true
-    }
   }
 })
 
