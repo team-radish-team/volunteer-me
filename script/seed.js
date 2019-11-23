@@ -9,6 +9,12 @@ const {
   photoUrls
 } = require('./customSeedArrays/customOrganizationSeed')
 
+const {
+  titleArr,
+  descriptionArr,
+  addressArr
+} = require('./customSeedArrays/customEventSeed')
+
 faker.seed(100)
 
 const categories = [
@@ -57,6 +63,24 @@ async function seed() {
   for (let i = 0; i < categories.length; i++) {
     await Category.create({
       name: categories[i]
+    })
+  }
+
+  for (let i = 0; i < 22; i++) {
+    await Event.create({
+      title: titleArr[i],
+      startTime: (datePtr = faker.date
+        .future(0.02, this.createdAt)
+        .setHours((hourNum = faker.random.number({min: 8, max: 20})), 0, 0, 0)),
+      endTime: new Date(datePtr).setHours(
+        hourNum + faker.random.number({min: 1, max: 3}),
+        0,
+        0,
+        0
+      ),
+      address: addressArr[i],
+      description: descriptionArr[i],
+      volunteerTargetNum: faker.random.number({min: 3, max: 25})
     })
   }
 
