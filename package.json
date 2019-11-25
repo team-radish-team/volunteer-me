@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "native-base": "^2.13.8",
+    "neo4j-driver": "^1.7.6",
     "pg": "^7.14.0",
     "pg-hstore": "^2.3.3",
     "prettier": "^1.19.1",
