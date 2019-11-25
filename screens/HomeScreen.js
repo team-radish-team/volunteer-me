@@ -17,18 +17,16 @@ import VolunteerList from '../components/VolunteerList'
 
 export default function HomeScreen() {
   return (
-    <NativeRouter>
-      <Container>
-        <Header />
-        <Link to={'/map'}>
-          <Text>To the Map</Text>
-        </Link>
-        <Link to={'/volunteers'}>
-          <Text>To Volunteers</Text>
-        </Link>
-        {/* <VolunteerList /> */}
-      </Container>
-    </NativeRouter>
+    <Container>
+      <Header />
+      <Link to={'/map'}>
+        <Text>To the Map</Text>
+      </Link>
+      <Link to={'/volunteers'}>
+        <Text>To Volunteers</Text>
+      </Link>
+      {/* <VolunteerList /> */}
+    </Container>
   )
 }
 
