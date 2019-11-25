@@ -16,6 +16,7 @@ import {
   Body,
   Right
 } from 'native-base'
+import VolunteerCard from './VolunteerCard'
 
 const VolunteerList = () => {
   const dispatch = useDispatch()
@@ -25,8 +26,11 @@ const VolunteerList = () => {
   }, [])
   return (
     <React.Fragment>
-      {console.log(volunteers)}
-      <Text>Ok</Text>
+      <Content>
+        {volunteers.map(volunteer => {
+          return <VolunteerCard key={volunteer.id} volunteer={volunteer} />
+        })}
+      </Content>
     </React.Fragment>
   )
 }

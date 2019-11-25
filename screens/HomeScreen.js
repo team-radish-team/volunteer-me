@@ -1,8 +1,7 @@
 import * as WebBrowser from 'expo-web-browser'
 import React from 'react'
-import {Container, Header} from 'native-base'
-import {Link} from 'react-router-native'
-import Map from '../components/Map'
+import {Container, Header, Content} from 'native-base'
+import {Link, NativeRouter} from 'react-router-native'
 import {
   Image,
   Platform,
@@ -14,20 +13,22 @@ import {
 } from 'react-native'
 
 import {MonoText} from '../components/StyledText'
+import VolunteerList from '../components/VolunteerList'
 
 export default function HomeScreen() {
   return (
-    <Container>
-      <Header />
-      <ScrollView>
+    <NativeRouter>
+      <Container>
+        <Header />
         <Link to={'/map'}>
           <Text>To the Map</Text>
         </Link>
         <Link to={'/volunteers'}>
           <Text>To Volunteers</Text>
         </Link>
-      </ScrollView>
-    </Container>
+        {/* <VolunteerList /> */}
+      </Container>
+    </NativeRouter>
   )
 }
 

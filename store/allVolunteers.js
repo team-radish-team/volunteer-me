@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {ngrokSecret} from '../secrets'
 
 const GET_ALL_VOLUNTEERS = 'GET_ALL_VOLUNTEERS'
 
@@ -8,9 +9,7 @@ const defaultState = []
 
 export const getVolunteersThunk = () => async dispatch => {
   try {
-    console.log('in thunk')
-    console.log('key is', process.env.REACT_APP_NGROK_KEY)
-    const {data} = await axios.get(`${process.env.NGROK_KEY}/api/volunteers`)
+    const {data} = await axios.get(`${ngrokSecret}/api/volunteers`)
     dispatch(getVolunteers(data))
   } catch (error) {
     console.error('Error getting all volunteers', error)
