@@ -2,14 +2,13 @@ const Event = require('./event')
 const Organization = require('./organization')
 const Volunteer = require('./volunteer')
 const Category = require('./category')
+const VolunteerEvent = require('./VolunteerEvent')
 
-Volunteer.hasMany(Event)
-Event.belongsToMany(Volunteer, {through: 'VolunteerEvent'})
+Volunteer.belongstoMany(Event, {through: VolunteerEvent})
 
 Organization.hasMany(Event)
 Event.belongsTo(Organization)
 
-Category.hasMany(Volunteer)
 Volunteer.belongsToMany(Category, {through: 'VolunteerCategory'})
 
 Category.hasMany(Organization)
@@ -19,5 +18,6 @@ module.exports = {
   Event,
   Organization,
   Volunteer,
-  Category
+  Category,
+  VolunteerEvent
 }
