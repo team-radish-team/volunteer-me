@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Volunteer} = require('../../db/models/volunteer')
+const {Volunteer} = require('../../db/models')
 module.exports = router
 
 /**

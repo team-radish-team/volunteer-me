@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const compression = require('compression')
-const db = require('./db')
+const {db} = require('../db')
 const app = express()
 module.exports = app
 
@@ -18,7 +18,7 @@ const createApp = () => {
   app.use(compression())
 
   // auth and api routes
-  app.use('/auth', require('./auth'))
+  //app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
 
   // static file-serving middleware
@@ -62,15 +62,17 @@ async function bootApp() {
   await createApp()
   await startListening()
 }
+
+bootApp()
 // This evaluates as true when this file is run directly from the command line,
 // i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)
 // It will evaluate false when this module is required by another module - for example,
 // if we wanted to require our app in a test spec
-if (require.main === module) {
-  bootApp()
-} else {
-  createApp()
-}
+// if (require.main === module) {
+//   bootApp()
+// } else {
+//   createApp()
+// }
 
 // const {sendPasswordResetEmail} = require("./utils")
 // sendPasswordResetEmail("https://www.youtube.com/watch?v=oHg5SJYRHA0","")

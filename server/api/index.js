@@ -2,8 +2,8 @@ const router = require('express').Router()
 module.exports = router
 
 router.use('/volunteers', require('./volunteer'))
-router.use('/organizations', require('./organization'))
-router.use('/categories', require('./category'))
+//router.use('/organizations', require('./organization'))
+//router.use('/categories', require('./category'))
 
 router.use((req, res, next) => {
   console.log('ERROR\n\n')

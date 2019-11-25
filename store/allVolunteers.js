@@ -9,7 +9,8 @@ const defaultState = []
 export const getVolunteersThunk = () => async dispatch => {
   try {
     console.log('in thunk')
-    const {data} = await axios.get('/api/volunteers')
+    console.log('key is', process.env.REACT_APP_NGROK_KEY)
+    const {data} = await axios.get(`${process.env.NGROK_KEY}/api/volunteers`)
     dispatch(getVolunteers(data))
   } catch (error) {
     console.error('Error getting all volunteers', error)
