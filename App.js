@@ -6,8 +6,11 @@ import {Platform, StatusBar, StyleSheet, View} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import {NativeRouter, Route} from 'react-router-native'
 import ReactMap from './components/Map'
+import {Provider} from 'react-redux'
+import store from './store'
 
 import AppNavigator from './navigation/AppNavigator'
+import VolunteerList from './components/VolunteerList'
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false)
@@ -22,16 +25,19 @@ export default function App(props) {
     )
   } else {
     return (
-      <NativeRouter>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-          <Route exact path="/" />
-          <Route path="/volunteer" />
-          <Route path="/event" />
-          <Route exact path="/map" component={ReactMap} />
-        </View>
-      </NativeRouter>
+      <Provider store={store}>
+        <NativeRouter>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <AppNavigator />
+            <Route exact path="/" />
+            <Route path="/volunteer" />
+            <Route path="/event" />
+            <Route exact path="/map" component={ReactMap} />
+            <Route exact path="/volunteers" component={VolunteerList} />
+          </View>
+        </NativeRouter>
+      </Provider>
     )
   }
 }

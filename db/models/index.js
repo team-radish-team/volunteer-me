@@ -4,7 +4,7 @@ const Volunteer = require('./volunteer')
 const Category = require('./category')
 const VolunteerEvent = require('./VolunteerEvent')
 
-Volunteer.belongstoMany(Event, {through: VolunteerEvent})
+Volunteer.belongsToMany(Event, {through: VolunteerEvent})
 
 Organization.hasMany(Event)
 Event.belongsTo(Organization)

@@ -23,6 +23,9 @@ export default function HomeScreen() {
         <Link to={'/map'}>
           <Text>To the Map</Text>
         </Link>
+        <Link to={'/volunteers'}>
+          <Text>To Volunteers</Text>
+        </Link>
       </ScrollView>
     </Container>
   )
