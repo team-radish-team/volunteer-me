@@ -21,27 +21,30 @@ const styles = StyleSheet.create({
   }
 })
 
-const VolunteerCard = props => {
+const VolunteerCard = () => {
   return (
-    <Card>
-      <CardItem>
-        <Left>
-          <Thumbnail
-            source={{
-              uri: props.volunteer.profilePic
+    <Content>
+      <Card>
+        <CardItem>
+          <Left>
+            <Thumbnail
+              source={{
+                uri:
+                  'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
+              }}
+            />
+          </Left>
+          <Body
+            style={{
+              display: 'flex',
+              justifyContent: 'center'
             }}
-          />
-        </Left>
-        <Body
-          style={{
-            display: 'flex',
-            justifyContent: 'center'
-          }}
-        >
-          <Text style={styles.name}>{props.volunteer.firstName}</Text>
-        </Body>
-      </CardItem>
-    </Card>
+          >
+            <Text style={styles.name}>Andrew P.</Text>
+          </Body>
+        </CardItem>
+      </Card>
+    </Content>
   )
 }
 
