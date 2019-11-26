@@ -1,16 +1,6 @@
 import React from 'react'
 import MapView, {Marker} from 'react-native-maps'
 import {StyleSheet, Dimensions, View} from 'react-native'
-import {
-  Container,
-  Header,
-  Content,
-  Footer,
-  FooterTab,
-  Button,
-  Icon,
-  Text
-} from 'native-base'
 
 let {height, width} = Dimensions.get('window')
 const styles = StyleSheet.create({
