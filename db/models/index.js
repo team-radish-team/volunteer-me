@@ -10,6 +10,7 @@ Organization.hasMany(Event)
 Event.belongsTo(Organization)
 
 Volunteer.belongsToMany(Category, {through: 'VolunteerCategory'})
+Category.belongsToMany(Volunteer, {through: 'VolunteerCategory'})
 
 Category.hasMany(Organization)
 Organization.belongsTo(Category)
