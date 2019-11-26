@@ -13,8 +13,8 @@ import {Provider} from 'react-redux'
 import store from './store'
 
 import VolunteerList from './components/VolunteerList'
-import HomeScreen from './screens/HomeScreen'
-import EventList from './screens/EventList'
+import HomeScreen from './components/HomeScreen'
+import EventList from './components/EventList'
 
 const AppNavigator = createBottomTabNavigator(
   {
