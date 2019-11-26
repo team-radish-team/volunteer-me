@@ -8,8 +8,10 @@ const {
   VolunteerEvent
 } = require('../db/index')
 
+//dummyEvents Imports
 const {dummyEvents} = require('./customSeedArrays/dummyEvents')
 
+//dummyVolunteers Imports
 const {dummyVolunteers} = require('./customSeedArrays/dummyVolunteers')
 
 //customOrganizationSeed Imports
@@ -28,6 +30,7 @@ const {
   addressArr
 } = require('./customSeedArrays/customEventSeed')
 
+//seed for consistency
 faker.seed(100)
 
 const categories = [
