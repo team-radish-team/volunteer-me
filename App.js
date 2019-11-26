@@ -16,19 +16,18 @@ import VolunteerList from './components/VolunteerList'
 import HomeScreen from './components/HomeScreen'
 import EventList from './components/EventList'
 
-const AppNavigator = createBottomTabNavigator(
+const VolunteerTabs = createBottomTabNavigator(
   {
-    Home: HomeScreen,
-    Volunteers: VolunteerList,
+    Events: EventList,
     Map: ReactMap,
-    Events: EventList
+    Profile: VolunteerList
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Events'
   }
 )
 
-const AppContainer = createAppContainer(AppNavigator)
+const AppContainer = createAppContainer(VolunteerTabs)
 
 export default function App() {
   return (
