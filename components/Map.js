@@ -1,6 +1,9 @@
-import React from 'react'
-import MapView, {Marker} from 'react-native-maps'
+import React, {useEffect} from 'react'
+import MapView, {Marker, Callout} from 'react-native-maps'
 import {StyleSheet, Dimensions, View} from 'react-native'
+import {useDispatch, useSelector} from 'react-redux'
+import {getEventsThunk} from '../store/allEvents'
+import EventCard from './EventCard'
 
 let {height, width} = Dimensions.get('window')
 const styles = StyleSheet.create({
@@ -299,6 +302,11 @@ const mapStyle = [
   }
 ]
 const ReactMap = () => {
+  const dispatch = useDispatch()
+  const events = useSelector(state => state.allEvents)
+  useEffect(() => {
+    dispatch(getEventsThunk())
+  }, [])
   return (
     <MapView
       provider={'google'}
@@ -312,11 +320,21 @@ const ReactMap = () => {
         longitudeDelta: 0.0421
       }}
     >
-      <Marker
-        coordinate={{latitude: 41.895322, longitude: -87.639035}}
-        title={'Fullstack'}
-        description={'My favorite place?'}
-      />
+      {events.map(event => {
+        return (
+          <Marker
+            key={event.id}
+            coordinate={{
+              latitude: Number(event.latitude),
+              longitude: Number(event.longitude)
+            }}
+          >
+            <Callout>
+              <EventCard event={event} />
+            </Callout>
+          </Marker>
+        )
+      })}
     </MapView>
   )
 }

@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 })
 
 const EventCard = props => {
-  //console.log(props.event)
   return (
     <Card>
       <CardItem
