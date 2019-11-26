@@ -18,7 +18,7 @@ import {
 } from 'native-base'
 
 const EventPage = props => {
-  console.log(props.navigation.state.params)
+  //console.log(props.navigation.state.params)
   const event = props.navigation.state.params
   return (
     <React.Fragment>
