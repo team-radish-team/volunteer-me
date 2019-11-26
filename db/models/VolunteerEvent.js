@@ -2,6 +2,8 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const neo4j = require('neo4j-driver').v1
 
+import {neo4jsecret} from '../../secrets'
+
 // :7687
 
 var driver = neo4j.driver(
