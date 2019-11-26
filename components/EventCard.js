@@ -21,16 +21,19 @@ const styles = StyleSheet.create({
   }
 })
 
-const VolunteerCard = props => {
+const EventCard = props => {
   return (
     <Card>
       <CardItem>
         <Left>
-          <Thumbnail
-            source={{
-              uri: props.volunteer.profilePic
-            }}
-          />
+          {/* <Thumbnail
+            source={
+              {
+                uri: props.event.profilePic
+              }
+            }
+          /> */}
+          <Text>{props.event.title}</Text>
         </Left>
         <Body
           style={{
@@ -38,11 +41,12 @@ const VolunteerCard = props => {
             justifyContent: 'center'
           }}
         >
-          <Text style={styles.name}>{props.volunteer.firstName}</Text>
+          {/* <Text style={styles.name}>{props.event.description}</Text> */}
+          <Text>{props.event.address}</Text>
         </Body>
       </CardItem>
     </Card>
   )
 }
 
-export default VolunteerCard
+export default EventCard
