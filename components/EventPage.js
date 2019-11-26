@@ -17,6 +17,8 @@ import {
   Right
 } from 'native-base'
 
+import normalize from '../utilities/timeConverter'
+
 const EventPage = props => {
   //console.log(props.navigation.state.params)
   const event = props.navigation.state.params
@@ -35,8 +37,9 @@ const EventPage = props => {
         <Text>Organization Name</Text>
         <Text></Text>
         <Text>
-          {event.startTime.slice(5, 9)} from {event.startTime.slice(12, 16)} -{' '}
-          {event.endTime.slice(12, 16)}
+          {event.startTime.slice(5, 10)} from{' '}
+          {normalize(event.startTime.slice(11, 16))} -{' '}
+          {normalize(event.endTime.slice(11, 16))}
         </Text>
         <Text>{event.address}</Text>
         <Text>{event.description}</Text>
