@@ -22,9 +22,13 @@ const styles = StyleSheet.create({
 })
 
 const EventCard = props => {
+  //console.log(props.event)
   return (
     <Card>
-      <CardItem button onPress={() => props.navigation.navigate('EventPage')}>
+      <CardItem
+        button
+        onPress={() => props.navigation.navigate('EventPage', props.event)}
+      >
         <Left>
           {/* <Thumbnail
             source={
