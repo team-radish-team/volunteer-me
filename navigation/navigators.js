@@ -3,7 +3,8 @@ import {createStackNavigator, createBottomTabNavigator} from 'react-navigation'
 
 // EventStack screens
 import EventList from '../components/EventList'
-//import SingleEventModal from ...
+import EventPage from '../components/EventPage'
+import EventCard from '../components/EventCard'
 
 // MapStack screens
 import ReactMap from '../components/Map'
@@ -22,8 +23,9 @@ import HomeScreen from '../components/HomeScreen'
 // stack for VolunteerEvents tab
 export const EventsStack = createStackNavigator(
   {
-    EventList: EventList
-    //EventPage: EventPage
+    EventList: EventList,
+    EventPage: EventPage,
+    EventCard: EventCard
   },
   {
     initialRouteName: 'EventList'

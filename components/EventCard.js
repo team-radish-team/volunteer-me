@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 const EventCard = props => {
   return (
     <Card>
-      <CardItem>
+      <CardItem button onPress={() => props.navigation.navigate('EventPage')}>
         <Left>
           {/* <Thumbnail
             source={

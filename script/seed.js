@@ -111,24 +111,6 @@ const dummyEvents = [
   }
 ]
 
-// const testSeed = async () => {
-//   try {
-//     await db.sync({force: true})
-//     const seededVolunteers = await Promise.all(
-//       dummyVolunteers.map(volunteer => Volunteer.create(volunteer))
-//     )
-//     const seededEvents = await Promise.all(
-//       dummyEvents.map(event => Event.create(event))
-//     )
-//     let volun = seededVolunteers[0]
-//     volun.addEvent(seededEvents[0])
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// testSeed()
-
 const {
   organizationNames,
   missionStatements,
