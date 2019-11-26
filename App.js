@@ -14,12 +14,14 @@ import store from './store'
 
 import VolunteerList from './components/VolunteerList'
 import HomeScreen from './screens/HomeScreen'
+import EventList from './screens/EventList'
 
 const AppNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
     Volunteers: VolunteerList,
-    Map: ReactMap
+    Map: ReactMap,
+    Events: EventList
   },
   {
     initialRouteName: 'Home'
