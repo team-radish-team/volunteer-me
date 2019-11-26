@@ -121,7 +121,8 @@ async function seed() {
       latitude: lat[i + 5],
       longitude: long[i + 5],
       description: descriptionArr[i],
-      volunteerTargetNum: faker.random.number({min: 3, max: 25})
+      volunteerTargetNum: faker.random.number({min: 3, max: 25}),
+      isActive: true
     })
   }
 
@@ -142,7 +143,8 @@ async function seed() {
       description: descriptionArr[i],
       latitude: lat[i + 5],
       longitude: long[i + 5],
-      volunteerTargetNum: faker.random.number({min: 3, max: 25})
+      volunteerTargetNum: faker.random.number({min: 3, max: 25}),
+      isActive: false
     })
   }
 

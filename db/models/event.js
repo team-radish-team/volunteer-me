@@ -31,6 +31,9 @@ const Event = db.define('event', {
   },
   volunteerTargetNum: {
     type: Sequelize.INTEGER
+  },
+  isActive: {
+    type: Sequelize.BOOLEAN
   }
 })
 
