@@ -1,11 +1,14 @@
-const neo4j = require('neo4j-driver')
-const db = require('../db')
+const neo4j = require('neo4j-driver').v1
 
-var driver = neo4j.driver(
-  'neo4j://localhost',
-  neo4j.auth.basic('neo4j', 'neo4j')
+const driver = neo4j.driver(
+  'bolt://localhost:7687',
+  neo4j.auth.basic('neo4j', '12345')
 )
 
-var session = driver.session({})
+driver.onCompleted = () => {
+  console.log('Driver created')
+}
 
-session.run('MERGE (v1:Volunteer)-[rel:HAS_ATTENDED]->(v2:Volunteer)')
+const session = driver.session()
+
+app.set('neo4jsession', driver.session)
