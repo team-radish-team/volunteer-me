@@ -27,7 +27,9 @@ const {
 const {
   titleArr,
   descriptionArr,
-  addressArr
+  addressArr,
+  lat,
+  long
 } = require('./customSeedArrays/customEventSeed')
 
 //seed for consistency
@@ -79,15 +81,15 @@ async function seed() {
   const seededVolunteers = await Promise.all(
     dummyVolunteers.map(volunteer => Volunteer.create(volunteer))
   )
-  const seededEvents = await Promise.all(
-    dummyEvents.map(event => Event.create(event))
-  )
+  // const seededEvents = await Promise.all(
+  //   dummyEvents.map(event => Event.create(event))
+  // )
 
-  let volun = seededVolunteers[0]
-  volun.addEvent(seededEvents)
+  // let volun = seededVolunteers[0]
+  // volun.addEvent(seededEvents)
 
-  let volun2 = seededVolunteers[1]
-  volun2.addEvent(seededEvents[1])
+  // let volun2 = seededVolunteers[1]
+  // volun2.addEvent(seededEvents[1])
 
   // await VolunteerEvent.createHasAttended(1, 1)
   // await VolunteerEvent.createHasAttended(1, 2)
@@ -116,6 +118,8 @@ async function seed() {
         0
       ),
       address: addressArr[i],
+      latitude: lat[i + 5],
+      longitude: long[i + 5],
       description: descriptionArr[i],
       volunteerTargetNum: faker.random.number({min: 3, max: 25}),
       isActive: true
@@ -137,7 +141,9 @@ async function seed() {
       ),
       address: addressArr[i],
       description: descriptionArr[i],
-      volunteerTargetNum: faker.random.number({min: 3, max: 25}),
+      latitude: lat[i + 5],
+      longitude: long[i + 5],
+      volunteerTargetNum: faker.random.number({min: 3, max: 25})
       isActive: false
     })
   }
