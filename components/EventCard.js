@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 })
 
 const EventCard = props => {
-  console.log(props.event.address)
   return (
     <Card>
       <CardItem button onPress={() => props.navigation.navigate('EventPage')}>
