@@ -117,7 +117,8 @@ async function seed() {
       ),
       address: addressArr[i],
       description: descriptionArr[i],
-      volunteerTargetNum: faker.random.number({min: 3, max: 25})
+      volunteerTargetNum: faker.random.number({min: 3, max: 25}),
+      isActive: true
     })
   }
 
@@ -136,7 +137,8 @@ async function seed() {
       ),
       address: addressArr[i],
       description: descriptionArr[i],
-      volunteerTargetNum: faker.random.number({min: 3, max: 25})
+      volunteerTargetNum: faker.random.number({min: 3, max: 25}),
+      isActive: false
     })
   }
 
