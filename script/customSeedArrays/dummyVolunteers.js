@@ -1,3 +1,5 @@
+const faker = require('faker')
+
 const dummyVolunteers = [
   {
     firstName: faker.name.firstName(),
