@@ -1,14 +1,16 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
+import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
+import {composeWithDevTools} from 'redux-devtools-extension'
 import allVolunteers from './allVolunteers'
-import allEvents from './allEvents'
 
 const reducer = combineReducers({
-  allVolunteers,
-  allEvents
+  allVolunteers
 })
 
-const middleware = applyMiddleware(thunkMiddleware)
+const middleware = composeWithDevTools(
+  applyMiddleware(thunkMiddleware /*, createLogger({ collapsed: true })*/)
+)
 
 const store = createStore(reducer, middleware)
 
