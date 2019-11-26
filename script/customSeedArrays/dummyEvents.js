@@ -1,3 +1,5 @@
+const faker = require('faker')
+
 const dummyEvents = [
   {
     title: 'Wag upon a Time',
