@@ -55,7 +55,7 @@ class OrgLogin extends React.Component {
         >
           <Form
             ref="form"
-            type={Vol}
+            type={Org}
             value={this.state.value}
             onChange={this.onChange}
           />
