@@ -1,41 +1,47 @@
 import React, {useState} from 'react'
 import {createVolunteerThunk} from '../store/singleVolunteer'
-import {useSelector, useDispatch, Provider} from 'react-redux'
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  SafeAreaView
-} from 'react-native'
+import {useSelector, useDispatch} from 'react-redux'
+import {Text} from 'react-native'
 
 import {
   Header,
   Container,
   Footer,
   Content,
-  Left,
   Button,
-  Right,
-  Body,
-  Card,
   Icon,
-  CardItem,
-  FooterTab,
   Form,
   Item,
-  Input,
-  Label
+  Input
 } from 'native-base'
+import {ScrollableComponent} from 'react-native-keyboard-aware-scroll-view'
 
-export default function App() {
-  const [isReady, setIsReady] = useState(false)
+const SignupPage = () => {
   const dispatch = useDispatch()
+  const initialState = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    password: ''
+  }
+  const [form, setForm] = useState(initialState)
 
-  handleSubmit = () => {
+  const handleChange = (event, name) => {
+    console.log('handling change')
+    console.log('name', name)
+    setForm({...form, [name]: event.nativeEvent.text})
+    console.log(form)
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+
     console.log('submitting')
-    dispatch(createVolunteerThunk())
+    console.log(form)
+
+    dispatch(createVolunteerThunk(form))
+    console.log('finished submitting front end')
   }
 
   return (
@@ -43,25 +49,41 @@ export default function App() {
       <Header />
       <Content>
         <Form style={{paddingBottom: 40}}>
-          <Item floatingLabel>
+          <Item floatingLabel onChange={() => setFirstName()}>
             <Icon active name="md-person" type="Ionicons" />
-            <Input placeholder="First name" />
+            <Input
+              placeholder="First name"
+              onChange={event => handleChange(event, 'firstName')}
+            />
           </Item>
           <Item floatingLabel>
             <Icon active name="profile" type="AntDesign" />
-            <Input placeholder="Last name" />
+            <Input
+              placeholder="Last name"
+              onChange={event => handleChange(event, 'lastName')}
+            />
           </Item>
           <Item floatingLabel>
             <Icon active name="email" type="MaterialIcons" />
-            <Input placeholder="email" />
+            <Input
+              placeholder="email"
+              onChange={event => handleChange(event, 'email')}
+            />
           </Item>
           <Item floatingLabel>
             <Icon active name="phone" type="FontAwesome" />
-            <Input placeholder="phone" />
+            <Input
+              placeholder="phone"
+              onChange={event => handleChange(event, 'phone')}
+            />
           </Item>
           <Item floatingLabel>
             <Icon active name="lock" type="Entypo" />
-            <Input placeholder="password" secureTextEntry={true} />
+            <Input
+              placeholder="password"
+              secureTextEntry={true}
+              onChange={event => handleChange(event, 'password')}
+            />
           </Item>
           <Item floatingLabel last>
             <Icon active name="lock" type="Entypo" />
@@ -69,7 +91,7 @@ export default function App() {
           </Item>
         </Form>
 
-        <Button block onPress={this.handleSubmit}>
+        <Button block onPress={handleSubmit}>
           <Text>Submit</Text>
         </Button>
       </Content>
@@ -77,3 +99,5 @@ export default function App() {
     </Container>
   )
 }
+
+export default SignupPage

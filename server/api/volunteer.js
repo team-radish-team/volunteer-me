@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:volunteerId', async (req, res, next) => {
   try {
     console.log(req.session)
-    let user = await User.findByPk(req.params.userId)
+    let user = await Volunteer.findByPk(req.params.userId)
     res.json(user)
   } catch (err) {
     next(err)
@@ -32,16 +32,16 @@ router.get('/:volunteerId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    let user = await User.create({
-      firstName: 'Kate',
-      lastName: 'Murray',
-      email: 'kate@kate.com',
-      phone: '617-680-7809',
-      profilePic: 'wwww.robothash.org/kate',
-      password: 'thingthingthing'
+    let volunteer = await Volunteer.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phone: req.body.phone,
+      password: req.body.password,
+      interests: req.body.interests ? req.body.interests : null,
+      profilePic: req.body.profilePic ? req.body.profilePic : null
     })
-    console.log('in API', user)
-    res.json(user)
+    res.json(volunteer)
   } catch (err) {
     next(err)
   }

@@ -1,6 +1,6 @@
 const Event = require('./event')
 const Organization = require('./organization')
-const Volunteer = require('./volunteer')
+const Volunteer = require('./Volunteer')
 const Category = require('./category')
 const VolunteerEvent = require('./VolunteerEvent')
 

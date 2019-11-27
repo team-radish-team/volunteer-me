@@ -6,24 +6,24 @@ const CREATE_VOLUNTEER = 'CREATE_VOLUNTEER'
 const UPDATE_VOLUNTEER = 'UPDATE_VOLUNTEER'
 
 //action creators
-export const createVolunteer = volunteer => {
-  type: CREATE_VOLUNTEER, volunteer
-}
+export const createVolunteer = volunteer => ({
+  type: CREATE_VOLUNTEER,
+  volunteer
+})
 
-export const updateVolunteer = volunteer => {
-  {
-    type: UPDATE_VOLUNTEER, volunteer
-  }
-}
+export const updateVolunteer = volunteer => ({
+  type: UPDATE_VOLUNTEER,
+  volunteer
+})
 
 //thunks
 
-export const createVolunteerThunk = () => async dispatch => {
+export const createVolunteerThunk = volunteer => async dispatch => {
   try {
-    const {data} = await axios.post(`/api/volunteers`)
+    const {data} = await axios.post(`${ngrokSecret}/api/volunteers`, volunteer)
     dispatch(createVolunteer(data))
   } catch (err) {
-    console.log('error creating volunteer')
+    console.error(err)
   }
 }
 
@@ -32,7 +32,7 @@ export const updateVolunteerThunk = volunteer => async dispatch => {
     const {data} = await axios.update(`/api/volunteers/${volunteer.id}`)
     dispatch(updateOrder(data))
   } catch (err) {
-    console.log('error updating volunteer')
+    console.error(err)
   }
 }
 
