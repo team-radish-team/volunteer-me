@@ -35,8 +35,8 @@ const options = {
 }
 
 class VolLogin extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {}
   }
   onChange = value => {
@@ -59,7 +59,11 @@ class VolLogin extends React.Component {
             value={this.state.value}
             onChange={this.onChange}
           />
-          <Button rounded info>
+          <Button
+            rounded
+            info
+            onPress={() => this.props.navigation.navigate('Volunteer')}
+          >
             <Text>Login</Text>
           </Button>
         </Container>

@@ -1,5 +1,9 @@
 // Navigators
-import {createStackNavigator, createBottomTabNavigator} from 'react-navigation'
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+  createSwitchNavigator
+} from 'react-navigation'
 
 // LoginStack screens
 import UserSelect from '../components/UserSelect'
@@ -73,3 +77,9 @@ export const VolunteerTabs = createBottomTabNavigator(
     order: ['Events', 'Map', 'Profile']
   }
 )
+
+export const EntireApp = createSwitchNavigator({
+  Login: LoginStack,
+  // Organization: OrganizationTabs,
+  Volunteer: VolunteerTabs
+})

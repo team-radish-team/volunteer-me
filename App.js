@@ -7,10 +7,10 @@ import {createAppContainer} from 'react-navigation'
 import ReactMap from './components/Map'
 import {Provider} from 'react-redux'
 import store from './store'
-import {VolunteerTabs, LoginStack} from './navigation/navigators'
+import {EntireApp} from './navigation/navigators'
 import {AppLoading} from 'expo'
 
-const AppContainer = createAppContainer(LoginStack)
+const AppContainer = createAppContainer(EntireApp)
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false)
