@@ -78,9 +78,9 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const seededVolunteers = await Promise.all(
-    dummyVolunteers.map(volunteer => Volunteer.create(volunteer))
-  )
+  // const seededVolunteers = await Promise.all(
+  //   dummyVolunteers.map(volunteer => Volunteer.create(volunteer))
+  // )
   // const seededEvents = await Promise.all(
   //   dummyEvents.map(event => Event.create(event))
   // )
