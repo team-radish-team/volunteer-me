@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {createVolunteerThunk} from '../store/singleVolunteer'
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {Text} from 'react-native'
 
 import {
@@ -14,7 +14,6 @@ import {
   Item,
   Input
 } from 'native-base'
-import {ScrollableComponent} from 'react-native-keyboard-aware-scroll-view'
 
 const SignupPage = () => {
   const dispatch = useDispatch()
@@ -28,20 +27,15 @@ const SignupPage = () => {
   const [form, setForm] = useState(initialState)
 
   const handleChange = (event, name) => {
-    console.log('handling change')
-    console.log('name', name)
     setForm({...form, [name]: event.nativeEvent.text})
-    console.log(form)
   }
 
   const handleSubmit = event => {
     event.preventDefault()
 
-    console.log('submitting')
-    console.log(form)
-
     dispatch(createVolunteerThunk(form))
     console.log('finished submitting front end')
+    alert('Thanks for signing up!')
   }
 
   return (

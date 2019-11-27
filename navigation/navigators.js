@@ -71,8 +71,8 @@ export const VolunteerTabs = createBottomTabNavigator(
   {
     Events: EventsStack,
     Map: MapStack,
-    Profile: SignupStack
-    // Profile: VolunteerProfileStack
+    // Profile: SignupStack
+    Profile: VolunteerProfileStack
   },
   {
     order: ['Events', 'Map', 'Profile']
