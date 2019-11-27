@@ -74,9 +74,22 @@ const createVolunteer = async () => {
   }
 }
 
+//neo4j
+const neo4j = require('neo4j-driver').v1
+var driver = neo4j.driver(
+  'bolt://localhost',
+  neo4j.auth.basic('neo4j', 'teamRadish')
+)
+driver.onCompleted = () => {
+  console.log('Driver created')
+}
+const session = driver.session()
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+
+  session.run('MATCH (n) DETACH DELETE n')
 
   // const seededVolunteers = await Promise.all(
   //   dummyVolunteers.map(volunteer => Volunteer.create(volunteer))

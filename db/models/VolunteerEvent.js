@@ -29,13 +29,14 @@ const VolunteerEvent = db.define('VolunteerEvent', {
   //   }
 })
 
+//Creates associations between volunteers and events by a has_attended relationship
 VolunteerEvent.afterBulkCreate(function(volunteerEvents) {
   volunteerEvents.map(volunteerEvent =>
     session.run(
-      `MERGE (v:Volunteer{id: ${volunteerEvent.volunteerId} }) MERGE (e:Event{id:${volunteerEvent.eventId}}) MERGE (v)-[:HAS_ATTENDED]->(e)`
+      `MERGE (v:Volunteer{volunteerId: ${volunteerEvent.volunteerId} }) MERGE (e:Event{eventId:${volunteerEvent.eventId}}) MERGE (v)-[:HAS_ATTENDED]->(e)`
     )
   )
-  session.close()
+  //session.close()
 })
 
 // VolunteerEvent.addHook('afterCreate', function(volunteerEvent) {

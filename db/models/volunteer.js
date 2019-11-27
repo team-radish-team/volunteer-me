@@ -2,6 +2,16 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const crypto = require('crypto')
 
+const neo4j = require('neo4j-driver').v1
+var driver = neo4j.driver(
+  'bolt://localhost',
+  neo4j.auth.basic('neo4j', 'teamRadish')
+)
+driver.onCompleted = () => {
+  console.log('Driver created')
+}
+const session = driver.session()
+
 const Volunteer = db.define('volunteer', {
   firstName: {
     type: Sequelize.STRING,
@@ -97,5 +107,14 @@ Volunteer.beforeUpdate(setSaltAndPassword)
 Volunteer.beforeBulkCreate(volunteers => {
   volunteers.forEach(setSaltAndPassword)
 })
+
+Volunteer.afterCreate(function(volunteer) {
+  session.run(
+    `MERGE (v:Volunteer{volunteerId: ${volunteer.dataValues.id}}) ON MATCH SET v.interests = split('${volunteer.dataValues.interests}', ',') ON CREATE SET v.interests = split('${volunteer.dataValues.interests}', ',')`
+  )
+})
+
+//ON CREATE SET v.interests=split([ 'agriculture', 'environment' ], ',') ON MATCH SET v.interests=collect(${volunteer.dataValues.interests})
+//session.close()
 
 module.exports = Volunteer
