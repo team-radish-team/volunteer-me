@@ -78,9 +78,9 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const seededVolunteers = await Promise.all(
-    dummyVolunteers.map(volunteer => Volunteer.create(volunteer))
-  )
+  // const seededVolunteers = await Promise.all(
+  //   dummyVolunteers.map(volunteer => Volunteer.create(volunteer))
+  // )
   // const seededEvents = await Promise.all(
   //   dummyEvents.map(event => Event.create(event))
   // )
@@ -104,9 +104,30 @@ async function seed() {
     })
   }
 
+  const organizationArray = []
+
+  for (let i = 0; i < organizationNames.length; i++) {
+    let organization = await Organization.create({
+      name: organizationNames[i],
+      contactFirstName: faker.name.firstName(),
+      contactLastName: faker.name.lastName(),
+      contactEmail: faker.internet.email(),
+      contactPhone: faker.phone.phoneNumber(),
+      missionStatement: missionStatements[i],
+      webUrl: organizationUrls[i],
+      orgImage: photoUrls[i],
+      address: addresses[i],
+      password: faker.internet.password()
+    })
+    organizationArray.push(organization)
+  }
+
+  const futureEvents = []
+  const pastEvents = []
+
   //Future Events
   for (let i = 0; i < 22; i++) {
-    await Event.create({
+    let event = await Event.create({
       title: titleArr[i],
       startTime: (datePtr = faker.date
         .future(0.02, this.createdAt)
@@ -124,11 +145,13 @@ async function seed() {
       volunteerTargetNum: faker.random.number({min: 3, max: 25}),
       isActive: true
     })
+    organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    futureEvents.push(event)
   }
 
   //Past Events
   for (let i = 0; i < 22; i++) {
-    await Event.create({
+    let event = await Event.create({
       title: titleArr[i],
       startTime: (datePtr = faker.date
         .past(0.04, this.createdAt)
@@ -146,25 +169,16 @@ async function seed() {
       volunteerTargetNum: faker.random.number({min: 3, max: 25}),
       isActive: false
     })
-  }
-
-  for (let i = 0; i < organizationNames.length; i++) {
-    await Organization.create({
-      name: organizationNames[i],
-      contactFirstName: faker.name.firstName(),
-      contactLastName: faker.name.lastName(),
-      contactEmail: faker.internet.email(),
-      contactPhone: faker.phone.phoneNumber(),
-      missionStatement: missionStatements[i],
-      webUrl: organizationUrls[i],
-      orgImage: photoUrls[i],
-      address: addresses[i],
-      password: faker.internet.password()
-    })
+    organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    pastEvents.push(event)
   }
 
   for (let i = 0; i < 200; i++) {
-    await createVolunteer()
+    let volunteer = await createVolunteer()
+    if (i % 6 === 0) {
+      volunteer.addEvent(pastEvents[Math.floor(Math.random() * 22)])
+      volunteer.addEvent(futureEvents[Math.floor(Math.random() * 22)])
+    }
   }
 
   console.log(`seeded successfully`)

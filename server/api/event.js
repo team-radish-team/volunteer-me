@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Event} = require('../../db/models')
+const {Event, Organization} = require('../../db/models')
 module.exports = router
 
 /**
@@ -7,8 +7,10 @@ module.exports = router
  */
 router.get('/', async (req, res, next) => {
   try {
-    let allEvents = await Event.findAll({where: {isActive: true}})
-    console.log(allEvents)
+    let allEvents = await Event.findAll({
+      where: {isActive: true},
+      include: [{model: Organization}]
+    })
     res.json(allEvents).status(200)
   } catch (error) {
     console.log('error')

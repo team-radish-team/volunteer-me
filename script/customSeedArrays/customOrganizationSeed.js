@@ -297,7 +297,14 @@ const photoUrls = [
   'https://res.cloudinary.com/dssu5deur/image/upload/v1574463498/capstone/43_oexesg.jpg',
   'https://res.cloudinary.com/dssu5deur/image/upload/v1574463498/capstone/44_ggfujz.jpg',
   'https://res.cloudinary.com/dssu5deur/image/upload/v1574463502/capstone/45_h3zwyc.jpg',
-  'https://res.cloudinary.com/dssu5deur/image/upload/v1574463499/capstone/46_cblfva.jpg'
+  'https://res.cloudinary.com/dssu5deur/image/upload/v1574463499/capstone/46_cblfva.jpg',
+  'https://res.cloudinary.com/dssu5deur/image/upload/v1574461329/capstone/1_pvkdas.jpg',
+  'https://res.cloudinary.com/dssu5deur/image/upload/v1574461328/capstone/2_ub9ebp.jpg',
+  'https://res.cloudinary.com/dssu5deur/image/upload/v1574461328/capstone/3_j9on8b.jpg',
+  'https://res.cloudinary.com/dssu5deur/image/upload/v1574461327/capstone/4_yecyts.jpg',
+  'https://res.cloudinary.com/dssu5deur/image/upload/v1574461327/capstone/5_e0xupv.jpg',
+  'https://res.cloudinary.com/dssu5deur/image/upload/v1574461327/capstone/6_fvam2j.jpg',
+  'https://res.cloudinary.com/dssu5deur/image/upload/v1574461332/capstone/7_ll2kgb.jpg'
 ]
 
 module.exports = {
