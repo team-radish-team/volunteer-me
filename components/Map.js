@@ -342,4 +342,8 @@ const ReactMap = props => {
   )
 }
 
+ReactMap.navigationOptions = {
+  title: 'Events'
+}
+
 export default ReactMap
