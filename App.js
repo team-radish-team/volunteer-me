@@ -6,11 +6,10 @@ import {Ionicons} from '@expo/vector-icons'
 import {createAppContainer} from 'react-navigation'
 import {Provider} from 'react-redux'
 import store from './store'
-import {VolunteerTabs} from './navigation/navigators'
-import {OrganizationTabs} from './navigation/navigators'
+import {EntireApp} from './navigation/navigators'
 import {AppLoading} from 'expo'
 
-const AppContainer = createAppContainer(OrganizationTabs)
+const AppContainer = createAppContainer(EntireApp)
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false)

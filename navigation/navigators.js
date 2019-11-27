@@ -1,5 +1,14 @@
 // Navigators
-import {createStackNavigator, createBottomTabNavigator} from 'react-navigation'
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+  createSwitchNavigator
+} from 'react-navigation'
+
+// LoginStack screens
+import UserSelect from '../components/UserSelect'
+import VolLogin from '../components/VolLogin'
+import OrgLogin from '../components/OrgLogin'
 
 // EventStack screens
 import EventList from '../components/EventList'
@@ -9,6 +18,18 @@ import EventCard from '../components/EventCard'
 // MapStack screens
 import ReactMap from '../components/ReactMap'
 import HomeScreen from '../components/HomeScreen'
+
+//stack for login page
+export const LoginStack = createStackNavigator(
+  {
+    UserSelect: UserSelect,
+    VolLogin: VolLogin,
+    OrgLogin: OrgLogin
+  },
+  {
+    initialRouteName: 'UserSelect'
+  }
+)
 
 //OrgStack Screens
 import OrgProfile from '../components/OrgProfile'
@@ -82,3 +103,9 @@ export const VolunteerTabs = createBottomTabNavigator(
     order: ['Events', 'Map', 'Profile']
   }
 )
+
+export const EntireApp = createSwitchNavigator({
+  Login: LoginStack,
+  // Organization: OrganizationTabs,
+  Volunteer: VolunteerTabs
+})
