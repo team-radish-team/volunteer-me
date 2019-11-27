@@ -20,7 +20,6 @@ import {
 import normalize from '../utilities/timeConverter'
 
 const EventPage = props => {
-  //console.log(props.navigation.state.params)
   const event = props.navigation.state.params
   return (
     <React.Fragment>
@@ -28,8 +27,7 @@ const EventPage = props => {
         <Text>{event.title}</Text>
         <Image
           source={{
-            uri:
-              'https://res.cloudinary.com/dssu5deur/image/upload/v1574461329/capstone/1_pvkdas.jpg'
+            uri: `${event.organization.orgImage}`
           }}
           style={{flex: 1, width: null, height: 400}}
         />

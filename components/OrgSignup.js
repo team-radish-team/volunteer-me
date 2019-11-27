@@ -15,7 +15,7 @@ import {
   Input
 } from 'native-base'
 
-const SignupPage = () => {
+const VolSignup = () => {
   const dispatch = useDispatch()
   const initialState = {
     firstName: '',
@@ -94,4 +94,4 @@ const SignupPage = () => {
   )
 }
 
-export default SignupPage
+export default VolSignup
