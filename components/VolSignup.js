@@ -42,7 +42,7 @@ const VolSignup = () => {
     <Container>
       <Header />
       <Content>
-        <Form style={{paddingBottom: 40}}>
+        <Form style={{paddingTop: 0, paddingBottom: 40}}>
           <Item floatingLabel onChange={() => setFirstName()}>
             <Icon active name="md-person" type="Ionicons" />
             <Input

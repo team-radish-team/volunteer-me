@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {createVolunteerThunk} from '../store/singleVolunteer'
+import {createOrganizationThunk} from '../store/singleOrganization'
 import {useDispatch} from 'react-redux'
 import {Text} from 'react-native'
 
@@ -15,13 +15,17 @@ import {
   Input
 } from 'native-base'
 
-const VolSignup = () => {
+const OrgSignup = () => {
   const dispatch = useDispatch()
   const initialState = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
+    name: '',
+    address: '',
+    missionStatement: '',
+    webUrl: '',
+    contactFirstName: '',
+    contactLastName: '',
+    contactEmail: '',
+    contactPhone: '',
     password: ''
   }
   const [form, setForm] = useState(initialState)
@@ -32,9 +36,7 @@ const VolSignup = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-
-    dispatch(createVolunteerThunk(form))
-    console.log('finished submitting front end')
+    dispatch(createOrganizationThunk(form))
     alert('Thanks for signing up!')
   }
 
@@ -44,31 +46,59 @@ const VolSignup = () => {
       <Content>
         <Form style={{paddingBottom: 40}}>
           <Item floatingLabel onChange={() => setFirstName()}>
+            <Icon active name="organization" type="Octicons" />
+            <Input
+              placeholder="Organization name"
+              onChange={event => handleChange(event, 'name')}
+            />
+          </Item>
+          <Item floatingLabel>
             <Icon active name="md-person" type="Ionicons" />
             <Input
-              placeholder="First name"
-              onChange={event => handleChange(event, 'firstName')}
+              placeholder="Contact First Name"
+              onChange={event => handleChange(event, 'contactFirstName')}
             />
           </Item>
           <Item floatingLabel>
             <Icon active name="profile" type="AntDesign" />
             <Input
-              placeholder="Last name"
-              onChange={event => handleChange(event, 'lastName')}
-            />
-          </Item>
-          <Item floatingLabel>
-            <Icon active name="email" type="MaterialIcons" />
-            <Input
-              placeholder="email"
-              onChange={event => handleChange(event, 'email')}
+              placeholder="Contact Last Name"
+              onChange={event => handleChange(event, 'contactLastName')}
             />
           </Item>
           <Item floatingLabel>
             <Icon active name="phone" type="FontAwesome" />
             <Input
-              placeholder="phone"
-              onChange={event => handleChange(event, 'phone')}
+              placeholder="Phone"
+              onChange={event => handleChange(event, 'contactPhone')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="email" type="MaterialIcons" />
+            <Input
+              placeholder="Email"
+              onChange={event => handleChange(event, 'contactEmail')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="pencil" type="Entypo" />
+            <Input
+              placeholder="Mission Statement"
+              onChange={event => handleChange(event, 'missionStatement')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="web" type="MaterialCommunityIcons" />
+            <Input
+              placeholder="Website"
+              onChange={event => handleChange(event, 'webUrl')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="address-book" type="FontAwesome" />
+            <Input
+              placeholder="Address"
+              onChange={event => handleChange(event, 'address')}
             />
           </Item>
           <Item floatingLabel>
@@ -94,4 +124,4 @@ const VolSignup = () => {
   )
 }
 
-export default VolSignup
+export default OrgSignup

@@ -3,11 +3,13 @@ import thunkMiddleware from 'redux-thunk'
 import allVolunteers from './allVolunteers'
 import allEvents from './allEvents'
 import singleVolunteer from './singleVolunteer'
+import singleOrganization from './singleOrganization'
 
 const reducer = combineReducers({
   allVolunteers,
   allEvents,
-  singleVolunteer
+  singleVolunteer,
+  singleOrganization
 })
 
 const middleware = applyMiddleware(thunkMiddleware)

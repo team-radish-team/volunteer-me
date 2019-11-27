@@ -1,7 +1,7 @@
-const Event = require('./event')
-const Organization = require('./organization')
+const Event = require('./Event')
+const Organization = require('./Organization')
 const Volunteer = require('./Volunteer')
-const Category = require('./category')
+const Category = require('./Category')
 const VolunteerEvent = require('./VolunteerEvent')
 
 Volunteer.belongsToMany(Event, {through: VolunteerEvent})

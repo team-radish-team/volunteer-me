@@ -29,8 +29,8 @@ export const createVolunteerThunk = volunteer => async dispatch => {
 
 export const updateVolunteerThunk = volunteer => async dispatch => {
   try {
-    const {data} = await axios.update(`/api/volunteers/${volunteer.id}`)
-    dispatch(updateOrder(data))
+    const {data} = await axios.put(`/api/volunteers/${volunteer.id}`)
+    dispatch(updateVolunteer(data))
   } catch (err) {
     console.error(err)
   }

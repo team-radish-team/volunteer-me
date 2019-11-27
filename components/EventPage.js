@@ -25,12 +25,12 @@ const EventPage = props => {
     <React.Fragment>
       <Content>
         <Text>{event.title}</Text>
-        <Image
+        {/* <Image
           source={{
             uri: `${event.organization.orgImage}`
           }}
           style={{flex: 1, width: null, height: 400}}
-        />
+        /> */}
         <Text>Num Volunteers Needed: {event.volunteerTargetNum}</Text>
         <Text>Organization Name</Text>
         <Text></Text>
