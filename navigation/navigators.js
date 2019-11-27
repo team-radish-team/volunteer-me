@@ -36,7 +36,9 @@ export const EventsStack = createStackNavigator(
 // stack for Map tab
 export const MapStack = createStackNavigator(
   {
-    ReactMap: ReactMap
+    ReactMap: ReactMap,
+    EventPage: EventPage,
+    EventCard: EventCard
   },
   {
     initialRouteName: 'ReactMap'
