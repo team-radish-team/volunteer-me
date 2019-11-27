@@ -20,7 +20,6 @@ import {
 import normalize from '../utilities/timeConverter'
 
 const EventPage = props => {
-  //console.log(props.navigation.state.params)
   const event = props.navigation.state.params
   return (
     <React.Fragment>
