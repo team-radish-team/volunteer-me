@@ -2,16 +2,18 @@ import axios from 'axios'
 import {ngrokSecret} from '../secrets'
 
 const GET_ORGANIZATION = 'GET_ORGANIZATION'
+const REMOVE_ORGANIZATION = 'REMOVE_ORGANIZATION'
 
 const getOrganization = organization => ({type: GET_ORGANIZATION, organization})
+const removeOrganization = () => ({type: REMOVE_ORGANIZATION})
 
-const defaultState = []
+const defaultOrganization = {}
 
-export const me = () => {
+export const organization = () => {
   return async dispatch => {
     try {
-      const res = await axios.get(`${ngrokSecret}/auth/me`)
-      dispatch(getOrganization(res.data))
+      const res = await axios.get(`${ngrokSecret}/auth/organization`)
+      dispatch(getOrganization(res.data || defaultOrganization))
     } catch (err) {
       console.log(error)
     }
@@ -25,6 +27,23 @@ export const auth = (email, password) => {
       res = await axios.post(`${ngrokSecret}/auth/`, {email, password})
     } catch (authError) {
       return dispatch(getOrganization({error: authError}))
+    }
+
+    try {
+      dispatch(getOrganization(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const logout = () => {
+  return async dispatch => {
+    try {
+      await axios.post(`${ngrokSecret}/auth/logout`)
+      dispatch(removeOrganization())
+    } catch (err) {
+      console.error(err)
     }
   }
 }
@@ -42,10 +61,12 @@ export const getOrganizationThunk = organizationId => {
   }
 }
 
-export default function(state = defaultState, action) {
+export default function(state = defaultOrganization, action) {
   switch (action.type) {
     case GET_ORGANIZATION:
       return action.organization
+    case REMOVE_ORGANIZATION:
+      return defaultOrganization
     default:
       return state
   }

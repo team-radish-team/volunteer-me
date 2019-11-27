@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {StyleSheet, Dimensions, View, Image} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {getEventsThunk} from '../store/allEvents'
+import t from 'tcomb-form-native'
 import {
   Container,
   Header,
@@ -17,31 +18,58 @@ import {
   Right
 } from 'native-base'
 
-const OrgLogin = props => {
-  return (
-    <React.Fragment>
-      <Container
-        style={{
-          flex: 2,
-          alignItems: 'center',
-          flexDirection: 'row'
-        }}
-      >
-        <Content>
+let Form = t.form.Form
+
+const Org = t.struct({
+  email: t.String,
+  password: t.String
+})
+
+const options = {
+  fields: {
+    password: {
+      password: true,
+      secureTextEntry: true
+    }
+  }
+}
+
+class OrgLogin extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+  onChange = value => {
+    this.setState({value})
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <Container
+          style={{
+            flex: 2,
+            alignItems: 'center',
+            flexDirection: 'column',
+            justifyContent: 'center'
+          }}
+        >
+          <Form
+            ref="form"
+            type={Vol}
+            value={this.state.value}
+            onChange={this.onChange}
+          />
           <Button
-            block
+            rounded
             info
-            onPress={() => props.navigation.navigate('VolLogin')}
+            onPress={() => this.props.navigation.navigate('Organization')}
           >
-            <Text>Volunteer</Text>
+            <Text>Login</Text>
           </Button>
-          <Button block warning style={{marginTop: 30}}>
-            <Text>Organization</Text>
-          </Button>
-        </Content>
-      </Container>
-    </React.Fragment>
-  )
+        </Container>
+      </React.Fragment>
+    )
+  }
 }
 
 export default OrgLogin

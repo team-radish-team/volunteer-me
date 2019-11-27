@@ -1,0 +1,73 @@
+import axios from 'axios'
+import {ngrokSecret} from '../secrets'
+
+const GET_VOLUNTEER = 'GET_VOLUNTEER'
+const REMOVE_VOLUNTEER = 'REMOVE_VOLUNTEER'
+
+const getVolunteer = volunteer => ({type: GET_VOLUNTEER, volunteer})
+const removeVolunteer = () => ({type: REMOVE_VOLUNTEER})
+
+const defaultVolunteer = {}
+
+export const volunteer = () => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(`${ngrokSecret}/auth/volunteer`)
+      dispatch(getVolunteer(res.data || defaultVolunteer))
+    } catch (err) {
+      console.log(error)
+    }
+  }
+}
+
+export const auth = (email, password) => {
+  return async dispatch => {
+    let res
+    try {
+      res = await axios.post(`${ngrokSecret}/auth/`, {email, password})
+    } catch (authError) {
+      return dispatch(getVolunteer({error: authError}))
+    }
+
+    try {
+      dispatch(getVolunteer(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const logout = () => {
+  return async dispatch => {
+    try {
+      await axios.post(`${ngrokSecret}/auth/logout`)
+      dispatch(removeVolunteer())
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+export const getVolunteerThunk = volunteerId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(
+        `${ngrokSecret}/api/volunteers/${volunteerId}`
+      )
+      dispatch(getVolunteer(data))
+    } catch (error) {
+      console.error('Error getting volunteer', error)
+    }
+  }
+}
+
+export default function(state = defaultVolunteer, action) {
+  switch (action.type) {
+    case GET_VOLUNTEER:
+      return action.volunteer
+    case REMOVE_VOLUNTEER:
+      return defaultVolunteer
+    default:
+      return state
+  }
+}
