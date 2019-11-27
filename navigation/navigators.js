@@ -5,6 +5,7 @@ import {createStackNavigator, createBottomTabNavigator} from 'react-navigation'
 import EventList from '../components/EventList'
 import EventPage from '../components/EventPage'
 import EventCard from '../components/EventCard'
+import Signup from '../components/Signup'
 
 // MapStack screens
 import ReactMap from '../components/Map'
@@ -54,11 +55,22 @@ export const VolunteerProfileStack = createStackNavigator(
   }
 )
 
+//stack for sign up page
+export const SignupStack = createStackNavigator(
+  {
+    SignupPage: Signup
+  },
+  {
+    initialRouteName: 'SignupPage'
+  }
+)
+
 export const VolunteerTabs = createBottomTabNavigator(
   {
     Events: EventsStack,
     Map: MapStack,
-    Profile: VolunteerProfileStack
+    Profile: SignupStack
+    // Profile: VolunteerProfileStack
   },
   {
     order: ['Events', 'Map', 'Profile']

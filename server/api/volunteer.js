@@ -18,15 +18,34 @@ router.get('/', async (req, res, next) => {
  *  GET single volunteer (api/volunteers/:id)
  */
 
-// router.get('/:volunteerId', async (req, res, next) => {
-//   try {
-//     console.log(req.session)
-//     let user = await User.findByPk(req.params.userId)
-//     res.json(user)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+router.get('/:volunteerId', async (req, res, next) => {
+  try {
+    console.log(req.session)
+    let user = await User.findByPk(req.params.userId)
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// POST a single volunteer
+
+router.post('/', async (req, res, next) => {
+  try {
+    let user = await User.create({
+      firstName: 'Kate',
+      lastName: 'Murray',
+      email: 'kate@kate.com',
+      phone: '617-680-7809',
+      profilePic: 'wwww.robothash.org/kate',
+      password: 'thingthingthing'
+    })
+    console.log('in API', user)
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
 
 /**
  *  PUT single user (api/users/:id)
