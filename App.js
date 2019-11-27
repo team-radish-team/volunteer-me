@@ -4,13 +4,13 @@ import React, {useState} from 'react'
 import {Platform, StatusBar, StyleSheet, View} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import {createAppContainer} from 'react-navigation'
-import ReactMap from './components/Map'
 import {Provider} from 'react-redux'
 import store from './store'
 import {VolunteerTabs} from './navigation/navigators'
+import {OrganizationTabs} from './navigation/navigators'
 import {AppLoading} from 'expo'
 
-const AppContainer = createAppContainer(VolunteerTabs)
+const AppContainer = createAppContainer(OrganizationTabs)
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false)

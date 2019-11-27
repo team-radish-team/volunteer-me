@@ -24,13 +24,13 @@ const EventPage = props => {
   return (
     <React.Fragment>
       <Content>
-        <Text>{event.title}</Text>
-        {/* <Image
+        <Image
           source={{
             uri: `${event.organization.orgImage}`
           }}
           style={{flex: 1, width: null, height: 400}}
-        /> */}
+        />{' '}
+        */}
         <Text>Num Volunteers Needed: {event.volunteerTargetNum}</Text>
         <Text>Organization Name</Text>
         <Text></Text>
@@ -47,6 +47,12 @@ const EventPage = props => {
       </Content>
     </React.Fragment>
   )
+}
+
+EventPage.navigationOptions = ({navigation}) => {
+  return {
+    title: navigation.state.params.title
+  }
 }
 
 export default EventPage

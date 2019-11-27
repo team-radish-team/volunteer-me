@@ -8,7 +8,7 @@ import singleOrganization from './singleOrganization'
 const reducer = combineReducers({
   allVolunteers,
   allEvents,
-  singleVolunteer,
+  singleVOlunteer,
   singleOrganization
 })
 
@@ -20,3 +20,4 @@ export default store
 export * from './allVolunteers'
 export * from './allEvents'
 export * from './singleVolunteer'
+export * from './singleOrganization'

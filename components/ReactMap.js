@@ -301,7 +301,7 @@ const mapStyle = [
     ]
   }
 ]
-const ReactMap = () => {
+const ReactMap = props => {
   const dispatch = useDispatch()
   const events = useSelector(state => state.allEvents)
   useEffect(() => {
@@ -329,7 +329,10 @@ const ReactMap = () => {
               longitude: Number(event.longitude)
             }}
           >
-            <Callout>
+            <Callout
+              button
+              onPress={() => props.navigation.navigate('EventPage', event)}
+            >
               <EventCard event={event} />
             </Callout>
           </Marker>
@@ -337,6 +340,10 @@ const ReactMap = () => {
       })}
     </MapView>
   )
+}
+
+ReactMap.navigationOptions = {
+  title: 'Events'
 }
 
 export default ReactMap
