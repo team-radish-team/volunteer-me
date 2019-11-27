@@ -41,4 +41,8 @@ const EventList = props => {
   )
 }
 
+EventList.navigationOptions = {
+  title: 'Events'
+}
+
 export default EventList
