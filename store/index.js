@@ -8,7 +8,7 @@ import singleOrganization from './singleOrganization'
 const reducer = combineReducers({
   allVolunteers,
   allEvents,
-  singleVOlunteer,
+  singleVolunteer,
   singleOrganization
 })
 

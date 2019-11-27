@@ -36,7 +36,6 @@ router.get('/:organizationId', async (req, res, next) => {
   }
 })
 
-
 // POST a single organization
 
 router.post('/', async (req, res, next) => {
@@ -55,3 +54,5 @@ router.post('/', async (req, res, next) => {
     res.json(org)
   } catch (err) {
     next(err)
+  }
+})
