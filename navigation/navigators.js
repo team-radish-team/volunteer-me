@@ -1,6 +1,11 @@
 // Navigators
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation'
 
+// LoginStack screens
+import UserSelect from '../components/UserSelect'
+import VolLogin from '../components/VolLogin'
+import OrgLogin from '../components/OrgLogin'
+
 // EventStack screens
 import EventList from '../components/EventList'
 import EventPage from '../components/EventPage'
@@ -10,15 +15,17 @@ import EventCard from '../components/EventCard'
 import ReactMap from '../components/Map'
 import HomeScreen from '../components/HomeScreen'
 
-//stack for Not Logged In
-// export const NotLoggedInStack = createStackNavigator(
-//   {
-//     //LoginPage: LoginPage
-//   },
-//   {
-//     //initialRouteName: 'LoginPage'
-//   }
-// )
+//stack for login page
+export const LoginStack = createStackNavigator(
+  {
+    UserSelect: UserSelect,
+    VolLogin: VolLogin,
+    OrgLogin: OrgLogin
+  },
+  {
+    initialRouteName: 'UserSelect'
+  }
+)
 
 // stack for VolunteerEvents tab
 export const EventsStack = createStackNavigator(
