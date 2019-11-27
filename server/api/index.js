@@ -3,6 +3,7 @@ module.exports = router
 
 router.use('/events', require('./event'))
 router.use('/volunteers', require('./volunteer'))
+router.use('/organizations', require('./organization'))
 
 router.use((req, res, next) => {
   console.log('ERROR\n\n')

@@ -16,7 +16,7 @@ import EventPage from '../components/EventPage'
 import EventCard from '../components/EventCard'
 
 // MapStack screens
-import ReactMap from '../components/Map'
+import ReactMap from '../components/ReactMap'
 import HomeScreen from '../components/HomeScreen'
 
 //stack for login page
@@ -30,6 +30,18 @@ export const LoginStack = createStackNavigator(
     initialRouteName: 'UserSelect'
   }
 )
+
+//OrgStack Screens
+import OrgProfile from '../components/OrgProfile'
+//stack for Not Logged In
+// export const NotLoggedInStack = createStackNavigator(
+//   {
+//     //LoginPage: LoginPage
+//   },
+//   {
+//     //initialRouteName: 'LoginPage'
+//   }
+// )
 
 // stack for VolunteerEvents tab
 export const EventsStack = createStackNavigator(
@@ -53,6 +65,20 @@ export const MapStack = createStackNavigator(
   {
     initialRouteName: 'ReactMap'
   }
+)
+
+export const OrganizationProfileStack = createStackNavigator(
+  {
+    OrgProfile: OrgProfile
+  },
+  {initialRouteName: 'OrgProfile'}
+)
+
+export const OrganizationTabs = createBottomTabNavigator(
+  {
+    Profile: OrganizationProfileStack
+  },
+  {order: ['Profile']}
 )
 
 // stack for Volunteer Profile tab
