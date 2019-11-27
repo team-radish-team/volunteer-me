@@ -1,12 +1,14 @@
 import axios from 'axios'
 import {ngrokSecret} from '../secrets'
 
-<<<<<<< HEAD
 //action types
+const GET_ORGANIZATION = 'GET_ORGANIZATION'
 const CREATE_ORGANIZATION = 'CREATE_ORGANIZATION'
 const UPDATE_ORGANIZATION = 'UPDATE_ORGANIZATION'
 
 //action creators
+const getOrganization = organization => ({type: GET_ORGANIZATION, organization})
+
 export const createOrganization = organization => ({
   type: CREATE_ORGANIZATION,
   organization
@@ -18,49 +20,6 @@ export const updateOrganization = organization => ({
 })
 
 //thunks
-
-export const createOrganizationThunk = organization => async dispatch => {
-  try {
-    const {data} = await axios.post(
-      `${ngrokSecret}/api/organizations`,
-      organization
-    )
-    dispatch(createOrganization(data))
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-export const updateOrganizationThunk = organization => async dispatch => {
-  try {
-    const {data} = await axios.put(`/api/organizations/${volunteer.id}`)
-    dispatch(updateOrder(data))
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-//reducer
-
-const initialState = {
-  currentOrganization: {}
-}
-
-export default function(state = initialState, action) {
-  switch (action.type) {
-    case CREATE_ORGANIZATION: {
-      return {...state, currentOrganization: action.organization}
-    }
-    case UPDATE_ORGANIZATION: {
-      return {...state, currentOrganization: action.organization}
-    }
-=======
-const GET_ORGANIZATION = 'GET_ORGANIZATION'
-
-const getOrganization = organization => ({type: GET_ORGANIZATION, organization})
-
-const defaultState = []
-
 export const me = () => {
   return async dispatch => {
     try {
@@ -96,11 +55,39 @@ export const getOrganizationThunk = organizationId => {
   }
 }
 
-export default function(state = defaultState, action) {
+export const createOrganizationThunk = organization => async dispatch => {
+  try {
+    const {data} = await axios.post(
+      `${ngrokSecret}/api/organizations`,
+      organization
+    )
+    dispatch(createOrganization(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updateOrganizationThunk = organization => async dispatch => {
+  try {
+    const {data} = await axios.put(`/api/organizations/${volunteer.id}`)
+    dispatch(updateOrder(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+const initialState = {currentOrganization: ''}
+
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ORGANIZATION:
       return action.organization
->>>>>>> 0580c828879001fe91586d833e8f3276b25154c4
+    case CREATE_ORGANIZATION: {
+      return {...state, currentOrganization: action.organization}
+    }
+    case UPDATE_ORGANIZATION: {
+      return {...state, currentOrganization: action.organization}
+    }
     default:
       return state
   }
