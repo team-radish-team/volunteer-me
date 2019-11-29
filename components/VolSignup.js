@@ -15,6 +15,24 @@ import {
   Input
 } from 'native-base'
 
+let validated = false
+function validate(form) {
+  if (
+    form.firstName.length < 1 ||
+    form.lastName.length < 1 ||
+    form.email.length < 1 ||
+    form.phone.length < 1 ||
+    form.password.length < 1 ||
+    form.confirmPassword.length < 1
+  ) {
+    alert(`You're missing a required field`)
+  } else if (!form.email.includes('@')) {
+    alert('Please provide a valid email')
+  } else {
+    validated = true
+  }
+}
+
 const VolSignup = props => {
   const dispatch = useDispatch()
   const initialState = {
@@ -22,7 +40,8 @@ const VolSignup = props => {
     lastName: '',
     email: '',
     phone: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   }
   const [form, setForm] = useState(initialState)
 
@@ -37,9 +56,11 @@ const VolSignup = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
-
-    dispatch(createVolunteerThunk(form))
-    props.navigation.navigate('Volunteer')
+    validate(form)
+    if (validated === true) {
+      dispatch(createVolunteerThunk(form))
+      props.navigation.navigate('Volunteer')
+    }
   }
 
   return (
@@ -86,7 +107,11 @@ const VolSignup = props => {
           </Item>
           <Item floatingLabel last>
             <Icon active name="lock" type="Entypo" />
-            <Input placeholder="Confirm password" secureTextEntry={true} />
+            <Input
+              placeholder="Confirm password"
+              onChange={event => handleChange(event, 'confirmPassword')}
+              secureTextEntry={true}
+            />
           </Item>
         </Form>
 
