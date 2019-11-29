@@ -90,7 +90,7 @@ const VolSignup = props => {
           </Item>
         </Form>
 
-        <Button block onPress={handleSubmit}>
+        <Button block onPress={event => handleSubmit(event)}>
           <Text>Submit</Text>
         </Button>
       </Content>
