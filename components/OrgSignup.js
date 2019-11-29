@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {createOrganizationThunk} from '../store/singleOrganization'
 import {useDispatch} from 'react-redux'
-import {Text, ScrollView} from 'react-native'
+import {Text} from 'react-native'
 import {
   Header,
   Container,
