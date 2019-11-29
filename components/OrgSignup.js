@@ -15,7 +15,7 @@ import {
   Input
 } from 'native-base'
 
-const OrgSignup = () => {
+const OrgSignup = props => {
   const dispatch = useDispatch()
   const initialState = {
     name: '',
@@ -31,13 +31,18 @@ const OrgSignup = () => {
   const [form, setForm] = useState(initialState)
 
   const handleChange = (event, name) => {
-    setForm({...form, [name]: event.nativeEvent.text})
+    if (name === 'contactEmail' || name === 'webUrl') {
+      let newText = event.nativeEvent.text.toLowerCase()
+      setForm({...form, [name]: newText})
+    } else {
+      setForm({...form, [name]: event.nativeEvent.text})
+    }
   }
 
   const handleSubmit = event => {
     event.preventDefault()
     dispatch(createOrganizationThunk(form))
-    alert('Thanks for signing up!')
+    props.navigation.navigate('Organization')
   }
 
   return (
@@ -77,6 +82,7 @@ const OrgSignup = () => {
             <Icon active name="email" type="MaterialIcons" />
             <Input
               placeholder="Email"
+              value={form.contactEmail}
               onChange={event => handleChange(event, 'contactEmail')}
             />
           </Item>
@@ -91,6 +97,7 @@ const OrgSignup = () => {
             <Icon active name="web" type="MaterialCommunityIcons" />
             <Input
               placeholder="Website"
+              value={form.webUrl}
               onChange={event => handleChange(event, 'webUrl')}
             />
           </Item>

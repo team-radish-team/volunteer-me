@@ -15,7 +15,7 @@ import {
   Input
 } from 'native-base'
 
-const VolSignup = () => {
+const VolSignup = props => {
   const dispatch = useDispatch()
   const initialState = {
     firstName: '',
@@ -27,15 +27,19 @@ const VolSignup = () => {
   const [form, setForm] = useState(initialState)
 
   const handleChange = (event, name) => {
-    setForm({...form, [name]: event.nativeEvent.text})
+    if (name === 'email') {
+      let newText = event.nativeEvent.text.toLowerCase()
+      setForm({...form, [name]: newText})
+    } else {
+      setForm({...form, [name]: event.nativeEvent.text})
+    }
   }
 
   const handleSubmit = event => {
     event.preventDefault()
 
     dispatch(createVolunteerThunk(form))
-    console.log('finished submitting front end')
-    alert('Thanks for signing up!')
+    props.navigation.navigate('Volunteer')
   }
 
   return (
@@ -61,6 +65,7 @@ const VolSignup = () => {
             <Icon active name="email" type="MaterialIcons" />
             <Input
               placeholder="email"
+              value={form.email}
               onChange={event => handleChange(event, 'email')}
             />
           </Item>

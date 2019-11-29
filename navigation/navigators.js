@@ -138,5 +138,7 @@ export const OrganizationTabs = createBottomTabNavigator({
 export const EntireApp = createSwitchNavigator({
   Login: LoginStack,
   Organization: OrganizationTabs,
-  Volunteer: VolunteerTabs
+  Volunteer: VolunteerTabs,
+  VolSignup: VolSignupStack,
+  OrgSignup: OrgSignupStack
 })
