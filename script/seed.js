@@ -111,10 +111,13 @@ async function seed() {
   // await VolunteerEvent.createHasAttended(1, 5)
   // await VolunteerEvent.createHasAttended(2, 2)
 
+  const categoryArray = []
+
   for (let i = 0; i < categories.length; i++) {
-    await Category.create({
+    let category = await Category.create({
       name: categories[i]
     })
+    categoryArray.push(category)
   }
 
   const organizationArray = []
@@ -133,6 +136,11 @@ async function seed() {
       password: faker.internet.password()
     })
     organizationArray.push(organization)
+    if (i < 7) {
+      categoryArray[0].addOrganization(organization)
+    } else {
+      categoryArray[Math.ceil(Math.random() * 5)].addOrganization(organization)
+    }
   }
 
   const futureEvents = []
