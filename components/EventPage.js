@@ -31,7 +31,7 @@ const EventPage = props => {
           style={{flex: 1, width: null, height: 400}}
         />
         <Text>Num Volunteers Needed: {event.volunteerTargetNum}</Text>
-        <Text>Organization Name</Text>
+        <Text>{event.organization.name}</Text>
         <Text></Text>
         <Text>
           {event.startTime.slice(5, 10)} from{' '}
