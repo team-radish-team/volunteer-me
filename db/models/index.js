@@ -13,7 +13,7 @@ Volunteer.belongsToMany(Category, {through: 'VolunteerCategory'})
 Category.belongsToMany(Volunteer, {through: 'VolunteerCategory'})
 
 Category.hasMany(Organization)
-Organization.belongsTo(Category)
+// Organization.belongsTo(Category)
 
 module.exports = {
   Event,
