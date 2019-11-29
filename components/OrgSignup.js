@@ -38,6 +38,14 @@ function validate(form) {
   }
 }
 
+function secureText(password) {
+  let visibleText = ''
+  for (let i = 0; i < password.length; i++) {
+    visibleText += '*'
+  }
+  return visibleText
+}
+
 const OrgSignup = props => {
   const dispatch = useDispatch()
   const initialState = {
@@ -75,91 +83,87 @@ const OrgSignup = props => {
   return (
     <Container>
       <Header />
-      <Content enableResetScrollToCoords={false}>
-        <ScrollView>
-          <Form style={{paddingBottom: 40}}>
-            <Item floatingLabel onChange={() => setFirstName()}>
-              <Icon active name="organization" type="Octicons" />
-              <Input
-                placeholder="Organization name"
-                onChange={event => handleChange(event, 'name')}
-              />
-            </Item>
-            <Item floatingLabel>
-              <Icon active name="md-person" type="Ionicons" />
-              <Input
-                placeholder="Contact First Name"
-                onChange={event => handleChange(event, 'contactFirstName')}
-              />
-            </Item>
-            <Item floatingLabel>
-              <Icon active name="profile" type="AntDesign" />
-              <Input
-                placeholder="Contact Last Name"
-                onChange={event => handleChange(event, 'contactLastName')}
-              />
-            </Item>
-            <Item floatingLabel>
-              <Icon active name="phone" type="FontAwesome" />
-              <Input
-                placeholder="Phone"
-                onChange={event => handleChange(event, 'contactPhone')}
-              />
-            </Item>
-            <Item floatingLabel>
-              <Icon active name="email" type="MaterialIcons" />
-              <Input
-                placeholder="Email"
-                value={form.contactEmail}
-                onChange={event => handleChange(event, 'contactEmail')}
-              />
-            </Item>
-            <Item floatingLabel>
-              <Icon active name="pencil" type="Entypo" />
-              <Input
-                placeholder="Mission Statement"
-                onChange={event => handleChange(event, 'missionStatement')}
-              />
-            </Item>
-            <Item floatingLabel>
-              <Icon active name="web" type="MaterialCommunityIcons" />
-              <Input
-                placeholder="Website"
-                value={form.webUrl}
-                onChange={event => handleChange(event, 'webUrl')}
-              />
-            </Item>
-            <Item floatingLabel>
-              <Icon active name="address-book" type="FontAwesome" />
-              <Input
-                placeholder="Address"
-                onChange={event => handleChange(event, 'address')}
-              />
-            </Item>
-            <Item floatingLabel>
-              <Icon active name="lock" type="Entypo" />
-              <Input
-                placeholder="password"
-                secureTextEntry={true}
-                value={form.password}
-                onChange={event => handleChange(event, 'password')}
-              />
-            </Item>
-            <Item floatingLabel last>
-              <Icon active name="lock" type="Entypo" />
-              <Input
-                placeholder="Confirm password"
-                value={form.confirmPassword}
-                secureTextEntry={true}
-                onChange={event => handleChange(event, 'confirmPassword')}
-              />
-            </Item>
-          </Form>
+      <Content>
+        <Form style={{paddingBottom: 40}}>
+          <Item floatingLabel onChange={() => setFirstName()}>
+            <Icon active name="organization" type="Octicons" />
+            <Input
+              placeholder="Organization name"
+              onChange={event => handleChange(event, 'name')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="md-person" type="Ionicons" />
+            <Input
+              placeholder="Contact First Name"
+              onChange={event => handleChange(event, 'contactFirstName')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="profile" type="AntDesign" />
+            <Input
+              placeholder="Contact Last Name"
+              onChange={event => handleChange(event, 'contactLastName')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="phone" type="FontAwesome" />
+            <Input
+              placeholder="Phone"
+              onChange={event => handleChange(event, 'contactPhone')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="email" type="MaterialIcons" />
+            <Input
+              placeholder="Email"
+              value={form.contactEmail}
+              onChange={event => handleChange(event, 'contactEmail')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="pencil" type="Entypo" />
+            <Input
+              placeholder="Mission Statement"
+              onChange={event => handleChange(event, 'missionStatement')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="web" type="MaterialCommunityIcons" />
+            <Input
+              placeholder="Website"
+              value={form.webUrl}
+              onChange={event => handleChange(event, 'webUrl')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="address-book" type="FontAwesome" />
+            <Input
+              placeholder="Address"
+              onChange={event => handleChange(event, 'address')}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Icon active name="lock" type="Entypo" />
+            <Input
+              placeholder="password"
+              value={secureText(form.password)}
+              onChange={event => handleChange(event, 'password')}
+            />
+          </Item>
+          <Item floatingLabel last>
+            <Icon active name="lock" type="Entypo" />
+            <Input
+              placeholder="Confirm password"
+              value={secureText(form.confirmPassword)}
+              onChange={event => handleChange(event, 'confirmPassword')}
+            />
+          </Item>
+        </Form>
 
-          <Button block onPress={event => handleSubmit(event)}>
-            <Text>Submit</Text>
-          </Button>
-        </ScrollView>
+        <Button block onPress={event => handleSubmit(event)}>
+          <Text>Submit</Text>
+        </Button>
       </Content>
       <Footer />
     </Container>
