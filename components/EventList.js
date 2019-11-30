@@ -34,12 +34,12 @@ const EventList = props => {
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
   const [header, setHeader] = useState('Events Near You')
-  const [filter, setFilter] = useState('Filter Categories')
+  const [filter, setFilter] = useState('All')
 
   return (
     <React.Fragment>
       <Content>
-        {/* {filter === 'Filter Categories' || filter === 0
+        {filter === 'All' || Number(filter) === 0
           ? events.map(event => {
               return (
                 <EventCard
@@ -50,10 +50,7 @@ const EventList = props => {
               )
             })
           : events.map(event => {
-              console.log(
-                `filter is ${filter} and event categoryId is ${event.organization.categoryId}`
-              )
-              if (event.organization.categoryId === filter) {
+              if (Number(event.organization.categoryId) === Number(filter)) {
                 return (
                   <EventCard
                     key={event.id}
@@ -62,16 +59,7 @@ const EventList = props => {
                   />
                 )
               }
-            })} */}
-        {events.map(event => {
-          return (
-            <EventCard
-              key={event.id}
-              event={event}
-              navigation={props.navigation}
-            />
-          )
-        })}
+            })}
       </Content>
     </React.Fragment>
   )
@@ -79,7 +67,7 @@ const EventList = props => {
 
 const eventHeaderOptions = ['Events Near You', 'Recommended Events']
 const filterOptions = [
-  'Filter Categories',
+  'All',
   'Animals',
   'Youth',
   'Agriculture',
@@ -108,7 +96,7 @@ EventList.navigationOptions = ({navigation}) => {
     ),
     headerRight: (
       <ModalDropdown
-        defaultValue={'Filter Categories'}
+        defaultValue={'All'}
         onSelect={navigation.getParam('handleFilterChange')}
         options={filterOptions}
         textStyle={{fontSize: 15, marginRight: 15, color: 'black'}}
