@@ -84,7 +84,7 @@ const Organization = db.define('organization', {
  */
 Organization.prototype.correctPassword = function(candidatePwd) {
   return (
-    Volunteer.encryptPassword(candidatePwd, this.salt()) === this.password()
+    Organization.encryptPassword(candidatePwd, this.salt()) === this.password()
   )
 }
 

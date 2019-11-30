@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Organization, Volunteer} = require('../../db/models')
+const {Organization, Volunteer} = require('../../db/index')
 module.exports = router
 
 router.post('/organization/login', async (req, res, next) => {

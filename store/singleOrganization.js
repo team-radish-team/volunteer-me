@@ -24,7 +24,10 @@ export const auth = (email, password) => {
   return async dispatch => {
     let res
     try {
-      res = await axios.post(`${ngrokSecret}/auth/`, {email, password})
+      res = await axios.post(`${ngrokSecret}/auth/organization/login`, {
+        email,
+        password
+      })
     } catch (authError) {
       return dispatch(getOrganization({error: authError}))
     }

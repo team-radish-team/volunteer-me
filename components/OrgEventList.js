@@ -19,26 +19,32 @@ import {
 import OrgEventCard from './OrgEventCard'
 
 const OrgEventList = props => {
+  const organization = useSelector(state => state.singleOrganization)
+  console.log(organization)
   const dispatch = useDispatch()
   const events = useSelector(state => state.allEvents)
   useEffect(() => {
-    dispatch(getOrgEventsThunk(1))
-  }, [])
-  return (
-    <React.Fragment>
-      <Content>
-        {events.map(event => {
-          return (
-            <OrgEventCard
-              key={event.id}
-              event={event}
-              navigation={props.navigation}
-            />
-          )
-        })}
-      </Content>
-    </React.Fragment>
-  )
+    dispatch(getOrgEventsThunk(2))
+  }, [organization.id])
+  if (!organization) {
+    return <React.Fragment></React.Fragment>
+  } else {
+    return (
+      <React.Fragment>
+        <Content>
+          {events.map(event => {
+            return (
+              <OrgEventCard
+                key={event.id}
+                event={event}
+                navigation={props.navigation}
+              />
+            )
+          })}
+        </Content>
+      </React.Fragment>
+    )
+  }
 }
 
 OrgEventList.navigationOptions = {

@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getEventsThunk} from '../store/allEvents'
 import t from 'tcomb-form-native'
 import {connect} from 'react-redux'
+import {auth} from '../store/singleOrganization'
 import {
   Container,
   Header,
@@ -39,9 +40,19 @@ class OrgLogin extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   onChange = value => {
     this.setState({value})
+  }
+  handleSubmit = () => {
+    const values = this.refs.form.getValue()
+    if (values) {
+      const email = values.email
+      const password = values.password
+      this.props.auth(email, password)
+      this.props.navigation.navigate('Organization')
+    }
   }
   render() {
     return (
@@ -60,11 +71,7 @@ class OrgLogin extends React.Component {
             value={this.state.value}
             onChange={this.onChange}
           />
-          <Button
-            rounded
-            info
-            onPress={() => this.props.navigation.navigate('Organization')}
-          >
+          <Button rounded info onPress={() => this.handleSubmit()}>
             <Text>Login</Text>
           </Button>
         </Container>
@@ -83,12 +90,7 @@ class OrgLogin extends React.Component {
 
 const mapDispatch = dispatch => {
   return {
-    handleSubmit(evt) {
-      evt.preventDefault()
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(auth(email, password))
-    }
+    auth: (email, password) => dispatch(auth(email, password))
   }
 }
 
