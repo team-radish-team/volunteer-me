@@ -35,7 +35,7 @@ export const LoginStack = createStackNavigator(
   }
 )
 
-//OrgStack Screens
+//OrgProfileStack Screens
 import OrgProfile from '../components/OrgProfile'
 //stack for Not Logged In
 // export const NotLoggedInStack = createStackNavigator(
@@ -46,6 +46,9 @@ import OrgProfile from '../components/OrgProfile'
 //     //initialRouteName: 'LoginPage'
 //   }
 // )
+
+//VolunteerProfileStack Screens
+import VolunteerProfile from '../components/VolunteerProfile'
 
 // stack for VolunteerEvents tab
 export const EventsStack = createStackNavigator(
@@ -71,7 +74,7 @@ export const MapStack = createStackNavigator(
   }
 )
 
-export const OrganizationProfileStack = createStackNavigator(
+export const OrgProfileStack = createStackNavigator(
   {
     OrgProfile: OrgProfile,
     OrgEventPage: OrgEventPage
@@ -84,10 +87,10 @@ export const VolunteerProfileStack = createStackNavigator(
   {
     // VolunteerProfile: VolunteerProfile,
     // VolunteerProfileEdit: VolunteerProfileEdit
-    HomePage: HomeScreen
+    VolunteerProfile: VolunteerProfile
   },
   {
-    // initialRouteName: "VolunteerProfile"
+    initialRouteName: 'VolunteerProfile'
   }
 )
 
@@ -104,13 +107,14 @@ export const VolunteerTabs = createBottomTabNavigator(
 
 export const OrgEventsStack = createStackNavigator({
   OrgEventList: OrgEventList,
-  OrgEventPage: OrgEventPage
+  OrgEventPage: OrgEventPage,
+  OrgProfile: OrgProfile
 })
 
 export const OrganizationTabs = createBottomTabNavigator({
-  Events: OrgEventsStack
+  Events: OrgEventsStack,
   // AddEvent: AddEventStack,
-  // Profile: OrgProfileStack
+  Profile: OrgProfileStack
 })
 
 export const EntireApp = createSwitchNavigator({
