@@ -5,9 +5,11 @@ import {ngrokSecret} from '../secrets'
 const GET_ORGANIZATION = 'GET_ORGANIZATION'
 const CREATE_ORGANIZATION = 'CREATE_ORGANIZATION'
 const UPDATE_ORGANIZATION = 'UPDATE_ORGANIZATION'
+const REMOVE_ORGANIZATION = 'REMOVE_ORGANIZATION'
 
 //action creators
 const getOrganization = organization => ({type: GET_ORGANIZATION, organization})
+const removeOrganization = () => ({type: REMOVE_ORGANIZATION})
 
 export const createOrganization = organization => ({
   type: CREATE_ORGANIZATION,
@@ -21,10 +23,14 @@ export const updateOrganization = organization => ({
 
 //thunks
 export const me = () => {
+const defaultOrganization = {}
+
+export const organization = () => {
+
   return async dispatch => {
     try {
-      const res = await axios.get(`${ngrokSecret}/auth/me`)
-      dispatch(getOrganization(res.data))
+      const res = await axios.get(`${ngrokSecret}/auth/organization`)
+      dispatch(getOrganization(res.data || defaultOrganization))
     } catch (err) {
       console.log(error)
     }
@@ -38,6 +44,23 @@ export const auth = (email, password) => {
       res = await axios.post(`${ngrokSecret}/auth/`, {email, password})
     } catch (authError) {
       return dispatch(getOrganization({error: authError}))
+    }
+
+    try {
+      dispatch(getOrganization(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const logout = () => {
+  return async dispatch => {
+    try {
+      await axios.post(`${ngrokSecret}/auth/logout`)
+      dispatch(removeOrganization())
+    } catch (err) {
+      console.error(err)
     }
   }
 }
@@ -88,6 +111,14 @@ export default function(state = initialState, action) {
     case UPDATE_ORGANIZATION: {
       return {...state, currentOrganization: action.organization}
     }
+
+export default function(state = defaultOrganization, action) {
+  switch (action.type) {
+    case GET_ORGANIZATION:
+      return action.organization
+    case REMOVE_ORGANIZATION:
+      return defaultOrganization
+
     default:
       return state
   }

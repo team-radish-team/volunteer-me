@@ -32,7 +32,7 @@ const EventPage = props => {
         />{' '}
         */}
         <Text>Num Volunteers Needed: {event.volunteerTargetNum}</Text>
-        <Text>Organization Name</Text>
+        <Text>{event.organization.name}</Text>
         <Text></Text>
         <Text>
           {event.startTime.slice(5, 10)} from{' '}

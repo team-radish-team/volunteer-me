@@ -3,6 +3,7 @@ import {StyleSheet, Dimensions, View, Image} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {getEventsThunk} from '../store/allEvents'
 import t from 'tcomb-form-native'
+import {connect} from 'react-redux'
 import {
   Container,
   Header,
@@ -20,7 +21,7 @@ import {
 
 let Form = t.form.Form
 
-const Vol = t.struct({
+const Org = t.struct({
   email: t.String,
   password: t.String
 })
@@ -55,7 +56,7 @@ class OrgLogin extends React.Component {
         >
           <Form
             ref="form"
-            type={Vol}
+            type={Org}
             value={this.state.value}
             onChange={this.onChange}
           />
@@ -82,4 +83,23 @@ class OrgLogin extends React.Component {
   }
 }
 
-export default OrgLogin
+// const mapLogin = state => {
+//   return {
+//     name: 'login',
+//     displayName: 'Login',
+//     error: state.user.error
+//   }
+// }
+
+const mapDispatch = dispatch => {
+  return {
+    handleSubmit(evt) {
+      evt.preventDefault()
+      const email = evt.target.email.value
+      const password = evt.target.password.value
+      dispatch(auth(email, password))
+    }
+  }
+}
+
+export default connect(null, mapDispatch)(OrgLogin)
