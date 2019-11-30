@@ -170,7 +170,11 @@ async function seed() {
       volunteerTargetNum: faker.random.number({min: 3, max: 25}),
       isActive: true
     })
-    organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    if (i === 0 || i === 1) {
+      seededOrganizations[0].addEvent(event)
+    } else {
+      organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    }
     futureEvents.push(event)
   }
 
@@ -194,7 +198,11 @@ async function seed() {
       volunteerTargetNum: faker.random.number({min: 3, max: 25}),
       isActive: false
     })
-    organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    if (i === 0 || i === 1) {
+      seededOrganizations[0].addEvent(event)
+    } else {
+      organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    }
     pastEvents.push(event)
   }
 
