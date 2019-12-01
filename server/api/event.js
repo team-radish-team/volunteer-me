@@ -33,3 +33,15 @@ router.get('/:organizationid', async (req, res, next) => {
     next(error)
   }
 })
+
+// GET all volunteer events
+router.get('/:volunteerId', async (req, res, next) => {
+  try {
+    let volEvents = await Event.findAll({
+      where: {volunteerId: req.params.volunteerId}
+    })
+    res.json(volEvents).status(200)
+  } catch (error) {
+    console.log('error')
+  }
+})
