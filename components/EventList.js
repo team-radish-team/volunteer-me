@@ -56,6 +56,17 @@ const EventList = props => {
                 )
               }
             })
+          : Number(filter) === 0
+          ? neoEvents.map(neoEvent => {
+              let neoId = neoEvent.low
+              return (
+                <EventCard
+                  key={neoId}
+                  event={events[neoId]}
+                  navigation={props.navigation}
+                />
+              )
+            })
           : events.map(event => {
               if (Number(event.organization.categoryId) === Number(filter)) {
                 if (
