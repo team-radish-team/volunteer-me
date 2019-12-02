@@ -29,6 +29,9 @@ const Event = db.define('event', {
     type: Sequelize.TEXT,
     allowNull: false
   },
+  volunteerCount: {
+    type: Sequelize.INTEGER
+  },
   volunteerTargetNum: {
     type: Sequelize.INTEGER
   },
