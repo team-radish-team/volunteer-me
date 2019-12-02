@@ -28,14 +28,16 @@ const EventList = props => {
   }
 
   const dispatch = useDispatch()
-  const events = useSelector(state => state.allEvents)
+  const events = useSelector(state => state.allEvents.allEvents)
+  const neoEvents = useSelector(state => state.allEvents.neoEvents)
+
   useEffect(() => {
-    //dispatch(getEventsThunk())
+    dispatch(getEventsThunk())
     dispatch(getNeo4jEventsThunk(45, 35))
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
   const [filter, setFilter] = useState('All')
-
+  console.log('NEOEVENTS!!!!!!!!: ', neoEvents)
   return (
     <React.Fragment>
       <Content>
