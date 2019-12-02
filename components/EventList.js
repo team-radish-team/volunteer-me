@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {StyleSheet, Dimensions, View} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
-import {getEventsThunk} from '../store/allEvents'
+import {getEventsThunk, getNeo4jEventsThunk} from '../store/allEvents'
 import ModalDropdown from 'react-native-modal-dropdown'
 import {
   Container,
@@ -30,7 +30,8 @@ const EventList = props => {
   const dispatch = useDispatch()
   const events = useSelector(state => state.allEvents)
   useEffect(() => {
-    dispatch(getEventsThunk())
+    //dispatch(getEventsThunk())
+    dispatch(getNeo4jEventsThunk(45, 35))
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
   const [filter, setFilter] = useState('All')

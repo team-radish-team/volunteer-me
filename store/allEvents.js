@@ -29,6 +29,28 @@ export const getOrgEventsThunk = organizationId => async dispatch => {
   }
 }
 
+//import {v1 as neo4j} from 'neo4j-driver'
+// var driver = neo4j.driver(
+//   'bolt://localhost',
+//   neo4j.auth.basic('neo4j', 'teamRadish')
+// )
+// driver.onCompleted = () => {
+//   console.log('Driver created')
+// }
+// const session = driver.session()
+
+export const getNeo4jEventsThunk = (volunteerId, eventId) => async dispatch => {
+  try {
+    const {data} = await axios.get(
+      `${ngrokSecret}/api/events/neo4j/${volunteerId}/${eventId}`
+    )
+    console.log(data)
+    dispatch(getEvents(data))
+  } catch (error) {
+    console.error('Error getting neo4j events ', error)
+  }
+}
+
 export default function(state = defaultState, action) {
   switch (action.type) {
     case GET_ALL_EVENTS:
