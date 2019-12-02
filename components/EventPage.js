@@ -16,34 +16,12 @@ import {
   Body,
   Right
 } from 'native-base'
-
 import normalize from '../utilities/timeConverter'
-
 const EventPage = props => {
   const event = props.navigation.state.params
   return (
     <React.Fragment>
       <Content>
-        <Image
-          source={{
-            uri: `${event.organization.orgImage}`
-          }}
-          style={{flex: 1, width: null, height: 400}}
-        />{' '}
-        */}
-        <Text>Num Volunteers Needed: {event.volunteerTargetNum}</Text>
-        <Text>{event.organization.name}</Text>
-        <Text></Text>
-        <Text>
-          {event.startTime.slice(5, 10)} from{' '}
-          {normalize(event.startTime.slice(11, 16))} -{' '}
-          {normalize(event.endTime.slice(11, 16))}
-        </Text>
-        <Text>{event.address}</Text>
-        <Text>{event.description}</Text>
-        <Button>
-          <Text>I'm Attending!</Text>
-        </Button>
         <Card style={{flex: 0}}>
           <CardItem>
             <Image
@@ -85,11 +63,9 @@ const EventPage = props => {
     </React.Fragment>
   )
 }
-
 EventPage.navigationOptions = ({navigation}) => {
   return {
     title: navigation.state.params.title
   }
 }
-
 export default EventPage
