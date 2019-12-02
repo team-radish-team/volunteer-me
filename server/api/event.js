@@ -3,7 +3,7 @@ const {Event, Organization} = require('../../db/models')
 module.exports = router
 
 /**
- *  GET all events (api/events)
+ *  GET all active events (api/events)
  */
 router.get('/', async (req, res, next) => {
   try {

@@ -24,25 +24,40 @@ const OrgEventPage = props => {
   return (
     <React.Fragment>
       <Content>
-        <Image
-          source={{
-            uri: `${event.organization.orgImage}`
-          }}
-          style={{flex: 1, width: null, height: 400}}
-        />
-        <Text>Num Volunteers Needed: {event.volunteerTargetNum}</Text>
-        <Text>{event.organization.name}</Text>
-        <Text></Text>
-        <Text>
-          {event.startTime.slice(5, 10)} from{' '}
-          {normalize(event.startTime.slice(11, 16))} -{' '}
-          {normalize(event.endTime.slice(11, 16))}
-        </Text>
-        <Text>{event.address}</Text>
-        <Text>{event.description}</Text>
-        <Button>
-          <Text>Edit This Event</Text>
-        </Button>
+        <Card style={{flex: 0}}>
+          <CardItem>
+            <Image
+              source={{
+                uri: `${event.organization.orgImage}`
+              }}
+              style={{flex: 1, width: null, height: 400}}
+            />
+          </CardItem>
+          <CardItem>
+            <Text>{event.organization.name}</Text>
+          </CardItem>
+          <CardItem>
+            <Text>Volunteers Needed: {event.volunteerTargetNum}</Text>
+          </CardItem>
+          <CardItem>
+            <Text>
+              {event.startTime.slice(5, 10)} from{' '}
+              {normalize(event.startTime.slice(11, 16))} -{' '}
+              {normalize(event.endTime.slice(11, 16))}
+            </Text>
+          </CardItem>
+          <CardItem>
+            <Text>{event.address}</Text>
+          </CardItem>
+          <CardItem>
+            <Text>{event.description}</Text>
+          </CardItem>
+          <CardItem>
+            <Button>
+              <Text>Edit This Event</Text>
+            </Button>
+          </CardItem>
+        </Card>
       </Content>
     </React.Fragment>
   )
