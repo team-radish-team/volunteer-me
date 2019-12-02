@@ -58,6 +58,7 @@ class VolLogin extends React.Component {
             type={Vol}
             value={this.state.value}
             onChange={this.onChange}
+            options={options}
           />
           <Button
             rounded
