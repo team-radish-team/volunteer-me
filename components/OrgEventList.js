@@ -33,9 +33,9 @@ const OrgEventList = props => {
   } else {
     return (
       <React.Fragment>
-        <Content>
-          <Tabs>
-            <Tab heading="Upcoming Events">
+        <Tabs>
+          <Tab heading="Upcoming Events">
+            <Content>
               {events.map(event => {
                 if (event.isActive) {
                   return (
@@ -47,8 +47,10 @@ const OrgEventList = props => {
                   )
                 }
               })}
-            </Tab>
-            <Tab heading="Past Events">
+            </Content>
+          </Tab>
+          <Tab heading="Past Events">
+            <Content>
               {events.map(event => {
                 if (!event.isActive) {
                   return (
@@ -60,9 +62,9 @@ const OrgEventList = props => {
                   )
                 }
               })}
-            </Tab>
-          </Tabs>
-        </Content>
+            </Content>
+          </Tab>
+        </Tabs>
       </React.Fragment>
     )
   }
