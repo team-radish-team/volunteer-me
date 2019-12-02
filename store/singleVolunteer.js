@@ -1,13 +1,25 @@
 import axios from 'axios'
 import {ngrokSecret} from '../secrets'
 
+//action types
+const CREATE_VOLUNTEER = 'CREATE_VOLUNTEER'
+const UPDATE_VOLUNTEER = 'UPDATE_VOLUNTEER'
 const GET_VOLUNTEER = 'GET_VOLUNTEER'
 const REMOVE_VOLUNTEER = 'REMOVE_VOLUNTEER'
 
+//action creators
+export const createVolunteer = volunteer => ({
+  type: CREATE_VOLUNTEER,
+  volunteer
+})
+
+export const updateVolunteer = volunteer => ({
+  type: UPDATE_VOLUNTEER,
+  volunteer
+})
+
 const getVolunteer = volunteer => ({type: GET_VOLUNTEER, volunteer})
 const removeVolunteer = () => ({type: REMOVE_VOLUNTEER})
-
-const defaultVolunteer = {}
 
 export const volunteer = () => {
   return async dispatch => {
@@ -37,6 +49,28 @@ export const auth = (email, password) => {
   }
 }
 
+//thunks
+
+export const createVolunteerThunk = volunteer => async dispatch => {
+  try {
+    const {data} = await axios.post(`${ngrokSecret}/api/volunteers`, volunteer)
+    dispatch(createVolunteer(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updateVolunteerThunk = volunteer => async dispatch => {
+  try {
+    const {data} = await axios.put(
+      `${ngrokSecret}/api/volunteers/${volunteer.id}`
+    )
+    dispatch(updateVolunteer(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const logout = () => {
   return async dispatch => {
     try {
@@ -61,12 +95,22 @@ export const getVolunteerThunk = volunteerId => {
   }
 }
 
-export default function(state = defaultVolunteer, action) {
+//reducer
+
+const initialState = {}
+
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_VOLUNTEER:
       return action.volunteer
     case REMOVE_VOLUNTEER:
-      return defaultVolunteer
+      return initialState
+    case CREATE_VOLUNTEER: {
+      return action.volunteer
+    }
+    case UPDATE_VOLUNTEER: {
+      return action.volunteer
+    }
     default:
       return state
   }

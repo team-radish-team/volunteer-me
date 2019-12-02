@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Content} from 'native-base'
+import {Content, Thumbnail} from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 
 const VolunteerProfile = props => {

@@ -37,10 +37,10 @@ const EventCard = props => {
         button
         onPress={() => props.navigation.navigate('EventPage', props.event)}
       >
-        <Image
+        {/* <Image
           source={{uri: `${props.event.organization.orgImage}`}}
           style={{height: 200, width: null, flex: 1}}
-        />
+        /> */}
       </CardItem>
       <CardItem
         button

@@ -74,6 +74,16 @@ class OrgLogin extends React.Component {
           <Button rounded info onPress={() => this.handleSubmit()}>
             <Text>Login</Text>
           </Button>
+          <Text style={{paddingTop: 30, paddingBottom: 10}}>
+            Don't have an account?
+          </Text>
+          <Button
+            rounded
+            info
+            onPress={() => this.props.navigation.navigate('OrgSignup')}
+          >
+            <Text>Sign Up</Text>
+          </Button>
         </Container>
       </React.Fragment>
     )
