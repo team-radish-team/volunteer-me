@@ -22,11 +22,10 @@ import OrgEventCard from './OrgEventCard'
 
 const OrgEventList = props => {
   const organization = useSelector(state => state.singleOrganization)
-  console.log(organization)
   const dispatch = useDispatch()
   const events = useSelector(state => state.allEvents)
   useEffect(() => {
-    dispatch(getOrgEventsThunk(2))
+    dispatch(getOrgEventsThunk(organization.id))
   }, [organization.id])
   if (!organization) {
     return <React.Fragment></React.Fragment>

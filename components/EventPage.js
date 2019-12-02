@@ -37,7 +37,10 @@ const EventPage = props => {
             <Text>{event.organization.name}</Text>
           </CardItem>
           <CardItem>
-            <Text>Volunteers Needed: {event.volunteerTargetNum}</Text>
+            <Text>
+              Volunteers Needed: {event.volunteerCount}/
+              {event.volunteerTargetNum}
+            </Text>
           </CardItem>
           <CardItem>
             <Text>

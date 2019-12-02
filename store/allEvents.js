@@ -18,10 +18,12 @@ export const getEventsThunk = () => async dispatch => {
 
 export const getOrgEventsThunk = organizationId => async dispatch => {
   try {
-    const {data} = await axios.get(
-      `${ngrokSecret}/api/events/${organizationId}`
-    )
-    dispatch(getEvents(data))
+    if (organizationId) {
+      const {data} = await axios.get(
+        `${ngrokSecret}/api/events/${organizationId}`
+      )
+      dispatch(getEvents(data))
+    }
   } catch (error) {
     console.error('Error getting all events', error)
   }
