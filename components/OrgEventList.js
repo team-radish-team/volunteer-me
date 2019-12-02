@@ -14,7 +14,9 @@ import {
   Icon,
   Left,
   Body,
-  Right
+  Right,
+  Tabs,
+  Tab
 } from 'native-base'
 import OrgEventCard from './OrgEventCard'
 
@@ -32,15 +34,34 @@ const OrgEventList = props => {
     return (
       <React.Fragment>
         <Content>
-          {events.map(event => {
-            return (
-              <OrgEventCard
-                key={event.id}
-                event={event}
-                navigation={props.navigation}
-              />
-            )
-          })}
+          <Tabs>
+            <Tab heading="Upcoming Events">
+              {events.map(event => {
+                if (event.isActive) {
+                  return (
+                    <OrgEventCard
+                      key={event.id}
+                      event={event}
+                      navigation={props.navigation}
+                    />
+                  )
+                }
+              })}
+            </Tab>
+            <Tab heading="Past Events">
+              {events.map(event => {
+                if (!event.isActive) {
+                  return (
+                    <OrgEventCard
+                      key={event.id}
+                      event={event}
+                      navigation={props.navigation}
+                    />
+                  )
+                }
+              })}
+            </Tab>
+          </Tabs>
         </Content>
       </React.Fragment>
     )
