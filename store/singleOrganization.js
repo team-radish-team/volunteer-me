@@ -1,14 +1,31 @@
 import axios from 'axios'
 import {ngrokSecret} from '../secrets'
 
+//action types
 const GET_ORGANIZATION = 'GET_ORGANIZATION'
+const CREATE_ORGANIZATION = 'CREATE_ORGANIZATION'
+const UPDATE_ORGANIZATION = 'UPDATE_ORGANIZATION'
 const REMOVE_ORGANIZATION = 'REMOVE_ORGANIZATION'
 
-const getOrganization = organization => ({type: GET_ORGANIZATION, organization})
-const removeOrganization = () => ({type: REMOVE_ORGANIZATION})
+//action creators
+export const getOrganization = organization => ({
+  type: GET_ORGANIZATION,
+  organization
+})
 
-const defaultOrganization = {}
+export const removeOrganization = () => ({type: REMOVE_ORGANIZATION})
 
+export const createOrganization = organization => ({
+  type: CREATE_ORGANIZATION,
+  organization
+})
+
+export const updateOrganization = organization => ({
+  type: UPDATE_ORGANIZATION,
+  organization
+})
+
+//thunks
 export const organization = () => {
   return async dispatch => {
     try {
@@ -64,12 +81,41 @@ export const getOrganizationThunk = organizationId => {
   }
 }
 
-export default function(state = defaultOrganization, action) {
+export const createOrganizationThunk = organization => async dispatch => {
+  try {
+    const {data} = await axios.post(
+      `${ngrokSecret}/api/organizations`,
+      organization
+    )
+    dispatch(createOrganization(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updateOrganizationThunk = organization => async dispatch => {
+  try {
+    const {data} = await axios.put(
+      `${ngrokSecret}/api/organizations/${organization.id}`
+    )
+    dispatch(updateOrder(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+const initialState = {}
+
+export default function singleOrganization(state = initialState, action) {
   switch (action.type) {
     case GET_ORGANIZATION:
       return action.organization
+    case CREATE_ORGANIZATION:
+      return action.organization
+    case UPDATE_ORGANIZATION:
+      return action.organization
     case REMOVE_ORGANIZATION:
-      return defaultOrganization
+      return state
     default:
       return state
   }

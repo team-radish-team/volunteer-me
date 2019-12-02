@@ -16,9 +16,7 @@ import {
   Body,
   Right
 } from 'native-base'
-
 import normalize from '../utilities/timeConverter'
-
 const EventPage = props => {
   const event = props.navigation.state.params
   return (
@@ -65,11 +63,9 @@ const EventPage = props => {
     </React.Fragment>
   )
 }
-
 EventPage.navigationOptions = ({navigation}) => {
   return {
     title: navigation.state.params.title
   }
 }
-
 export default EventPage
