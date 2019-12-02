@@ -44,6 +44,40 @@ const EventPage = props => {
         <Button>
           <Text>I'm Attending!</Text>
         </Button>
+        <Card style={{flex: 0}}>
+          <CardItem>
+            <Image
+              source={{
+                uri: `${event.organization.orgImage}`
+              }}
+              style={{flex: 1, width: null, height: 400}}
+            />
+          </CardItem>
+          <CardItem>
+            <Text>{event.organization.name}</Text>
+          </CardItem>
+          <CardItem>
+            <Text>Volunteers Needed: {event.volunteerTargetNum}</Text>
+          </CardItem>
+          <CardItem>
+            <Text>
+              {event.startTime.slice(5, 10)} from{' '}
+              {normalize(event.startTime.slice(11, 16))} -{' '}
+              {normalize(event.endTime.slice(11, 16))}
+            </Text>
+          </CardItem>
+          <CardItem>
+            <Text>{event.address}</Text>
+          </CardItem>
+          <CardItem>
+            <Text>{event.description}</Text>
+          </CardItem>
+          <CardItem>
+            <Button>
+              <Text>I'm Attending!</Text>
+            </Button>
+          </CardItem>
+        </Card>
       </Content>
     </React.Fragment>
   )
