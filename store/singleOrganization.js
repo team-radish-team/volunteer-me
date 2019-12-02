@@ -71,10 +71,12 @@ export const logout = () => {
 export const getOrganizationThunk = organizationId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(
-        `${ngrokSecret}/api/organizations/${organizationId}`
-      )
-      dispatch(getOrganization(data))
+      if (organizationId) {
+        const {data} = await axios.get(
+          `${ngrokSecret}/api/organizations/${organizationId}`
+        )
+        dispatch(getOrganization(data))
+      }
     } catch (error) {
       console.error('Error getting organization', error)
     }

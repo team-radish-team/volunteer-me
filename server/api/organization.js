@@ -27,6 +27,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:organizationId', async (req, res, next) => {
   try {
+    console.log('in the api', req.params.organizationId)
     const organization = await Organization.findByPk(
       Number(req.params.organizationId)
     )
