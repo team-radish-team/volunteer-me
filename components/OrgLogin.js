@@ -3,6 +3,8 @@ import {StyleSheet, Dimensions, View, Image} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {getEventsThunk} from '../store/allEvents'
 import t from 'tcomb-form-native'
+import {connect} from 'react-redux'
+import {auth} from '../store/singleOrganization'
 import {
   Container,
   Header,
@@ -20,7 +22,7 @@ import {
 
 let Form = t.form.Form
 
-const Vol = t.struct({
+const Org = t.struct({
   email: t.String,
   password: t.String
 })
@@ -38,9 +40,19 @@ class OrgLogin extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   onChange = value => {
     this.setState({value})
+  }
+  handleSubmit = () => {
+    const values = this.refs.form.getValue()
+    if (values) {
+      const email = values.email
+      const password = values.password
+      this.props.auth(email, password)
+      this.props.navigation.navigate('Organization')
+    }
   }
   render() {
     return (
@@ -55,15 +67,11 @@ class OrgLogin extends React.Component {
         >
           <Form
             ref="form"
-            type={Vol}
+            type={Org}
             value={this.state.value}
             onChange={this.onChange}
           />
-          <Button
-            rounded
-            info
-            onPress={() => this.props.navigation.navigate('Organization')}
-          >
+          <Button rounded info onPress={() => this.handleSubmit()}>
             <Text>Login</Text>
           </Button>
           <Text style={{paddingTop: 30, paddingBottom: 10}}>
@@ -82,4 +90,18 @@ class OrgLogin extends React.Component {
   }
 }
 
-export default OrgLogin
+// const mapLogin = state => {
+//   return {
+//     name: 'login',
+//     displayName: 'Login',
+//     error: state.user.error
+//   }
+// }
+
+const mapDispatch = dispatch => {
+  return {
+    auth: (email, password) => dispatch(auth(email, password))
+  }
+}
+
+export default connect(null, mapDispatch)(OrgLogin)

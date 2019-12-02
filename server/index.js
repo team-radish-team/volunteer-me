@@ -4,7 +4,23 @@ const morgan = require('morgan')
 const compression = require('compression')
 const {db} = require('../db')
 const app = express()
+const passport = require('passport')
+const session = require('express-session')
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const sessionStore = new SequelizeStore({db})
 module.exports = app
+
+passport.serializeUser((user, done) => done(null, user.id))
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    console.log(db.models)
+    const user = await db.models.organization.findByPk(id)
+    done(null, user)
+  } catch (error) {
+    done(error)
+  }
+})
 
 const createApp = () => {
   // logging middleware
@@ -17,9 +33,22 @@ const createApp = () => {
   // compression middleware
   app.use(compression())
 
+  // passport middleware
+  app.use(
+    session({
+      secret: 'whocares',
+      store: sessionStore,
+      resave: false,
+      saveUninitialized: false
+    })
+  )
+  app.use(passport.initialize())
+  app.use(passport.session())
+
   // auth and api routes
   //app.use('/auth', require('./auth'))
   app.use(`/api`, require('./api'))
+  app.use('/auth', require('./auth'))
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -58,6 +87,7 @@ const startListening = () => {
 const syncDb = () => db.sync()
 
 async function bootApp() {
+  await sessionStore.sync()
   await syncDb()
   await createApp()
   await startListening()

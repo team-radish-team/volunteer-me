@@ -13,7 +13,7 @@ const {dummyEvents} = require('./customSeedArrays/dummyEvents')
 
 //dummyVolunteers Imports
 const {dummyVolunteers} = require('./customSeedArrays/dummyVolunteers')
-
+const {dummyOrganizations} = require('./customSeedArrays/dummyOrganizations')
 //customOrganizationSeed Imports
 const {
   organizationNames,
@@ -91,9 +91,13 @@ async function seed() {
 
   session.run('MATCH (n) DETACH DELETE n')
 
-  // const seededVolunteers = await Promise.all(
-  //   dummyVolunteers.map(volunteer => Volunteer.create(volunteer))
-  // )
+  const seededVolunteers = await Promise.all(
+    dummyVolunteers.map(volunteer => Volunteer.create(volunteer))
+  )
+
+  const seededOrganizations = await Promise.all(
+    dummyOrganizations.map(organization => Organization.create(organization))
+  )
   // const seededEvents = await Promise.all(
   //   dummyEvents.map(event => Event.create(event))
   // )
@@ -166,7 +170,11 @@ async function seed() {
       volunteerTargetNum: faker.random.number({min: 3, max: 25}),
       isActive: true
     })
-    organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    if (i === 0 || i === 1) {
+      seededOrganizations[0].addEvent(event)
+    } else {
+      organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    }
     futureEvents.push(event)
   }
 
@@ -190,7 +198,11 @@ async function seed() {
       volunteerTargetNum: faker.random.number({min: 3, max: 25}),
       isActive: false
     })
-    organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    if (i === 0 || i === 1) {
+      seededOrganizations[0].addEvent(event)
+    } else {
+      organizationArray[Math.floor(Math.random() * 52)].addEvent(event)
+    }
     pastEvents.push(event)
   }
 

@@ -17,7 +17,7 @@ const middleware = applyMiddleware(thunkMiddleware)
 const store = createStore(reducer, middleware)
 
 export default store
-export * from './allVolunteers'
-export * from './allEvents'
-export * from './singleVolunteer'
-export * from './singleOrganization'
+// export * from './allVolunteers'
+// export * from './allEvents'
+// export * from './singleVolunteer'
+// // export * from './singleOrganization'

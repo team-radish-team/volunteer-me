@@ -20,11 +20,11 @@ import {
 import EventCard from './EventCard'
 
 const EventList = props => {
-  const handleHeaderChange = event => {
-    console.log('hello')
+  const handleHeaderChange = value => {
+    setHeader(value)
   }
-  const handleFilterChange = event => {
-    console.log('filter')
+  const handleFilterChange = value => {
+    setFilter(value)
   }
 
   const dispatch = useDispatch()
@@ -34,29 +34,50 @@ const EventList = props => {
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
   const [header, setHeader] = useState('Events Near You')
-  const [filter, setFilter] = useState('')
+  const [filter, setFilter] = useState('All')
+
   return (
     <React.Fragment>
-      {/* <Content>
-        {header === 'Events Near You' ? (
-          <Text>Events</Text>
-        ) : ( */}
       <Content>
-        {events.map(event => {
-          return (
-            <EventCard
-              key={event.id}
-              event={event}
-              navigation={props.navigation}
-            />
-          )
-        })}
+        {filter === 'All' || Number(filter) === 0
+          ? events.map(event => {
+              return (
+                <EventCard
+                  key={event.id}
+                  event={event}
+                  navigation={props.navigation}
+                />
+              )
+            })
+          : events.map(event => {
+              if (Number(event.organization.categoryId) === Number(filter)) {
+                return (
+                  <EventCard
+                    key={event.id}
+                    event={event}
+                    navigation={props.navigation}
+                  />
+                )
+              }
+            })}
       </Content>
     </React.Fragment>
   )
 }
 
 const eventHeaderOptions = ['Events Near You', 'Recommended Events']
+const filterOptions = [
+  'All',
+  'Animals',
+  'Youth',
+  'Agriculture',
+  'Environment',
+  'Art and Music',
+  'Civic Engagement',
+  'Hunger',
+  'Education',
+  'Advocacy'
+]
 
 EventList.navigationOptions = ({navigation}) => {
   return {
@@ -75,19 +96,9 @@ EventList.navigationOptions = ({navigation}) => {
     ),
     headerRight: (
       <ModalDropdown
-        defaultValue={'Categories'}
+        defaultValue={'All'}
         onSelect={navigation.getParam('handleFilterChange')}
-        options={[
-          'Animals',
-          'Youth',
-          'Agriculture',
-          'Environment',
-          'Art and Music',
-          'Civic Engagement',
-          'Hunger',
-          'Education',
-          'Advocacy'
-        ]}
+        options={filterOptions}
         textStyle={{fontSize: 15, marginRight: 15, color: 'black'}}
       />
     )
