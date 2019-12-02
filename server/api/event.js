@@ -18,18 +18,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/past', async (req, res, next) => {
-  try {
-    let pastEvents = await Event.findAll({
-      where: {isActive: false}
-    })
-    res.json(pastEvents).status(200)
-  } catch (error) {
-    console.log('error')
-    next(error)
-  }
-})
-
 /**
  *  GET all organization events (api/events/organization)
  */
