@@ -3,7 +3,7 @@ const {Event, Organization} = require('../../db/models')
 module.exports = router
 
 /**
- *  GET all events (api/events)
+ *  GET all active events (api/events)
  */
 router.get('/', async (req, res, next) => {
   try {
@@ -12,6 +12,18 @@ router.get('/', async (req, res, next) => {
       include: [{model: Organization}]
     })
     res.json(allEvents).status(200)
+  } catch (error) {
+    console.log('error')
+    next(error)
+  }
+})
+
+router.get('/past', async (req, res, next) => {
+  try {
+    let pastEvents = await Event.findAll({
+      where: {isActive: false}
+    })
+    res.json(pastEvents).status(200)
   } catch (error) {
     console.log('error')
     next(error)
