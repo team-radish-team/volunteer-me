@@ -321,22 +321,26 @@ const ReactMap = props => {
       }}
     >
       {events.map(event => {
-        return (
-          <Marker
-            key={event.id}
-            coordinate={{
-              latitude: Number(event.latitude),
-              longitude: Number(event.longitude)
-            }}
-          >
-            <Callout
-              button
-              onPress={() => props.navigation.navigate('EventPage', event)}
+        if (event.isActive && event.volunteerCount < event.volunteerTargetNum) {
+          return (
+            <Marker
+              key={event.id}
+              coordinate={{
+                latitude: Number(event.latitude),
+                longitude: Number(event.longitude)
+              }}
             >
-              <EventCard event={event} />
-            </Callout>
-          </Marker>
-        )
+              <Callout
+                tooltip={true}
+                button
+                onPress={() => props.navigation.navigate('EventPage', event)}
+                style={{width: 300, height: 300}}
+              >
+                <EventCard event={event} />
+              </Callout>
+            </Marker>
+          )
+        }
       })}
     </MapView>
   )

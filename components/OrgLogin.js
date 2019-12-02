@@ -70,6 +70,7 @@ class OrgLogin extends React.Component {
             type={Org}
             value={this.state.value}
             onChange={this.onChange}
+            options={options}
           />
           <Button rounded info onPress={() => this.handleSubmit()}>
             <Text>Login</Text>

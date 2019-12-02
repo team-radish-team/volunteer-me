@@ -33,24 +33,17 @@ const EventList = props => {
     dispatch(getEventsThunk())
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
-  const [header, setHeader] = useState('Events Near You')
   const [filter, setFilter] = useState('All')
 
   return (
     <React.Fragment>
       <Content>
-        {filter === 'All' || Number(filter) === 0
+        {filter === 'All' || Number(filter) === 10
           ? events.map(event => {
-              return (
-                <EventCard
-                  key={event.id}
-                  event={event}
-                  navigation={props.navigation}
-                />
-              )
-            })
-          : events.map(event => {
-              if (Number(event.organization.categoryId) === Number(filter)) {
+              if (
+                event.isActive &&
+                event.volunteerCount < event.volunteerTargetNum
+              ) {
                 return (
                   <EventCard
                     key={event.id}
@@ -59,15 +52,30 @@ const EventList = props => {
                   />
                 )
               }
+            })
+          : events.map(event => {
+              if (Number(event.organization.categoryId) === Number(filter)) {
+                if (
+                  event.isActive &&
+                  event.volunteerCount < event.volunteerTargetNum
+                ) {
+                  return (
+                    <EventCard
+                      key={event.id}
+                      event={event}
+                      navigation={props.navigation}
+                    />
+                  )
+                }
+              }
             })}
       </Content>
     </React.Fragment>
   )
 }
 
-const eventHeaderOptions = ['Events Near You', 'Recommended Events']
 const filterOptions = [
-  'All',
+  'For You',
   'Animals',
   'Youth',
   'Agriculture',
@@ -76,24 +84,13 @@ const filterOptions = [
   'Civic Engagement',
   'Hunger',
   'Education',
-  'Advocacy'
+  'Advocacy',
+  'All'
 ]
 
 EventList.navigationOptions = ({navigation}) => {
   return {
-    headerTitle: (
-      <ModalDropdown
-        options={eventHeaderOptions}
-        defaultValue={'Events Near You'}
-        onSelect={navigation.getParam('handleHeaderChange')}
-        dropdownStyle={{
-          alignItems: 'center',
-          height: 40 * eventHeaderOptions.length
-        }}
-        dropdownTextStyle={{fontSize: 16, color: 'black'}}
-        textStyle={{fontSize: 20, color: 'black'}}
-      />
-    ),
+    title: 'Events',
     headerRight: (
       <ModalDropdown
         defaultValue={'All'}
