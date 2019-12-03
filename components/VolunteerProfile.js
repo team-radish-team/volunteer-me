@@ -7,16 +7,25 @@ import {
   Text,
   Body,
   Title,
-  Header
+  Header,
+  Tabs,
+  Tab
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getVolunteerThunk} from '../store/singleVolunteer'
+import {getVolunteerEventsThunk} from '../store/allEvents'
 import VolLogoutButton from './VolLogoutButton'
+import EventCard from './EventCard'
+import {ScrollView} from 'react-native-gesture-handler'
 
 const VolunteerProfile = props => {
   const dispatch = useDispatch()
   const volunteer = useSelector(state => state.singleVolunteer)
-  useEffect(() => dispatch(getVolunteerThunk(volunteer.id)), [volunteer.id])
+  const events = useSelector(state => state.allEvents.volunteerEvents)
+  useEffect(() => {
+    dispatch(getVolunteerThunk(volunteer.id))
+    dispatch(getVolunteerEventsThunk(volunteer.id))
+  }, [volunteer.id])
   if (!volunteer) {
     return <React.Fragment></React.Fragment>
   } else {
@@ -37,12 +46,45 @@ const VolunteerProfile = props => {
                   <Text>Phone Number: {volunteer.phone}</Text>
                   <Text>Interests:</Text>
                   {volunteer.interests.map(interest => {
-                    return <Text>{interest} </Text>
+                    return <Text key={interest}>{interest} </Text>
                   })}
                 </Body>
               </CardItem>
             </CardItem>
           </Card>
+          {/* <VolLogoutButton /> */}
+          <Tabs>
+            <Tab heading="Upcoming Events">
+              <Content>
+                {events.map(event => {
+                  if (event.isActive) {
+                    return (
+                      <EventCard
+                        key={event.id}
+                        event={event}
+                        navigation={props.navigation}
+                      />
+                    )
+                  }
+                })}
+              </Content>
+            </Tab>
+            <Tab heading="Past Events">
+              <Content>
+                {events.map(event => {
+                  if (!event.isActive) {
+                    return (
+                      <EventCard
+                        key={event.id}
+                        event={event}
+                        navigation={props.navigation}
+                      />
+                    )
+                  }
+                })}
+              </Content>
+            </Tab>
+          </Tabs>
         </Content>
       </React.Fragment>
     )
@@ -51,7 +93,6 @@ const VolunteerProfile = props => {
 
 VolunteerProfile.navigationOptions = ({navigation}) => {
   return {
-    headerLeft: <VolLogoutButton />,
     title: 'Profile'
   }
 }

@@ -104,7 +104,6 @@ const filterOptions = [
 
 EventList.navigationOptions = ({navigation}) => {
   return {
-    headerLeft: <VolLogoutButton />,
     title: 'Events',
     headerRight: (
       <ModalDropdown

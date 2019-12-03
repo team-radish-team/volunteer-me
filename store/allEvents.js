@@ -2,18 +2,30 @@ import axios from 'axios'
 import {ngrokSecret} from '../secrets'
 
 const GET_ALL_EVENTS = 'GET_ALL_EVENTS'
-
 const ADD_EVENT = 'ADD_EVENT'
-
 const GET_NEO_EVENTS = 'GET_NEO_EVENTS'
+const GET_VOLUNTEER_EVENTS = 'GET_VOLUNTEER_EVENTS'
 
 const addEvent = event => ({type: ADD_EVENT, event})
 const getEvents = events => ({type: GET_ALL_EVENTS, events})
 const getNeoEvents = eventIds => ({type: GET_NEO_EVENTS, eventIds})
+const getVolunteerEvents = events => ({type: GET_VOLUNTEER_EVENTS, events})
 
 const defaultState = {
   allEvents: [],
-  neoEvents: []
+  neoEvents: [],
+  volunteerEvents: []
+}
+
+export const getVolunteerEventsThunk = volunteerId => async dispatch => {
+  try {
+    const {data} = await axios.get(
+      `${ngrokSecret}/api/events/volunteer/${volunteerId}`
+    )
+    dispatch(getVolunteerEvents(data.events))
+  } catch (error) {
+    console.error('Error getting volunteer events', error)
+  }
 }
 
 export const getEventsThunk = () => async dispatch => {
@@ -93,6 +105,8 @@ export default function(state = defaultState, action) {
       return {...state, allEvents: action.events}
     case GET_NEO_EVENTS:
       return {...state, neoEvents: action.eventIds}
+    case GET_VOLUNTEER_EVENTS:
+      return {...state, volunteerEvents: action.events}
     case ADD_EVENT:
       return {...state, allEvents: [...state.allEvents, action.event]}
     default:

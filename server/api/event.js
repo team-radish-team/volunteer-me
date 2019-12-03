@@ -1,5 +1,10 @@
 const router = require('express').Router()
-const {Event, Organization} = require('../../db/models')
+const {
+  Event,
+  Organization,
+  Volunteer,
+  VolunteerEvent
+} = require('../../db/models')
 const moment = require('moment')
 module.exports = router
 
@@ -52,6 +57,21 @@ router.get('/:organizationid', async (req, res, next) => {
     res.json(orgEvents).status(200)
   } catch (error) {
     console.log(error)
+    next(error)
+  }
+})
+
+/**
+ *  GET all volunteer events (api/events/:volunteerId)
+ */
+router.get('/volunteer/:volunteerId', async (req, res, next) => {
+  try {
+    let volunteer = await Volunteer.findByPk(req.params.volunteerId, {
+      include: [{model: Event, include: [{model: Organization}]}]
+    })
+
+    res.json(volunteer)
+  } catch (error) {
     next(error)
   }
 })
