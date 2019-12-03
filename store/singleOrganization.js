@@ -96,12 +96,16 @@ export const createOrganizationThunk = organization => async dispatch => {
   }
 }
 
-export const updateOrganizationThunk = organization => async dispatch => {
+export const updateOrganizationThunk = (
+  organization,
+  organizationId
+) => async dispatch => {
   try {
     const {data} = await axios.put(
-      `${ngrokSecret}/api/organizations/${organization.id}`
+      `${ngrokSecret}/api/organizations/${organizationId}`,
+      organization
     )
-    dispatch(updateOrder(data))
+    dispatch(updateOrganization(data))
   } catch (err) {
     console.error(err)
   }
