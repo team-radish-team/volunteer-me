@@ -59,6 +59,8 @@ export const addEventThunk = (
       dateOfEvent,
       organizationId
     })
+    data.organizationId = organizationId
+    dispatch(addEvent(data))
   } catch (error) {
     console.log('Error adding event', error)
   }
@@ -91,6 +93,8 @@ export default function(state = defaultState, action) {
       return {...state, allEvents: action.events}
     case GET_NEO_EVENTS:
       return {...state, neoEvents: action.eventIds}
+    case ADD_EVENT:
+      return {...state, allEvents: [...state.allEvents, action.event]}
     default:
       return state
   }
