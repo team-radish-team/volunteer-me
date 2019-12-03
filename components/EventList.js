@@ -18,6 +18,7 @@ import {
   Right
 } from 'native-base'
 import EventCard from './EventCard'
+import VolLogoutButton from './VolLogoutButton'
 
 const EventList = props => {
   const handleHeaderChange = value => {
@@ -104,6 +105,7 @@ const filterOptions = [
 
 EventList.navigationOptions = ({navigation}) => {
   return {
+    headerLeft: <VolLogoutButton />,
     title: 'Events',
     headerRight: (
       <ModalDropdown

@@ -19,6 +19,7 @@ import {
   Tab
 } from 'native-base'
 import OrgEventCard from './OrgEventCard'
+import OrgLogoutButton from './OrgLogoutButton'
 
 const OrgEventList = props => {
   const organization = useSelector(state => state.singleOrganization)
@@ -70,6 +71,7 @@ const OrgEventList = props => {
 }
 
 OrgEventList.navigationOptions = {
+  headerLeft: <OrgLogoutButton />,
   title: 'Events'
 }
 

@@ -11,6 +11,7 @@ import {
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getOrganizationThunk} from '../store/singleOrganization'
+import OrgLogoutButton from './OrgLogoutButton'
 
 const OrgProfile = props => {
   const dispatch = useDispatch()
@@ -51,6 +52,13 @@ const OrgProfile = props => {
         </Content>
       </React.Fragment>
     )
+  }
+}
+
+OrgProfile.navigationOptions = ({navigation}) => {
+  return {
+    headerLeft: <OrgLogoutButton />,
+    title: 'Profile'
   }
 }
 
