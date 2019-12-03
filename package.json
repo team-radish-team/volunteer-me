@@ -34,6 +34,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "faker": "^4.1.0",
+    "moment": "^2.24.0",
     "native-base": "^2.13.8",
     "neo4j-driver": "^1.7.6",
     "ngrok": "^3.2.5",

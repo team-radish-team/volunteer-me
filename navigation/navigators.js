@@ -25,6 +25,9 @@ import HomeScreen from '../components/HomeScreen'
 import OrgEventList from '../components/OrgEventList'
 import OrgEventPage from '../components/OrgEventPage'
 
+// AddEventStack screens
+import AddEvent from '../components/AddEvent'
+
 //stack for login page
 export const LoginStack = createStackNavigator(
   {
@@ -136,9 +139,13 @@ export const OrgEventsStack = createStackNavigator({
   OrgProfile: OrgProfile
 })
 
+export const AddEventStack = createStackNavigator({
+  AddEvent: AddEvent
+})
+
 export const OrganizationTabs = createBottomTabNavigator({
   Events: OrgEventsStack,
-  // AddEvent: AddEventStack,
+  'Add Event': AddEventStack,
   Profile: OrgProfileStack
 })
 
