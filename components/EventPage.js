@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {StyleSheet, Dimensions, View, Image} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
-import {getEventsThunk} from '../store/allEvents'
+import {addVolunteerThunk} from '../store/allEvents'
 import {
   Container,
   Header,
@@ -19,6 +19,7 @@ import {
 import normalize from '../utilities/timeConverter'
 const EventPage = props => {
   const event = props.navigation.state.params
+  const dispatch = useDispatch()
   return (
     <React.Fragment>
       <Content>
