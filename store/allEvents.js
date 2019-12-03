@@ -76,6 +76,15 @@ export const getNeo4jEventsThunk = (volunteerId, eventId) => async dispatch => {
   }
 }
 
+export const addVolunteerThunk = eventId => async dispatch => {
+  try {
+    const {data} = await axios.patch(`${ngrokSecret}/api/events/${eventId}`)
+    dispatch(getEvents(data))
+  } catch (error) {
+    console.error('Error adding Volunteer', error)
+  }
+}
+
 export default function(state = defaultState, action) {
   switch (action.type) {
     case GET_ALL_EVENTS:
