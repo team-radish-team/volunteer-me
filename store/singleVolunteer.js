@@ -65,6 +65,7 @@ export const createVolunteerThunk = volunteer => async dispatch => {
 }
 
 export const updateVolunteerThunk = volunteer => async dispatch => {
+  console.log('in the thunk', volunteer)
   try {
     const {data} = await axios.put(
       `${ngrokSecret}/api/volunteers/${volunteer.id}`,
@@ -109,12 +110,12 @@ export default function(state = initialState, action) {
     case GET_VOLUNTEER:
       return action.volunteer
     case REMOVE_VOLUNTEER:
-      return initialState
+      return state
     case CREATE_VOLUNTEER: {
       return {state, signedUpVol: action.volunteer}
     }
     case UPDATE_VOLUNTEER: {
-      return action.volunteer
+      return {state, signedUpVol: action.volunteer}
     }
     default:
       return state

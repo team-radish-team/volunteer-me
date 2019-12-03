@@ -2,9 +2,7 @@ const router = require('express').Router()
 const {Volunteer} = require('../../db/models')
 module.exports = router
 
-/**
- *  GET all volunteers (api/volunteers)
- */
+//GET all volunteers
 router.get('/', async (req, res, next) => {
   try {
     const volunteers = await Volunteer.findAll({
@@ -26,22 +24,17 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-/**
- *  GET single volunteer (api/volunteers/:id)
- */
-
+//GET a single volunteer
 router.get('/:volunteerId', async (req, res, next) => {
   try {
-    console.log(req.session)
-    let user = await Volunteer.findByPk(req.params.userId)
-    res.json(user)
+    const volunteer = await Volunteer.findByPk(req.params.volunteerId)
+    res.json(volunteer)
   } catch (err) {
     next(err)
   }
 })
 
 // POST a single volunteer
-
 router.post('/', async (req, res, next) => {
   try {
     let volunteer = await Volunteer.create({
@@ -59,9 +52,18 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-/**
- *  PUT single user (api/users/:id)
- */
+//PUT a single volunteer
+router.put('/:volunteerId', async (req, res, next) => {
+  try {
+    let oldVol = await Volunteer.findByPk(req.params.volunteerId)
+    let updated = await oldVol.update({
+      interests: req.body.interests
+    })
+    res.json(updated)
+  } catch (error) {
+    next(error)
+  }
+})
 
 // router.put('/:userId', async (req, res, next) => {
 //   try {
