@@ -71,9 +71,11 @@ router.put('/:organizationId', async (req, res, next) => {
         contactPhone: req.body.phone,
         password: req.body.password
       },
-      {where: {id: Number(organizationId)}}
+      {where: {id: Number(req.params.organizationId)}}
     )
-    const updatedOrg = await Organization.findByPk(Number(organizationId))
+    const updatedOrg = await Organization.findByPk(
+      Number(req.params.organizationId)
+    )
     res.status(200).json(updatedOrg)
   } catch (error) {
     next(error)
