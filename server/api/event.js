@@ -36,7 +36,6 @@ router.get('/neo4j/:volunteerId/:eventId', async (req, res, next) => {
     let data = await session.run(`MATCH (me:Volunteer {volunteerId: ${req.params.volunteerId}})-[:HAS_ATTENDED]->(e:Event{eventId: ${req.params.eventId}}),
     (newEv:Event)<-[:HAS_ATTENDED]-(other:Volunteer)-[:HAS_ATTENDED]->(e)
     RETURN collect(newEv.eventId)`)
-    console.log(data)
     res.json(data).status(200)
   } catch (error) {
     next(error)
@@ -77,7 +76,6 @@ router.get('/:organizationid', async (req, res, next) => {
  */
 router.post('/', async (req, res, next) => {
   try {
-    console.log(req.body)
     const date = moment(req.body.dateOfEvent)
       .format('YYYY MM DD')
       .split(' ')
@@ -95,9 +93,31 @@ router.post('/', async (req, res, next) => {
       isActive: true
     })
     const organization = await Organization.findByPk(req.body.organizationId)
-    organization.addEvent(event)
-    res.json(event).status(200)
+    await organization.addEvent(event)
+    const actualEvent = await Event.findOne({
+      where: {title: req.body.eventName},
+      include: [{model: Organization}]
+    })
+    res.json(actualEvent).status(200)
   } catch (error) {
+    next(error)
+  }
+})
+
+/**
+ *  ADD volunteer to event (api/events/:eventId)
+ */
+router.patch('/:eventId', async (req, res, next) => {
+  try {
+    let event = await Event.findByPk(req.params.eventId)
+    await event.increment('volunteerCount', {by: 1})
+    let allEvents = await Event.findAll({
+      include: [{model: Organization}],
+      order: [['id', 'ASC']]
+    })
+    res.json(allEvents)
+  } catch (error) {
+    console.log(error)
     next(error)
   }
 })

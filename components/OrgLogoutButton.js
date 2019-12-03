@@ -20,4 +20,4 @@ const OrgLogoutButton = props => {
   )
 }
 
-export default OrgLogoutButton
+export default withNavigation(OrgLogoutButton)

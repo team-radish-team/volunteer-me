@@ -59,6 +59,8 @@ export const addEventThunk = (
       dateOfEvent,
       organizationId
     })
+    data.organizationId = organizationId
+    dispatch(addEvent(data))
   } catch (error) {
     console.log('Error adding event', error)
   }
@@ -84,12 +86,23 @@ export const expiredEventThunk = eventId => async dispatch => {
   }
 }
 
+export const addVolunteerThunk = eventId => async dispatch => {
+  try {
+    const {data} = await axios.patch(`${ngrokSecret}/api/events/${eventId}`)
+    dispatch(getEvents(data))
+  } catch (error) {
+    console.error('Error adding Volunteer', error)
+  }
+}
+
 export default function(state = defaultState, action) {
   switch (action.type) {
     case GET_ALL_EVENTS:
       return {...state, allEvents: action.events}
     case GET_NEO_EVENTS:
       return {...state, neoEvents: action.eventIds}
+    case ADD_EVENT:
+      return {...state, allEvents: [...state.allEvents, action.event]}
     default:
       return state
   }
