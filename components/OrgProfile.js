@@ -18,9 +18,10 @@ import {withNavigation} from 'react-navigation'
 const OrgProfile = props => {
   const dispatch = useDispatch()
   const organization = useSelector(state => state.singleOrganization)
-  useEffect(() => dispatch(getOrganizationThunk(organization.id)), [
-    organization.id
-  ])
+
+  useEffect(() => {
+    dispatch(getOrganizationThunk(organization.id)) 
+  }, [organization.id])
 
   handleClick = () => {
     props.navigation.navigate('OrgEditForm')

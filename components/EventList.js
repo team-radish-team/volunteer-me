@@ -62,7 +62,7 @@ const EventList = props => {
               return (
                 <EventCard
                   key={neoId}
-                  event={events[neoId]}
+                  event={events[neoId - 1]}
                   navigation={props.navigation}
                 />
               )

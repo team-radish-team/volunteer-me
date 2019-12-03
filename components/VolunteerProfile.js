@@ -16,7 +16,10 @@ import VolLogoutButton from './VolLogoutButton'
 const VolunteerProfile = props => {
   const dispatch = useDispatch()
   const volunteer = useSelector(state => state.singleVolunteer)
-  useEffect(() => dispatch(getVolunteerThunk(volunteer.id)), [volunteer.id])
+  useEffect(() => {
+    dispatch(getVolunteerThunk(volunteer.id))
+  }, [volunteer.id])
+  console.log(props)
   if (!volunteer) {
     return <React.Fragment></React.Fragment>
   } else {
@@ -36,9 +39,11 @@ const VolunteerProfile = props => {
                   <Text>Email: {volunteer.email}</Text>
                   <Text>Phone Number: {volunteer.phone}</Text>
                   <Text>Interests:</Text>
-                  {volunteer.interests.map(interest => {
-                    return <Text>{interest} </Text>
-                  })}
+                  <React.Fragment>
+                    {volunteer.interests.map(interest => {
+                      return <Text key={interest}>{interest}</Text>
+                    })}
+                  </React.Fragment>
                 </Body>
               </CardItem>
             </CardItem>
