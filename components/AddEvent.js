@@ -81,7 +81,7 @@ class AddEvent extends React.Component {
         dateOfEvent,
         organizationId
       )
-      // this.props.navigation.navigate('Organization')
+      this.props.navigation.navigate('Events')
     }
   }
   render() {
