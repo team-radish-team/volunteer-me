@@ -28,6 +28,8 @@ function validate(form) {
     alert(`You're missing a required field`)
   } else if (!form.email.includes('@')) {
     alert('Please provide a valid email')
+  } else if (form.password !== form.confirmPassword) {
+    alert('Passwords must match!')
   } else {
     validated = true
   }
