@@ -2,10 +2,15 @@ import axios from 'axios'
 import {ngrokSecret} from '../secrets'
 
 const GET_ALL_EVENTS = 'GET_ALL_EVENTS'
+const GET_NEO_EVENTS = 'GET_NEO_EVENTS'
 
 const getEvents = events => ({type: GET_ALL_EVENTS, events})
+const getNeoEvents = eventIds => ({type: GET_NEO_EVENTS, eventIds})
 
-const defaultState = []
+const defaultState = {
+  allEvents: [],
+  neoEvents: []
+}
 
 export const getEventsThunk = () => async dispatch => {
   try {
@@ -29,10 +34,24 @@ export const getOrgEventsThunk = organizationId => async dispatch => {
   }
 }
 
+export const getNeo4jEventsThunk = (volunteerId, eventId) => async dispatch => {
+  try {
+    const {data} = await axios.get(
+      `${ngrokSecret}/api/events/neo4j/${volunteerId}/${eventId}`
+    )
+    console.log(data.records[0]._fields[0])
+    dispatch(getNeoEvents(data.records[0]._fields[0]))
+  } catch (error) {
+    console.error('Error getting neo4j events ', error)
+  }
+}
+
 export default function(state = defaultState, action) {
   switch (action.type) {
     case GET_ALL_EVENTS:
-      return action.events
+      return {...state, allEvents: action.events}
+    case GET_NEO_EVENTS:
+      return {...state, neoEvents: action.eventIds}
     default:
       return state
   }
