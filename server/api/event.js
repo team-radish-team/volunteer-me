@@ -9,12 +9,11 @@ const moment = require('moment')
 module.exports = router
 
 /**
- *  GET all active events (api/events)
+ *  GET all events (api/events)
  */
 router.get('/', async (req, res, next) => {
   try {
     let allEvents = await Event.findAll({
-      where: {isActive: true},
       include: [{model: Organization}]
     })
     res.json(allEvents).status(200)
@@ -24,6 +23,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+/**
+ *  GET all related events through neo4j
+ */
 const neo4j = require('neo4j-driver').v1
 var driver = neo4j.driver(
   'bolt://localhost',
@@ -40,6 +42,19 @@ router.get('/neo4j/:volunteerId/:eventId', async (req, res, next) => {
     (newEv:Event)<-[:HAS_ATTENDED]-(other:Volunteer)-[:HAS_ATTENDED]->(e)
     RETURN collect(newEv.eventId)`)
     res.json(data).status(200)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/time/:eventId', async (req, res, next) => {
+  try {
+    console.log('reqParmId', req.params.eventId)
+    let event = await Event.findByPk(req.params.eventId)
+    await event.update({
+      isActive: false
+    })
+    res.json(event).status(200)
   } catch (error) {
     next(error)
   }

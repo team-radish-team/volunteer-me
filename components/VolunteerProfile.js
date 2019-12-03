@@ -26,6 +26,7 @@ const VolunteerProfile = props => {
     dispatch(getVolunteerThunk(volunteer.id))
     dispatch(getVolunteerEventsThunk(volunteer.id))
   }, [volunteer.id])
+
   if (!volunteer) {
     return <React.Fragment></React.Fragment>
   } else {
