@@ -65,7 +65,6 @@ export const createVolunteerThunk = volunteer => async dispatch => {
 }
 
 export const updateVolunteerThunk = volunteer => async dispatch => {
-  console.log('in the thunk', volunteer)
   try {
     const {data} = await axios.put(
       `${ngrokSecret}/api/volunteers/${volunteer.id}`,

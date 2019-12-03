@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {updateVolunteerThunk} from '../store/singleVolunteer'
-import {Text} from 'react-native'
+import {Text, Alert} from 'react-native'
 import {
   Container,
   Content,
@@ -51,7 +51,9 @@ const IconPage = props => {
     console.log('submitted thisVol', thisVol, thisVol.id)
     const volUpdate = {interests: ['animals', 'youth', 'art'], id: thisVol.id}
     dispatch(updateVolunteerThunk(volUpdate))
-    alert('Thanks for signing up!')
+    Alert.alert('Done', 'Thanks for signing up!', [{text: 'OK'}], {
+      cancelable: false
+    })
     props.navigation.navigate('VolLogin')
   }
 
