@@ -11,6 +11,7 @@ import {
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getVolunteerThunk} from '../store/singleVolunteer'
+import VolLogoutButton from './VolLogoutButton'
 
 const VolunteerProfile = props => {
   const dispatch = useDispatch()
@@ -31,7 +32,7 @@ const VolunteerProfile = props => {
             <Thumbnail large source={{uri: volunteer.profilePic}} />
             <CardItem>
               <CardItem>
-                <Body style>
+                <Body>
                   <Text>Email: {volunteer.email}</Text>
                   <Text>Phone Number: {volunteer.phone}</Text>
                   <Text>Interests:</Text>
@@ -45,6 +46,13 @@ const VolunteerProfile = props => {
         </Content>
       </React.Fragment>
     )
+  }
+}
+
+VolunteerProfile.navigationOptions = ({navigation}) => {
+  return {
+    headerLeft: <VolLogoutButton />,
+    title: 'Profile'
   }
 }
 

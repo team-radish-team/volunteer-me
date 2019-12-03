@@ -118,7 +118,7 @@ export default function singleOrganization(state = initialState, action) {
     case UPDATE_ORGANIZATION:
       return action.organization
     case REMOVE_ORGANIZATION:
-      return state
+      return initialState
     default:
       return state
   }

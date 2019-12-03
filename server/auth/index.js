@@ -67,10 +67,9 @@ router.post('/volunteer/signup', async (req, res, next) => {
   }
 })
 
-router.post('/logout', (req, res) => {
-  req.logout()
-  req.session.destroy()
-  res.redirect('/')
+router.post('/logout', async (req, res) => {
+  await req.logout()
+  console.log('DESTROY', await req.session.destroy())
 })
 
 router.get('/volunteer', (req, res) => {
