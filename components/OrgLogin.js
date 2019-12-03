@@ -39,7 +39,7 @@ const options = {
 class OrgLogin extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {type: 'organization'}
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   onChange = value => {
@@ -50,7 +50,8 @@ class OrgLogin extends React.Component {
     if (values) {
       const email = values.email
       const password = values.password
-      this.props.auth(email, password)
+      const type = this.state.type
+      this.props.auth(email, password, type)
       this.props.navigation.navigate('Organization')
     }
   }
@@ -91,17 +92,9 @@ class OrgLogin extends React.Component {
   }
 }
 
-// const mapLogin = state => {
-//   return {
-//     name: 'login',
-//     displayName: 'Login',
-//     error: state.user.error
-//   }
-// }
-
 const mapDispatch = dispatch => {
   return {
-    auth: (email, password) => dispatch(auth(email, password))
+    auth: (email, password, type) => dispatch(auth(email, password, type))
   }
 }
 

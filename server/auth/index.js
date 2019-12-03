@@ -7,6 +7,7 @@ router.post('/organization/login', async (req, res, next) => {
     const organization = await Organization.findOne({
       where: {contactEmail: req.body.email}
     })
+    console.log('organization', organization)
     if (!organization) {
       console.log('No such user found:', req.body.email)
       res.status(401).send('Wrong username and/or password')
@@ -66,10 +67,9 @@ router.post('/volunteer/signup', async (req, res, next) => {
   }
 })
 
-router.post('/logout', (req, res) => {
-  req.logout()
-  req.session.destroy()
-  res.redirect('/')
+router.post('/logout', async (req, res) => {
+  await req.logout()
+  console.log('DESTROY', await req.session.destroy())
 })
 
 router.get('/volunteer', (req, res) => {

@@ -32,9 +32,10 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:volunteerId', async (req, res, next) => {
   try {
-    console.log(req.session)
-    let user = await Volunteer.findByPk(req.params.userId)
-    res.json(user)
+    console.log('req', req)
+    let volunteer = await Volunteer.findByPk(Number(req.params.volunteerId))
+    console.log('in the api', volunteer)
+    res.json(volunteer)
   } catch (err) {
     next(err)
   }
@@ -85,24 +86,6 @@ router.post('/', async (req, res, next) => {
 //     await User.destroy({
 //       where: {id: req.body.userId}
 //     })
-//     res.sendStatus(200)
-//   } catch (error) {
-//     next(error)
-//   }
-// })
-
-/**
- *  PATCH promote single user (api/users/:id)
- */
-
-// router.patch('/:userId', isAdmin, async (req, res, next) => {
-//   try {
-//     await User.update(
-//       {
-//         isAdmin: true
-//       },
-//       {where: {id: req.body.userId}}
-//     )
 //     res.sendStatus(200)
 //   } catch (error) {
 //     next(error)
