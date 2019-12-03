@@ -19,6 +19,28 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+const neo4j = require('neo4j-driver').v1
+var driver = neo4j.driver(
+  'bolt://localhost',
+  neo4j.auth.basic('neo4j', 'teamRadish')
+)
+driver.onCompleted = () => {
+  console.log('Driver created')
+}
+const session = driver.session()
+
+router.get('/neo4j/:volunteerId/:eventId', async (req, res, next) => {
+  try {
+    let data = await session.run(`MATCH (me:Volunteer {volunteerId: ${req.params.volunteerId}})-[:HAS_ATTENDED]->(e:Event{eventId: ${req.params.eventId}}),
+    (newEv:Event)<-[:HAS_ATTENDED]-(other:Volunteer)-[:HAS_ATTENDED]->(e)
+    RETURN collect(newEv.eventId)`)
+    console.log(data)
+    res.json(data).status(200)
+  } catch (error) {
+    next(error)
+  }
+})
+
 /**
  *  GET all organization events (api/events/organization)
  */
@@ -57,6 +79,8 @@ router.post('/', async (req, res, next) => {
       volunteerTargetNum: req.body.volunteersNeeded,
       isActive: true
     })
+    const organization = await Organization.findByPk(req.body.organizationId)
+    organization.addEvent(event)
     res.json(event).status(200)
   } catch (error) {
     next(error)

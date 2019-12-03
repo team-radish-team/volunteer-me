@@ -37,13 +37,14 @@ export const organization = () => {
   }
 }
 
-export const auth = (email, password) => {
+export const auth = (email, password, type) => {
   return async dispatch => {
     let res
     try {
       res = await axios.post(`${ngrokSecret}/auth/organization/login`, {
         email,
-        password
+        password,
+        type
       })
     } catch (authError) {
       return dispatch(getOrganization({error: authError}))
@@ -71,10 +72,12 @@ export const logout = () => {
 export const getOrganizationThunk = organizationId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(
-        `${ngrokSecret}/api/organizations/${organizationId}`
-      )
-      dispatch(getOrganization(data))
+      if (organizationId) {
+        const {data} = await axios.get(
+          `${ngrokSecret}/api/organizations/${organizationId}`
+        )
+        dispatch(getOrganization(data))
+      }
     } catch (error) {
       console.error('Error getting organization', error)
     }

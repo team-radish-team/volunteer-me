@@ -7,6 +7,7 @@ router.post('/organization/login', async (req, res, next) => {
     const organization = await Organization.findOne({
       where: {contactEmail: req.body.email}
     })
+    console.log('organization', organization)
     if (!organization) {
       console.log('No such user found:', req.body.email)
       res.status(401).send('Wrong username and/or password')

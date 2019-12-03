@@ -303,7 +303,7 @@ const mapStyle = [
 ]
 const ReactMap = props => {
   const dispatch = useDispatch()
-  const events = useSelector(state => state.allEvents)
+  const events = useSelector(state => state.allEvents.allEvents)
   useEffect(() => {
     dispatch(getEventsThunk())
   }, [])

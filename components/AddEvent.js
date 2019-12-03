@@ -70,6 +70,7 @@ class AddEvent extends React.Component {
       const eventEnd = values['Event End Time']
       const dateOfEvent = values['Date Of Event']
       const description = values['Event Description']
+      const organizationId = this.props.organization.id
       this.props.addEvent(
         eventName,
         description,
@@ -77,7 +78,8 @@ class AddEvent extends React.Component {
         address,
         eventStart,
         eventEnd,
-        dateOfEvent
+        dateOfEvent,
+        organizationId
       )
       // this.props.navigation.navigate('Organization')
     }
@@ -112,20 +114,24 @@ const mapDispatch = dispatch => {
   return {
     addEvent: (
       eventName,
+      description,
       volunteersNeeded,
       address,
       eventStart,
       eventEnd,
-      dateOfEvent
+      dateOfEvent,
+      organizationId
     ) =>
       dispatch(
         addEventThunk(
           eventName,
+          description,
           volunteersNeeded,
           address,
           eventStart,
           eventEnd,
-          dateOfEvent
+          dateOfEvent,
+          organizationId
         )
       )
   }
