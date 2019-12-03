@@ -37,13 +37,14 @@ export const organization = () => {
   }
 }
 
-export const auth = (email, password) => {
+export const auth = (email, password, type) => {
   return async dispatch => {
     let res
     try {
       res = await axios.post(`${ngrokSecret}/auth/organization/login`, {
         email,
-        password
+        password,
+        type
       })
     } catch (authError) {
       return dispatch(getOrganization({error: authError}))

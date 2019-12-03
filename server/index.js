@@ -12,11 +12,16 @@ module.exports = app
 
 passport.serializeUser((user, done) => done(null, user.id))
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (req, id, done) => {
   try {
-    console.log(db.models)
-    const user = await db.models.organization.findByPk(id)
-    done(null, user)
+    console.log('id', id)
+    if (req.body.type === 'volunteer') {
+      const user = await db.models.volunteer.findByPk(id.id)
+      done(null, user)
+    } else {
+      const user = await db.models.organization.findByPk(id.id)
+      done(null, user)
+    }
   } catch (error) {
     done(error)
   }
@@ -34,6 +39,7 @@ const createApp = () => {
   app.use(compression())
 
   // passport middleware
+
   app.use(
     session({
       secret: 'whocares',
