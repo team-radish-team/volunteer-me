@@ -16,9 +16,9 @@ import OrgLogoutButton from './OrgLogoutButton'
 const OrgProfile = props => {
   const dispatch = useDispatch()
   const organization = useSelector(state => state.singleOrganization)
-  useEffect(() => dispatch(getOrganizationThunk(organization.id)), [
-    organization.id
-  ])
+  useEffect(() => {
+    dispatch(getOrganizationThunk(organization.id))
+  }, [organization.id])
   if (!organization) {
     return <React.Fragment></React.Fragment>
   } else {
