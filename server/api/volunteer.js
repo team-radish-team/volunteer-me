@@ -90,21 +90,3 @@ router.post('/', async (req, res, next) => {
 //     next(error)
 //   }
 // })
-
-/**
- *  PATCH promote single user (api/users/:id)
- */
-
-// router.patch('/:userId', isAdmin, async (req, res, next) => {
-//   try {
-//     await User.update(
-//       {
-//         isAdmin: true
-//       },
-//       {where: {id: req.body.userId}}
-//     )
-//     res.sendStatus(200)
-//   } catch (error) {
-//     next(error)
-//   }
-// })

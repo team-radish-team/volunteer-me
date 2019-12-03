@@ -2,7 +2,9 @@ import axios from 'axios'
 import {ngrokSecret} from '../secrets'
 
 const GET_ALL_EVENTS = 'GET_ALL_EVENTS'
+const ADD_EVENT = 'ADD_EVENT'
 
+const addEvent = event => ({type: ADD_EVENT, event})
 const getEvents = events => ({type: GET_ALL_EVENTS, events})
 
 const defaultState = []
@@ -26,6 +28,30 @@ export const getOrgEventsThunk = organizationId => async dispatch => {
     }
   } catch (error) {
     console.error('Error getting all events', error)
+  }
+}
+
+export const addEventThunk = (
+  eventName,
+  description,
+  volunteersNeeded,
+  address,
+  eventStart,
+  eventEnd,
+  dateOfEvent
+) => async dispatch => {
+  try {
+    const {data} = await axios.post(`${ngrokSecret}/api/events`, {
+      eventName,
+      description,
+      volunteersNeeded,
+      address,
+      eventStart,
+      eventEnd,
+      dateOfEvent
+    })
+  } catch (error) {
+    console.log('Error adding event', error)
   }
 }
 

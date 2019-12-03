@@ -91,14 +91,6 @@ class OrgLogin extends React.Component {
   }
 }
 
-// const mapLogin = state => {
-//   return {
-//     name: 'login',
-//     displayName: 'Login',
-//     error: state.user.error
-//   }
-// }
-
 const mapDispatch = dispatch => {
   return {
     auth: (email, password) => dispatch(auth(email, password))
