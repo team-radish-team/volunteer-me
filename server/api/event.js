@@ -3,12 +3,11 @@ const {Event, Organization} = require('../../db/models')
 module.exports = router
 
 /**
- *  GET all active events (api/events)
+ *  GET all events (api/events)
  */
 router.get('/', async (req, res, next) => {
   try {
     let allEvents = await Event.findAll({
-      where: {isActive: true},
       include: [{model: Organization}]
     })
     res.json(allEvents).status(200)
@@ -18,6 +17,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+/**
+ *  GET all related events through neo4j
+ */
 const neo4j = require('neo4j-driver').v1
 var driver = neo4j.driver(
   'bolt://localhost',
@@ -35,6 +37,19 @@ router.get('/neo4j/:volunteerId/:eventId', async (req, res, next) => {
     RETURN collect(newEv.eventId)`)
     console.log(data)
     res.json(data).status(200)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/time/:eventId', async (req, res, next) => {
+  try {
+    let event = await Event.findByPk(req.params.eventId)
+    console.log('req body is ', req.body)
+    await event.update({
+      isActive: !req.body.isActive
+    })
+    res.json(event).status(200)
   } catch (error) {
     next(error)
   }
