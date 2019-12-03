@@ -32,9 +32,10 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:volunteerId', async (req, res, next) => {
   try {
-    console.log(req.session)
-    let user = await Volunteer.findByPk(req.params.userId)
-    res.json(user)
+    console.log('req', req)
+    let volunteer = await Volunteer.findByPk(Number(req.params.volunteerId))
+    console.log('in the api', volunteer)
+    res.json(volunteer)
   } catch (err) {
     next(err)
   }
