@@ -44,10 +44,10 @@ router.get('/neo4j/:volunteerId/:eventId', async (req, res, next) => {
 
 router.put('/time/:eventId', async (req, res, next) => {
   try {
+    console.log('reqParmId', req.params.eventId)
     let event = await Event.findByPk(req.params.eventId)
-    console.log('req body is ', req.body)
     await event.update({
-      isActive: !req.body.isActive
+      isActive: false
     })
     res.json(event).status(200)
   } catch (error) {

@@ -39,10 +39,18 @@ export const getNeo4jEventsThunk = (volunteerId, eventId) => async dispatch => {
     const {data} = await axios.get(
       `${ngrokSecret}/api/events/neo4j/${volunteerId}/${eventId}`
     )
-    console.log(data.records[0]._fields[0])
+    //console.log(data.records[0]._fields[0])
     dispatch(getNeoEvents(data.records[0]._fields[0]))
   } catch (error) {
     console.error('Error getting neo4j events ', error)
+  }
+}
+
+export const expiredEventThunk = eventId => async dispatch => {
+  try {
+    await axios.put(`${ngrokSecret}/api/events/time/${eventId}`)
+  } catch (error) {
+    console.error('Error occured while trying to make event inactive')
   }
 }
 
