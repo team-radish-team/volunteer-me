@@ -86,3 +86,21 @@ router.post('/', async (req, res, next) => {
     next(error)
   }
 })
+
+/**
+ *  ADD volunteer to event (api/events/:eventId)
+ */
+router.patch('/:eventId', async (req, res, next) => {
+  try {
+    let event = await Event.findByPk(req.params.eventId)
+    await event.increment('volunteerCount', {by: 1})
+    let allEvents = await Event.findAll({
+      include: [{model: Organization}],
+      order: [['id', 'ASC']]
+    })
+    res.json(allEvents)
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+})
