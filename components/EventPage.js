@@ -54,7 +54,21 @@ const EventPage = props => {
             <Text>{event.description}</Text>
           </CardItem>
           <CardItem>
-            <Button>
+            <Button
+              style={{
+                width: 175,
+                marginLeft: 120,
+                marginTop: 10,
+                marginBottom: 20
+              }}
+              rounded
+              iconLeft
+              onPress={() => {
+                dispatch(addVolunteerThunk(event.id))
+                props.navigation.goBack()
+              }}
+            >
+              <Icon name="people" />
               <Text>I'm Attending!</Text>
             </Button>
           </CardItem>
