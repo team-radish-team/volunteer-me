@@ -19,6 +19,7 @@ export const updateVolunteer = volunteer => ({
 })
 
 const getVolunteer = volunteer => ({type: GET_VOLUNTEER, volunteer})
+
 const removeVolunteer = () => ({type: REMOVE_VOLUNTEER})
 
 export const volunteer = () => {
@@ -66,7 +67,8 @@ export const createVolunteerThunk = volunteer => async dispatch => {
 export const updateVolunteerThunk = volunteer => async dispatch => {
   try {
     const {data} = await axios.put(
-      `${ngrokSecret}/api/volunteers/${volunteer.id}`
+      `${ngrokSecret}/api/volunteers/${volunteer.id}`,
+      volunteer
     )
     dispatch(updateVolunteer(data))
   } catch (err) {
@@ -100,7 +102,7 @@ export const getVolunteerThunk = volunteerId => {
 
 //reducer
 
-const initialState = {}
+const initialState = {signedUpVol: {}}
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -109,7 +111,7 @@ export default function(state = initialState, action) {
     case REMOVE_VOLUNTEER:
       return initialState
     case CREATE_VOLUNTEER: {
-      return action.volunteer
+      return {state, signedUpVol: action.volunteer}
     }
     case UPDATE_VOLUNTEER: {
       return action.volunteer

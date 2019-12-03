@@ -76,7 +76,8 @@ const OrgSignup = props => {
     validate(form)
     if (validated === true) {
       dispatch(createOrganizationThunk(form))
-      props.navigation.navigate('Organization')
+      console.log('submitted')
+      // props.navigation.navigate('Organization')
     }
   }
 

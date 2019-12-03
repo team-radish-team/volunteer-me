@@ -59,8 +59,16 @@ const VolSignup = props => {
     validate(form)
     if (validated === true) {
       dispatch(createVolunteerThunk(form))
-      props.navigation.navigate('Volunteer')
+      props.navigation.navigate('IconPage')
     }
+  }
+
+  const secureText = password => {
+    let visibleText = ''
+    for (let i = 0; i < password.length; i++) {
+      visibleText += '*'
+    }
+    return visibleText
   }
 
   return (
@@ -101,8 +109,8 @@ const VolSignup = props => {
             <Icon active name="lock" type="Entypo" />
             <Input
               placeholder="password"
-              secureTextEntry={true}
               onChange={event => handleChange(event, 'password')}
+              value={secureText(form.password)}
             />
           </Item>
           <Item floatingLabel last>
@@ -110,7 +118,7 @@ const VolSignup = props => {
             <Input
               placeholder="Confirm password"
               onChange={event => handleChange(event, 'confirmPassword')}
-              secureTextEntry={true}
+              value={secureText(form.confirmPassword)}
             />
           </Item>
         </Form>
