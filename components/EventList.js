@@ -37,7 +37,6 @@ const EventList = props => {
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
   const [filter, setFilter] = useState('All')
-  console.log('NEOEVENTS!!!!!!!!: ', neoEvents)
   return (
     <React.Fragment>
       <Content>

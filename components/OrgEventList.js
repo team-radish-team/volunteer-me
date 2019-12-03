@@ -23,7 +23,7 @@ import OrgEventCard from './OrgEventCard'
 const OrgEventList = props => {
   const organization = useSelector(state => state.singleOrganization)
   const dispatch = useDispatch()
-  const events = useSelector(state => state.allEvents)
+  const events = useSelector(state => state.allEvents.allEvents)
   useEffect(() => {
     dispatch(getOrgEventsThunk(organization.id))
   }, [organization.id])
