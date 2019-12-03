@@ -12,6 +12,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux'
 import {getOrganizationThunk} from '../store/singleOrganization'
 import OrgLogoutButton from './OrgLogoutButton'
+import {withNavigation} from 'react-navigation'
 
 const OrgProfile = props => {
   const dispatch = useDispatch()
@@ -58,8 +59,13 @@ const OrgProfile = props => {
 OrgProfile.navigationOptions = ({navigation}) => {
   return {
     headerLeft: <OrgLogoutButton />,
-    title: 'Profile'
+    title: 'Profile',
+    headerRight: (
+      <Button onPress={() => props.navigation.navigate('OrgEditForm')}>
+        <Text>Edit</Text>
+      </Button>
+    )
   }
 }
 
-export default OrgProfile
+export default withNavigation(OrgProfile)

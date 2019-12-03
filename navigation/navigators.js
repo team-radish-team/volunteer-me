@@ -39,6 +39,8 @@ export const LoginStack = createStackNavigator(
 
 //OrgProfileStack Screens
 import OrgProfile from '../components/OrgProfile'
+import OrgEditForm from '../components/OrgEditForm'
+
 //stack for Not Logged In
 // export const NotLoggedInStack = createStackNavigator(
 //   {
@@ -79,7 +81,8 @@ export const MapStack = createStackNavigator(
 export const OrgProfileStack = createStackNavigator(
   {
     OrgProfile: OrgProfile,
-    OrgEventPage: OrgEventPage
+    OrgEventPage: OrgEventPage,
+    OrgEditForm: OrgEditForm
   },
   {initialRouteName: 'OrgProfile'}
 )
