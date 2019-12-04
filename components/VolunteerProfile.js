@@ -9,7 +9,8 @@ import {
   Title,
   Tabs,
   Tab,
-  Button
+  Button,
+  Header
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getVolunteerThunk} from '../store/singleVolunteer'

@@ -31,18 +31,52 @@ const EventList = props => {
   const dispatch = useDispatch()
   const events = useSelector(state => state.allEvents.allEvents)
   const neoEvents = useSelector(state => state.allEvents.neoEvents)
-
+  const volunteer = useSelector(state => state.singleVolunteer)
+  const volEvents = useSelector(state => state.allEvents.volunteerEvents)
+  console.log(volEvents)
   useEffect(() => {
     dispatch(getEventsThunk())
-    dispatch(getNeo4jEventsThunk(45, 35))
+    dispatch(getNeo4jEventsThunk(volunteer.id, volEvents[0]))
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
   const [filter, setFilter] = useState('All')
+
   return (
     <React.Fragment>
       <Content>
-        {filter === 'All' || Number(filter) === 10
-          ? events.map(event => {
+        {filter === 'All' || Number(filter) === 10 ? (
+          events.map(event => {
+            if (
+              event.isActive &&
+              event.volunteerCount < event.volunteerTargetNum
+            ) {
+              return (
+                <EventCard
+                  key={event.id}
+                  event={event}
+                  navigation={props.navigation}
+                />
+              )
+            }
+          })
+        ) : Number(filter) === 0 ? (
+          !neoEvents.length ? (
+            <Text>Attend an event for recommendations!</Text>
+          ) : (
+            neoEvents.map(neoEvent => {
+              let neoId = neoEvent.low
+              return (
+                <EventCard
+                  key={neoId}
+                  event={events[neoId - 1]}
+                  navigation={props.navigation}
+                />
+              )
+            })
+          )
+        ) : (
+          events.map(event => {
+            if (Number(event.organization.categoryId) === Number(filter)) {
               if (
                 event.isActive &&
                 event.volunteerCount < event.volunteerTargetNum
@@ -55,34 +89,9 @@ const EventList = props => {
                   />
                 )
               }
-            })
-          : Number(filter) === 0
-          ? neoEvents.map(neoEvent => {
-              let neoId = neoEvent.low
-              return (
-                <EventCard
-                  key={neoId}
-                  event={events[neoId - 1]}
-                  navigation={props.navigation}
-                />
-              )
-            })
-          : events.map(event => {
-              if (Number(event.organization.categoryId) === Number(filter)) {
-                if (
-                  event.isActive &&
-                  event.volunteerCount < event.volunteerTargetNum
-                ) {
-                  return (
-                    <EventCard
-                      key={event.id}
-                      event={event}
-                      navigation={props.navigation}
-                    />
-                  )
-                }
-              }
-            })}
+            }
+          })
+        )}
       </Content>
     </React.Fragment>
   )

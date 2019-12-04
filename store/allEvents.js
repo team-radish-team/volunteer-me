@@ -80,10 +80,13 @@ export const addEventThunk = (
 
 export const getNeo4jEventsThunk = (volunteerId, eventId) => async dispatch => {
   try {
+    if (!eventId) {
+      return undefined
+    }
     const {data} = await axios.get(
       `${ngrokSecret}/api/events/neo4j/${volunteerId}/${eventId}`
     )
-    //console.log(data.records[0]._fields[0])
+    console.log(data.records[0]._fields[0])
     dispatch(getNeoEvents(data.records[0]._fields[0]))
   } catch (error) {
     console.error('Error getting neo4j events ', error)
