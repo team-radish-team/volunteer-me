@@ -64,10 +64,14 @@ export const createVolunteerThunk = volunteer => async dispatch => {
   }
 }
 
-export const updateVolunteerThunk = volunteer => async dispatch => {
+export const updateVolunteerThunk = (
+  volunteer,
+  volunteerId
+) => async dispatch => {
   try {
-    const {data} = await axios.put(
-      `${ngrokSecret}/api/volunteers/${volunteer.id}`
+    const {data} = await axios.patch(
+      `${ngrokSecret}/api/volunteers/${volunteerId}`,
+      volunteer
     )
     dispatch(updateVolunteer(data))
   } catch (err) {

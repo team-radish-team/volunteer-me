@@ -71,7 +71,6 @@ const OrgEventList = props => {
 }
 
 OrgEventList.navigationOptions = {
-  headerLeft: <OrgLogoutButton />,
   title: 'Events'
 }
 
