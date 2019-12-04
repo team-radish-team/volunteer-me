@@ -96,9 +96,9 @@ const OrgSignup = props => {
       <Content>
         <Form style={{paddingBottom: 40}}>
           <Item floatingLabel onChange={() => setFirstName()}>
-            <Icon active name="organization" type="Octicons" />
+            <Icon active name="ios-hand" type="Ionicons" />
             <Input
-              placeholder="Organization name"
+              placeholder="Organization Name"
               onChange={event => handleChange(event, 'name')}
             />
           </Item>
@@ -156,7 +156,7 @@ const OrgSignup = props => {
           <Item floatingLabel>
             <Icon active name="lock" type="Entypo" />
             <Input
-              placeholder="password"
+              placeholder="Password"
               value={secureText(form.password)}
               onChange={event => handleChange(event, 'password')}
             />
@@ -164,7 +164,7 @@ const OrgSignup = props => {
           <Item floatingLabel last>
             <Icon active name="lock" type="Entypo" />
             <Input
-              placeholder="Confirm password"
+              placeholder="Confirm Password"
               value={secureText(form.confirmPassword)}
               onChange={event => handleChange(event, 'confirmPassword')}
             />

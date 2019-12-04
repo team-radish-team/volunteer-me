@@ -37,13 +37,14 @@ export const organization = () => {
   }
 }
 
-export const auth = (email, password) => {
+export const auth = (email, password, type) => {
   return async dispatch => {
     let res
     try {
       res = await axios.post(`${ngrokSecret}/auth/organization/login`, {
         email,
-        password
+        password,
+        type
       })
     } catch (authError) {
       return dispatch(getOrganization({error: authError}))
@@ -96,12 +97,16 @@ export const createOrganizationThunk = organization => async dispatch => {
   }
 }
 
-export const updateOrganizationThunk = organization => async dispatch => {
+export const updateOrganizationThunk = (
+  organization,
+  organizationId
+) => async dispatch => {
   try {
     const {data} = await axios.put(
-      `${ngrokSecret}/api/organizations/${organization.id}`
+      `${ngrokSecret}/api/organizations/${organizationId}`,
+      organization
     )
-    dispatch(updateOrder(data))
+    dispatch(updateOrganization(data))
   } catch (err) {
     console.error(err)
   }
@@ -118,7 +123,7 @@ export default function singleOrganization(state = initialState, action) {
     case UPDATE_ORGANIZATION:
       return action.organization
     case REMOVE_ORGANIZATION:
-      return state
+      return initialState
     default:
       return state
   }

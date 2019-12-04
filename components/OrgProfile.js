@@ -7,17 +7,26 @@ import {
   Text,
   Body,
   Title,
-  Header
+  Header,
+  Button
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getOrganizationThunk} from '../store/singleOrganization'
+import OrgLogoutButton from './OrgLogoutButton'
+import {withNavigation} from 'react-navigation'
 
 const OrgProfile = props => {
   const dispatch = useDispatch()
   const organization = useSelector(state => state.singleOrganization)
-  useEffect(() => dispatch(getOrganizationThunk(organization.id)), [
-    organization.id
-  ])
+
+  useEffect(() => {
+    dispatch(getOrganizationThunk(organization.id))
+  }, [organization.id])
+
+  handleClick = () => {
+    props.navigation.navigate('OrgEditForm')
+  }
+
   if (!organization) {
     return <React.Fragment></React.Fragment>
   } else {
@@ -49,9 +58,21 @@ const OrgProfile = props => {
             </CardItem>
           </Card>
         </Content>
+        <OrgLogoutButton />
       </React.Fragment>
     )
   }
 }
 
-export default OrgProfile
+OrgProfile.navigationOptions = ({navigation}) => {
+  return {
+    title: 'Profile',
+    headerRight: (
+      <Button onPress={() => handleClick()}>
+        <Text>Edit</Text>
+      </Button>
+    )
+  }
+}
+
+export default withNavigation(OrgProfile)

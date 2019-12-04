@@ -27,7 +27,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:organizationId', async (req, res, next) => {
   try {
-    console.log('in the api', req.params.organizationId)
     const organization = await Organization.findByPk(
       Number(req.params.organizationId)
     )
@@ -65,5 +64,30 @@ router.post('/', async (req, res, next) => {
     }
   } catch (err) {
     next(err)
+  }
+})
+
+router.patch('/:organizationId', async (req, res, next) => {
+  try {
+    await Organization.update(
+      {
+        name: req.body.orgName,
+        address: req.body.address,
+        missionStatement: req.body.mission,
+        webUrl: req.body.webUrl,
+        contactFirstName: req.body.firstName,
+        contactLastName: req.body.lastName,
+        contactEmail: req.body.email,
+        contactPhone: req.body.phone,
+        password: req.body.password
+      },
+      {where: {id: Number(req.params.organizationId)}}
+    )
+    const updatedOrg = await Organization.findByPk(
+      Number(req.params.organizationId)
+    )
+    res.status(200).json(updatedOrg)
+  } catch (error) {
+    next(error)
   }
 })

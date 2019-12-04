@@ -90,21 +90,21 @@ const VolSignup = props => {
           <Item floatingLabel onChange={() => setFirstName()}>
             <Icon active name="md-person" type="Ionicons" />
             <Input
-              placeholder="First name"
+              placeholder="First Name"
               onChange={event => handleChange(event, 'firstName')}
             />
           </Item>
           <Item floatingLabel>
             <Icon active name="profile" type="AntDesign" />
             <Input
-              placeholder="Last name"
+              placeholder="Last Name"
               onChange={event => handleChange(event, 'lastName')}
             />
           </Item>
           <Item floatingLabel>
             <Icon active name="email" type="MaterialIcons" />
             <Input
-              placeholder="email"
+              placeholder="Email"
               value={form.email}
               onChange={event => handleChange(event, 'email')}
             />
@@ -112,14 +112,14 @@ const VolSignup = props => {
           <Item floatingLabel>
             <Icon active name="phone" type="FontAwesome" />
             <Input
-              placeholder="phone"
+              placeholder="Phone"
               onChange={event => handleChange(event, 'phone')}
             />
           </Item>
           <Item floatingLabel>
             <Icon active name="lock" type="Entypo" />
             <Input
-              placeholder="password"
+              placeholder="Password"
               onChange={event => handleChange(event, 'password')}
               value={secureText(form.password)}
             />
@@ -127,7 +127,7 @@ const VolSignup = props => {
           <Item floatingLabel last>
             <Icon active name="lock" type="Entypo" />
             <Input
-              placeholder="Confirm password"
+              placeholder="Confirm Password"
               onChange={event => handleChange(event, 'confirmPassword')}
               value={secureText(form.confirmPassword)}
             />

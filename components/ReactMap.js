@@ -4,6 +4,7 @@ import {StyleSheet, Dimensions, View} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {getEventsThunk} from '../store/allEvents'
 import EventCard from './EventCard'
+import VolLogoutButton from './VolLogoutButton'
 
 let {height, width} = Dimensions.get('window')
 const styles = StyleSheet.create({
@@ -303,7 +304,7 @@ const mapStyle = [
 ]
 const ReactMap = props => {
   const dispatch = useDispatch()
-  const events = useSelector(state => state.allEvents)
+  const events = useSelector(state => state.allEvents.allEvents)
   useEffect(() => {
     dispatch(getEventsThunk())
   }, [])
