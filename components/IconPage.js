@@ -1,16 +1,8 @@
 import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {updateVolunteerThunkPut} from '../store/singleVolunteer'
-import {Text, Alert} from 'react-native'
-import {
-  Container,
-  Content,
-  Icon,
-  Header,
-  Button,
-  Card,
-  CardItem
-} from 'native-base'
+import {Text, Alert, StyleSheet} from 'react-native'
+import {Container, Content, Icon, Button, Card, CardItem} from 'native-base'
 
 const selected = []
 
@@ -28,7 +20,7 @@ const IconPage = props => {
   }
   const [categories, setCategories] = useState(initialState)
   const dispatch = useDispatch()
-  const thisVol = useSelector(state => state.singleVolunteer.signedUpVol)
+  const thisVol = useSelector(state => state.singleVolunteer)
 
   handlePress = function(event, name) {
     event.preventDefault()
@@ -48,59 +40,64 @@ const IconPage = props => {
 
   handleSubmit = function(event) {
     event.preventDefault()
+    console.log('thisVol', thisVol)
     const volUpdate = {interests: ['animals', 'youth', 'art'], id: thisVol.id}
     dispatch(updateVolunteerThunkPut(volUpdate))
-    Alert.alert('Done', 'Thanks for signing up!', [{text: 'OK'}], {
-      cancelable: false
-    })
-    props.navigation.navigate('VolLogin')
+    Alert.alert(
+      'Done',
+      'Thanks for signing up!',
+      [{text: 'OK', onPress: () => props.navigation.navigate('VolLogin')}],
+      {
+        cancelable: false
+      }
+    )
   }
 
   return (
     <Container>
-      <Header />
       <Content>
-        <Card
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            backgroundColor: '#FF8E72',
-            paddingTop: 20,
-            paddingBottom: 20
-          }}
-        >
-          <Text style={{fontSize: 15}}>Select Your Top Three Interests</Text>
+        <Card style={styles.cardStyle}>
+          <Text style={styles.cardText}>Select Your Top Three Interests</Text>
         </Card>
 
         <Card>
           <CardItem
-            style={categories.animals === false ? inactiveStyle : activeStyle}
+            style={
+              categories.animals === false
+                ? styles.inactiveStyle
+                : styles.activeStyle
+            }
             cardBody
             button
             onPress={event => handlePress(event, 'animals')}
           >
             <Icon name="dog" type="FontAwesome5" />
-            <Text style={{fontSize: 15}}>Animals</Text>
+            <Text style={styles.textStyle}>Animals</Text>
           </CardItem>
         </Card>
 
         <Card>
           <CardItem
-            style={categories.youth === false ? inactiveStyle : activeStyle}
+            style={
+              categories.youth === false
+                ? styles.inactiveStyle
+                : styles.activeStyle
+            }
             cardBody
             button
             onPress={event => handlePress(event, 'youth')}
           >
             <Icon name="child" type="FontAwesome5" />
 
-            <Text style={{fontSize: 15}}>Youth</Text>
+            <Text style={styles.textStyle}>Youth</Text>
           </CardItem>
         </Card>
         <Card>
           <CardItem
             style={
-              categories.agriculture === false ? inactiveStyle : activeStyle
+              categories.agriculture === false
+                ? styles.inactiveStyle
+                : styles.activeStyle
             }
             cardBody
             button
@@ -108,14 +105,16 @@ const IconPage = props => {
           >
             <Icon name="leaf" type="Entypo" />
 
-            <Text style={{fontSize: 15}}>Agriculture</Text>
+            <Text style={styles.textStyle}>Agriculture</Text>
           </CardItem>
         </Card>
 
         <Card>
           <CardItem
             style={
-              categories.environment === false ? inactiveStyle : activeStyle
+              categories.environment === false
+                ? styles.inactiveStyle
+                : styles.activeStyle
             }
             cardBody
             button
@@ -123,75 +122,95 @@ const IconPage = props => {
           >
             <Icon name="tree" type="MaterialCommunityIcons" />
 
-            <Text style={{fontSize: 15}}>Environment</Text>
+            <Text style={styles.textStyle}>Environment</Text>
           </CardItem>
         </Card>
 
         <Card>
           <CardItem
-            style={categories.art === false ? inactiveStyle : activeStyle}
+            style={
+              categories.art === false
+                ? styles.inactiveStyle
+                : styles.activeStyle
+            }
             cardBody
             button
             onPress={event => handlePress(event, 'art')}
           >
             <Icon name="paint-brush" type="FontAwesome" />
 
-            <Text style={{fontSize: 15}}>Art</Text>
+            <Text style={styles.textStyle}>Art</Text>
           </CardItem>
         </Card>
         <Card>
           <CardItem
-            style={categories.civic === false ? inactiveStyle : activeStyle}
+            style={
+              categories.civic === false
+                ? styles.inactiveStyle
+                : styles.activeStyle
+            }
             cardBody
             button
             onPress={event => handlePress(event, 'civic')}
           >
             <Icon name="news" type="Entypo" />
 
-            <Text style={{fontSize: 15}}>Civic</Text>
+            <Text style={styles.textStyle}>Civic</Text>
           </CardItem>
         </Card>
 
         <Card>
           <CardItem
-            style={categories.hunger === false ? inactiveStyle : activeStyle}
+            style={
+              categories.hunger === false
+                ? styles.inactiveStyle
+                : styles.activeStyle
+            }
             cardBody
             button
             onPress={event => handlePress(event, 'hunger')}
           >
             <Icon name="food-apple" type="MaterialCommunityIcons" />
 
-            <Text style={{fontSize: 15}}>Hunger</Text>
+            <Text style={styles.textStyle}>Hunger</Text>
           </CardItem>
         </Card>
 
         <Card>
           <CardItem
-            style={categories.education === false ? inactiveStyle : activeStyle}
+            style={
+              categories.education === false
+                ? styles.inactiveStyle
+                : styles.activeStyle
+            }
             cardBody
             button
             onPress={event => handlePress(event, 'education')}
           >
             <Icon name="pencil" type="Entypo" />
 
-            <Text style={{fontSize: 15}}>Education</Text>
+            <Text style={styles.textStyle}>Education</Text>
           </CardItem>
         </Card>
 
         <Card>
           <CardItem
-            style={categories.advocacy === false ? inactiveStyle : activeStyle}
+            style={
+              categories.advocacy === false
+                ? styles.inactiveStyle
+                : styles.activeStyle
+            }
             cardBody
             button
             onPress={event => handlePress(event, 'advocacy')}
           >
             <Icon name="person" type="MaterialIcons" />
-            <Text style={{fontSize: 15}}>Advocacy</Text>
+            <Text style={styles.textStyle}>Advocacy</Text>
           </CardItem>
         </Card>
         <Button
           block
-          style={{marginTop: 10, marginBottom: 10}}
+          style={styles.buttonStyle}
           onPress={event => handleSubmit(event)}
         >
           <Text>Submit</Text>
@@ -201,19 +220,31 @@ const IconPage = props => {
   )
 }
 
-const activeStyle = {
-  backgroundColor: '#FF8E72',
-  paddingTop: 5,
-  paddingBottom: 5,
-  width: 375,
-  justifyContent: 'center'
-}
-
-const inactiveStyle = {
-  paddingTop: 5,
-  paddingBottom: 5,
-  width: 375,
-  justifyContent: 'center'
-}
+const styles = StyleSheet.create({
+  activeStyle: {
+    backgroundColor: '#F5B39D',
+    paddingTop: 5,
+    paddingBottom: 5,
+    width: 375,
+    justifyContent: 'center'
+  },
+  inactiveStyle: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    width: 375,
+    justifyContent: 'center'
+  },
+  cardStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: '#F16286',
+    paddingTop: 20,
+    paddingBottom: 20
+  },
+  cardText: {fontSize: 15, color: 'white', fontWeight: 'bold'},
+  buttonStyle: {marginTop: 10, marginBottom: 10, backgroundColor: '#F16286'},
+  textStyle: {fontSize: 15}
+})
 
 export default IconPage

@@ -122,7 +122,7 @@ export const getVolunteerThunk = volunteerId => {
 
 //reducer
 
-const initialState = {signedUpVol: {}}
+const initialState = {}
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -130,12 +130,11 @@ export default function(state = initialState, action) {
       return action.volunteer
     case REMOVE_VOLUNTEER:
       return state
-    case CREATE_VOLUNTEER: {
-      return {state, signedUpVol: action.volunteer}
-    }
-    case UPDATE_VOLUNTEER: {
-      return {state, signedUpVol: action.volunteer}
-    }
+    case CREATE_VOLUNTEER:
+      return action.volunteer
+    case UPDATE_VOLUNTEER:
+      return action.volunteer
+
     default:
       return state
   }

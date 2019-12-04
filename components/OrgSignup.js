@@ -2,17 +2,7 @@ import React, {useState} from 'react'
 import {createOrganizationThunk} from '../store/singleOrganization'
 import {useDispatch} from 'react-redux'
 import {Text, Alert} from 'react-native'
-import {
-  Header,
-  Container,
-  Footer,
-  Content,
-  Button,
-  Icon,
-  Form,
-  Item,
-  Input
-} from 'native-base'
+import {Container, Content, Button, Icon, Form, Item, Input} from 'native-base'
 
 let validated = false
 function validate(form) {
@@ -82,17 +72,20 @@ const OrgSignup = props => {
       if (existsVar === 'exists') {
         alert('Please use a different email.')
       } else {
-        Alert.alert('Done', 'Thanks for signing up!', [{text: 'OK'}], {
-          cancelable: false
-        })
-        props.navigation.navigate('OrgLogin')
+        Alert.alert(
+          'Done',
+          'Thanks for signing up!',
+          [{text: 'OK', onPress: () => props.navigation.navigate('OrgLogin')}],
+          {
+            cancelable: false
+          }
+        )
       }
     }
   }
 
   return (
     <Container>
-      <Header />
       <Content>
         <Form style={{paddingBottom: 40}}>
           <Item floatingLabel onChange={() => setFirstName()}>
@@ -171,13 +164,20 @@ const OrgSignup = props => {
           </Item>
         </Form>
 
-        <Button block onPress={event => handleSubmit(event)}>
+        <Button
+          style={styles.buttonStyle}
+          block
+          onPress={event => handleSubmit(event)}
+        >
           <Text>Submit</Text>
         </Button>
       </Content>
-      <Footer />
     </Container>
   )
 }
 
 export default OrgSignup
+
+const styles = {
+  buttonStyle: {backgroundColor: '#F5B39D'}
+}

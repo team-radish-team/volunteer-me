@@ -1,24 +1,9 @@
-import React, {useEffect} from 'react'
-import {StyleSheet, Dimensions, View, Image} from 'react-native'
-import {useDispatch, useSelector} from 'react-redux'
-import {getEventsThunk} from '../store/allEvents'
+import React from 'react'
 import t from 'tcomb-form-native'
 import {connect} from 'react-redux'
 import {auth} from '../store/singleOrganization'
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from 'native-base'
+import {Container, Text, Button} from 'native-base'
+import {Image, StyleSheet} from 'react-native'
 
 let Form = t.form.Form
 
@@ -50,6 +35,7 @@ class OrgLogin extends React.Component {
     if (values) {
       const password = values.password
       const email = values.email.toLowerCase()
+      const password = values.password
       const type = this.state.type
       this.props.auth(email, password, type)
 
@@ -59,14 +45,11 @@ class OrgLogin extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Container
-          style={{
-            flex: 2,
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'center'
-          }}
-        >
+        <Container style={styles.container}>
+          <Image
+            source={require('../assets/images/logo.png')}
+            style={styles.imageStyle}
+          />
           <Form
             ref="form"
             type={Org}
@@ -74,13 +57,16 @@ class OrgLogin extends React.Component {
             onChange={this.onChange}
             options={options}
           />
-          <Button info onPress={() => this.handleSubmit()}>
+          <Button
+            style={styles.buttonStyle}
+            info
+            onPress={() => this.handleSubmit()}
+          >
             <Text>Login</Text>
           </Button>
-          <Text style={{paddingTop: 30, paddingBottom: 10}}>
-            Don't have an account?
-          </Text>
+          <Text style={styles.text}>Don't have an account?</Text>
           <Button
+            style={styles.buttonStyle}
             info
             onPress={() => this.props.navigation.navigate('OrgSignup')}
           >
@@ -99,3 +85,18 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(null, mapDispatch)(OrgLogin)
+
+const styles = StyleSheet.create({
+  buttonStyle: {backgroundColor: '#F5B39D'},
+  imageStyle: {
+    width: 225,
+    height: 225
+  },
+  container: {
+    flex: 2,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  text: {paddingTop: 30, paddingBottom: 10}
+})
