@@ -62,6 +62,27 @@ router.post('/', async (req, res, next) => {
  *  PUT single user (api/users/:id)
  */
 
+router.patch('/:volunteerId', async (req, res, next) => {
+  try {
+    await Volunteer.update(
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: req.body.password
+      },
+      {
+        where: {id: Number(req.params.volunteerId)}
+      }
+    )
+    const updatedVol = await Volunteer.findByPk(Number(req.params.volunteerId))
+    res.status(200).json(updatedVol)
+  } catch (error) {
+    next(error)
+  }
+})
+
 // router.put('/:userId', async (req, res, next) => {
 //   try {
 //     let oldUser = await User.findById(req.params.userId)

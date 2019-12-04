@@ -7,9 +7,9 @@ import {
   Text,
   Body,
   Title,
-  Header,
   Tabs,
-  Tab
+  Tab,
+  Button
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getVolunteerThunk} from '../store/singleVolunteer'
@@ -17,6 +17,7 @@ import {getVolunteerEventsThunk} from '../store/allEvents'
 import VolLogoutButton from './VolLogoutButton'
 import EventCard from './EventCard'
 import {ScrollView} from 'react-native-gesture-handler'
+import {withNavigation} from 'react-navigation'
 
 const VolunteerProfile = props => {
   const dispatch = useDispatch()
@@ -27,6 +28,9 @@ const VolunteerProfile = props => {
     dispatch(getVolunteerEventsThunk(volunteer.id))
   }, [volunteer.id])
 
+  handleClick = () => {
+    props.navigation.navigate('VolEditForm')
+  }
   if (!volunteer) {
     return <React.Fragment></React.Fragment>
   } else {
@@ -87,6 +91,7 @@ const VolunteerProfile = props => {
             </Tab>
           </Tabs>
         </Content>
+        <VolLogoutButton />
       </React.Fragment>
     )
   }
@@ -94,8 +99,13 @@ const VolunteerProfile = props => {
 
 VolunteerProfile.navigationOptions = ({navigation}) => {
   return {
-    title: 'Profile'
+    title: 'Profile',
+    headerRight: (
+      <Button onPress={() => handleClick()}>
+        <Text>Edit</Text>
+      </Button>
+    )
   }
 }
 
-export default VolunteerProfile
+export default withNavigation(VolunteerProfile)
