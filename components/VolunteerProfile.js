@@ -7,20 +7,27 @@ import {
   Text,
   Body,
   Title,
-  Header,
+  Tabs,
+  Tab,
   Button
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getVolunteerThunk} from '../store/singleVolunteer'
+import {getVolunteerEventsThunk} from '../store/allEvents'
 import VolLogoutButton from './VolLogoutButton'
+import EventCard from './EventCard'
+import {ScrollView} from 'react-native-gesture-handler'
 import {withNavigation} from 'react-navigation'
 
 const VolunteerProfile = props => {
   const dispatch = useDispatch()
   const volunteer = useSelector(state => state.singleVolunteer)
+  const events = useSelector(state => state.allEvents.volunteerEvents)
   useEffect(() => {
     dispatch(getVolunteerThunk(volunteer.id))
+    dispatch(getVolunteerEventsThunk(volunteer.id))
   }, [volunteer.id])
+
   handleClick = () => {
     props.navigation.navigate('VolEditForm')
   }
@@ -43,15 +50,46 @@ const VolunteerProfile = props => {
                   <Text>Email: {volunteer.email}</Text>
                   <Text>Phone Number: {volunteer.phone}</Text>
                   <Text>Interests:</Text>
-                  <React.Fragment>
-                    {volunteer.interests.map(interest => {
-                      return <Text key={interest}>{interest}</Text>
-                    })}
-                  </React.Fragment>
+                  {volunteer.interests.map(interest => {
+                    return <Text key={interest}>{interest} </Text>
+                  })}
                 </Body>
               </CardItem>
             </CardItem>
           </Card>
+          {/* <VolLogoutButton /> */}
+          <Tabs>
+            <Tab heading="Upcoming Events">
+              <Content>
+                {events.map(event => {
+                  if (event.isActive) {
+                    return (
+                      <EventCard
+                        key={event.id}
+                        event={event}
+                        navigation={props.navigation}
+                      />
+                    )
+                  }
+                })}
+              </Content>
+            </Tab>
+            <Tab heading="Past Events">
+              <Content>
+                {events.map(event => {
+                  if (!event.isActive) {
+                    return (
+                      <EventCard
+                        key={event.id}
+                        event={event}
+                        navigation={props.navigation}
+                      />
+                    )
+                  }
+                })}
+              </Content>
+            </Tab>
+          </Tabs>
         </Content>
         <VolLogoutButton />
       </React.Fragment>

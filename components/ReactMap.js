@@ -348,7 +348,6 @@ const ReactMap = props => {
 }
 
 ReactMap.navigationOptions = {
-  headerLeft: <VolLogoutButton />,
   title: 'Events'
 }
 

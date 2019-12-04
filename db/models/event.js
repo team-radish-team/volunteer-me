@@ -40,20 +40,20 @@ const Event = db.define('event', {
   }
 })
 
-Event.beforeCreate(async function(event) {
-  let lat, long
-  const address = `${event.address} chicago il`
-  await axios
-    .get(
-      `https://us1.locationiq.com/v1/search.php?key=683f12733c5177&q=${address}&format=json`
-    )
-    .then(response => {
-      console.log(response.data[0])
-      lat = response.data[0].lat
-      long = response.data[0].lon
-    })
-  event.latitude = lat
-  event.longitude = long
-})
+// Event.beforeCreate(async function(event) {
+//   let lat, long
+//   const address = `${event.address} chicago il`
+//   await axios
+//     .get(
+//       `https://us1.locationiq.com/v1/search.php?key=683f12733c5177&q=${address}&format=json`
+//     )
+//     .then(response => {
+//       console.log(response.data[0])
+//       lat = response.data[0].lat
+//       long = response.data[0].lon
+//     })
+//   event.latitude = lat
+//   event.longitude = long
+// })
 
 module.exports = Event
