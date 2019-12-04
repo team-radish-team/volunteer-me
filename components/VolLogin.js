@@ -8,7 +8,7 @@ import {Image, StyleSheet} from 'react-native'
 let Form = t.form.Form
 
 const Vol = t.struct({
-  email: t.String,
+  YourEmail: t.String,
   password: t.String
 })
 
@@ -33,10 +33,10 @@ class VolLogin extends React.Component {
   handleSubmit = () => {
     const values = this.refs.form.getValue()
     if (values) {
-      const email = values.email.toLowerCase()
+      const email = values.YourEmail.toLowerCase()
       const password = values.password
-
       const type = this.state.type
+
       this.props.auth(email, password, type)
       this.props.navigation.navigate('Volunteer')
     }

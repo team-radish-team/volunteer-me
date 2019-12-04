@@ -8,7 +8,7 @@ import {Image, StyleSheet} from 'react-native'
 let Form = t.form.Form
 
 const Org = t.struct({
-  email: t.String,
+  'YourEmail  ': t.String,
   password: t.String
 })
 
@@ -35,7 +35,6 @@ class OrgLogin extends React.Component {
     if (values) {
       const password = values.password
       const email = values.email.toLowerCase()
-      const password = values.password
       const type = this.state.type
       this.props.auth(email, password, type)
 
@@ -56,6 +55,7 @@ class OrgLogin extends React.Component {
             value={this.state.value}
             onChange={this.onChange}
             options={options}
+            style={styles.formStyle}
           />
           <Button
             style={styles.buttonStyle}
@@ -98,5 +98,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center'
   },
-  text: {paddingTop: 30, paddingBottom: 10}
+  text: {paddingTop: 30, paddingBottom: 10},
+  formStyle: {
+    textAlign: 'center'
+  }
 })

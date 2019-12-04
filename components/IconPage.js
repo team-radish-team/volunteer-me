@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {updateVolunteerThunkPut} from '../store/singleVolunteer'
-import {Text, Alert, StyleSheet} from 'react-native'
+import {Text, Alert, StyleSheet, Dimensions} from 'react-native'
 import {Container, Content, Icon, Button, Card, CardItem} from 'native-base'
 
 const selected = []
+const {height, width} = Dimensions.get('window')
 
 const IconPage = props => {
   const initialState = {
@@ -40,7 +41,6 @@ const IconPage = props => {
 
   handleSubmit = function(event) {
     event.preventDefault()
-    console.log('thisVol', thisVol)
     const volUpdate = {interests: ['animals', 'youth', 'art'], id: thisVol.id}
     dispatch(updateVolunteerThunkPut(volUpdate))
     Alert.alert(
@@ -225,13 +225,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5B39D',
     paddingTop: 5,
     paddingBottom: 5,
-    width: 375,
+    width: width,
     justifyContent: 'center'
   },
   inactiveStyle: {
     paddingTop: 5,
     paddingBottom: 5,
-    width: 375,
+    width: width,
     justifyContent: 'center'
   },
   cardStyle: {
