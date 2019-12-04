@@ -20,7 +20,7 @@ const OrgProfile = props => {
   const organization = useSelector(state => state.singleOrganization)
 
   useEffect(() => {
-    dispatch(getOrganizationThunk(organization.id)) 
+    dispatch(getOrganizationThunk(organization.id))
   }, [organization.id])
 
   handleClick = () => {
@@ -58,6 +58,7 @@ const OrgProfile = props => {
             </CardItem>
           </Card>
         </Content>
+        <OrgLogoutButton />
       </React.Fragment>
     )
   }
@@ -65,7 +66,6 @@ const OrgProfile = props => {
 
 OrgProfile.navigationOptions = ({navigation}) => {
   return {
-    headerLeft: <OrgLogoutButton />,
     title: 'Profile',
     headerRight: (
       <Button onPress={() => handleClick()}>

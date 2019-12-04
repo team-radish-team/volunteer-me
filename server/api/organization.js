@@ -57,7 +57,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:organizationId', async (req, res, next) => {
+router.patch('/:organizationId', async (req, res, next) => {
   try {
     await Organization.update(
       {

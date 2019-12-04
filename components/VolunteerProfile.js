@@ -7,11 +7,13 @@ import {
   Text,
   Body,
   Title,
-  Header
+  Header,
+  Button
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getVolunteerThunk} from '../store/singleVolunteer'
 import VolLogoutButton from './VolLogoutButton'
+import {withNavigation} from 'react-navigation'
 
 const VolunteerProfile = props => {
   const dispatch = useDispatch()
@@ -19,7 +21,9 @@ const VolunteerProfile = props => {
   useEffect(() => {
     dispatch(getVolunteerThunk(volunteer.id))
   }, [volunteer.id])
-  console.log(props)
+  handleClick = () => {
+    props.navigation.navigate('VolEditForm')
+  }
   if (!volunteer) {
     return <React.Fragment></React.Fragment>
   } else {
@@ -49,6 +53,7 @@ const VolunteerProfile = props => {
             </CardItem>
           </Card>
         </Content>
+        <VolLogoutButton />
       </React.Fragment>
     )
   }
@@ -56,9 +61,13 @@ const VolunteerProfile = props => {
 
 VolunteerProfile.navigationOptions = ({navigation}) => {
   return {
-    headerLeft: <VolLogoutButton />,
-    title: 'Profile'
+    title: 'Profile',
+    headerRight: (
+      <Button onPress={() => handleClick()}>
+        <Text>Edit</Text>
+      </Button>
+    )
   }
 }
 
-export default VolunteerProfile
+export default withNavigation(VolunteerProfile)
