@@ -1,19 +1,9 @@
 import React, {useState} from 'react'
 import {createVolunteerThunk} from '../store/singleVolunteer'
 import {useDispatch} from 'react-redux'
-import {Text} from 'react-native'
+import {Text, StyleSheet} from 'react-native'
 
-import {
-  Header,
-  Container,
-  Footer,
-  Content,
-  Button,
-  Icon,
-  Form,
-  Item,
-  Input
-} from 'native-base'
+import {Container, Content, Button, Icon, Form, Item, Input} from 'native-base'
 
 let validated = false
 function validate(form) {
@@ -80,9 +70,8 @@ const VolSignup = props => {
 
   return (
     <Container>
-      <Header />
       <Content>
-        <Form style={{paddingTop: 0, paddingBottom: 40}}>
+        <Form style={styles.form}>
           <Item floatingLabel onChange={() => setFirstName()}>
             <Icon active name="md-person" type="Ionicons" />
             <Input
@@ -131,18 +120,20 @@ const VolSignup = props => {
         </Form>
 
         <Button
-          style={buttonStyle}
+          style={styles.buttonStyle}
           block
           onPress={event => handleSubmit(event)}
         >
           <Text>Submit</Text>
         </Button>
       </Content>
-      <Footer />
     </Container>
   )
 }
 
 export default VolSignup
 
-const buttonStyle = {backgroundColor: '#F16286'}
+const styles = StyleSheet.create({
+  buttonStyle: {backgroundColor: '#F16286'},
+  form: {paddingTop: 0, paddingBottom: 40}
+})

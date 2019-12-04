@@ -9,14 +9,14 @@ import {
 import UserSelect from '../components/UserSelect'
 import VolLogin from '../components/VolLogin'
 import OrgLogin from '../components/OrgLogin'
+import VolSignup from '../components/VolSignup'
+import OrgSignup from '../components/OrgSignup'
+import IconPage from '../components/IconPage'
 
 // EventStack screens
 import EventList from '../components/EventList'
 import EventPage from '../components/EventPage'
 import EventCard from '../components/EventCard'
-import VolSignup from '../components/VolSignup'
-import OrgSignup from '../components/OrgSignup'
-import IconPage from '../components/IconPage'
 
 // MapStack screens
 import ReactMap from '../components/ReactMap'
@@ -127,8 +127,15 @@ export const OrganizationTabs = createBottomTabNavigator({
   Profile: OrgProfileStack
 })
 
-export const EntireApp = createSwitchNavigator({
-  Login: LoginStack,
-  Organization: OrganizationTabs,
-  Volunteer: VolunteerTabs
-})
+export const EntireApp = createSwitchNavigator(
+  {
+    Login: LoginStack,
+    Organization: OrganizationTabs,
+    Volunteer: VolunteerTabs
+  },
+  {
+    defaultNavigationOptions: {
+      header: 'null'
+    }
+  }
+)

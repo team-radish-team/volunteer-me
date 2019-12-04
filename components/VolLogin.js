@@ -2,20 +2,8 @@ import React from 'react'
 import t from 'tcomb-form-native'
 import {connect} from 'react-redux'
 import {auth} from '../store/singleVolunteer'
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from 'native-base'
+import {Container, Text, Button} from 'native-base'
+import {Image, StyleSheet} from 'react-native'
 
 let Form = t.form.Form
 
@@ -46,7 +34,6 @@ class VolLogin extends React.Component {
     const values = this.refs.form.getValue()
     if (values) {
       const email = values.email.toLowerCase()
-
       const password = values.password
 
       const type = this.state.type
@@ -58,14 +45,11 @@ class VolLogin extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Container
-          style={{
-            flex: 2,
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'center'
-          }}
-        >
+        <Container style={styles.container}>
+          <Image
+            source={require('../assets/images/logo.png')}
+            style={styles.imageStyle}
+          />
           <Form
             ref="form"
             type={Vol}
@@ -73,17 +57,14 @@ class VolLogin extends React.Component {
             onChange={this.onChange}
             options={options}
           />
-          <Button style={buttonStyle} info onPress={() => this.handleSubmit()}>
-            <Text>Login</Text>
-          </Button>
-          <Text
-            style={{
-              paddingTop: 30,
-              paddingBottom: 10
-            }}
+          <Button
+            style={styles.buttonColor}
+            info
+            onPress={() => this.handleSubmit()}
           >
-            Don't have an account?
-          </Text>
+            <Text style={styles.buttonText}>Login</Text>
+          </Button>
+          <Text style={styles.bottomText}>Don't have an account?</Text>
           <Button
             style={buttonStyle}
             info
@@ -96,6 +77,7 @@ class VolLogin extends React.Component {
     )
   }
 }
+
 const mapDispatch = dispatch => {
   return {
     auth: (email, password, type) => dispatch(auth(email, password, type))
@@ -104,3 +86,23 @@ const mapDispatch = dispatch => {
 export default connect(null, mapDispatch)(VolLogin)
 
 const buttonStyle = {backgroundColor: '#F16286'}
+
+var styles = StyleSheet.create({
+  buttonText: {alignSelf: 'center'},
+  buttonColor: {backgroundColor: '#F16286'},
+  imageStyle: {
+    width: 225,
+    height: 225
+  },
+  container: {
+    flex: 2,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  bottomText: {
+    paddingTop: 30,
+    paddingBottom: 10,
+    fontWeight: 'bold'
+  }
+})

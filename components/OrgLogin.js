@@ -3,6 +3,7 @@ import t from 'tcomb-form-native'
 import {connect} from 'react-redux'
 import {auth} from '../store/singleOrganization'
 import {Container, Text, Button} from 'native-base'
+import {Image, StyleSheet} from 'react-native'
 
 let Form = t.form.Form
 
@@ -33,9 +34,8 @@ class OrgLogin extends React.Component {
     const values = this.refs.form.getValue()
     if (values) {
       const email = values.email.toLowerCase()
+      const password = values.password
       const type = this.state.type
-      this.props.auth(email, password, type)
-
       this.props.auth(email, password, type)
 
       this.props.navigation.navigate('Organization')
@@ -44,14 +44,11 @@ class OrgLogin extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Container
-          style={{
-            flex: 2,
-            alignItems: 'center',
-            flexDirection: 'column',
-            justifyContent: 'center'
-          }}
-        >
+        <Container style={styles.container}>
+          <Image
+            source={require('../assets/images/logo.png')}
+            style={styles.imageStyle}
+          />
           <Form
             ref="form"
             type={Org}
@@ -59,14 +56,16 @@ class OrgLogin extends React.Component {
             onChange={this.onChange}
             options={options}
           />
-          <Button style={buttonStyle} info onPress={() => this.handleSubmit()}>
+          <Button
+            style={styles.buttonStyle}
+            info
+            onPress={() => this.handleSubmit()}
+          >
             <Text>Login</Text>
           </Button>
-          <Text style={{paddingTop: 30, paddingBottom: 10}}>
-            Don't have an account?
-          </Text>
+          <Text style={styles.text}>Don't have an account?</Text>
           <Button
-            style={buttonStyle}
+            style={styles.buttonStyle}
             info
             onPress={() => this.props.navigation.navigate('OrgSignup')}
           >
@@ -86,4 +85,17 @@ const mapDispatch = dispatch => {
 
 export default connect(null, mapDispatch)(OrgLogin)
 
-const buttonStyle = {backgroundColor: '#F5B39D'}
+const styles = StyleSheet.create({
+  buttonStyle: {backgroundColor: '#F5B39D'},
+  imageStyle: {
+    width: 225,
+    height: 225
+  },
+  container: {
+    flex: 2,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  text: {paddingTop: 30, paddingBottom: 10}
+})
