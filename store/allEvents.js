@@ -112,9 +112,11 @@ export const expiredEventThunk = eventId => async dispatch => {
   }
 }
 
-export const addVolunteerThunk = eventId => async dispatch => {
+export const addVolunteerThunk = (eventId, volunteerId) => async dispatch => {
   try {
-    const {data} = await axios.patch(`${ngrokSecret}/api/events/${eventId}`)
+    const {data} = await axios.patch(`${ngrokSecret}/api/events/${eventId}`, {
+      volunteerId
+    })
     dispatch(getEvents(data))
   } catch (error) {
     console.error('Error adding Volunteer', error)
