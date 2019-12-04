@@ -27,7 +27,9 @@ router.get('/', async (req, res, next) => {
 //GET a single volunteer
 router.get('/:volunteerId', async (req, res, next) => {
   try {
-    const volunteer = await Volunteer.findByPk(req.params.volunteerId)
+
+    let volunteer = await Volunteer.findByPk(Number(req.params.volunteerId))
+
     res.json(volunteer)
   } catch (err) {
     next(err)
@@ -75,6 +77,27 @@ router.put('/:volunteerId', async (req, res, next) => {
   }
 })
 
+router.patch('/:volunteerId', async (req, res, next) => {
+  try {
+    await Volunteer.update(
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: req.body.password
+      },
+      {
+        where: {id: Number(req.params.volunteerId)}
+      }
+    )
+    const updatedVol = await Volunteer.findByPk(Number(req.params.volunteerId))
+    res.status(200).json(updatedVol)
+  } catch (error) {
+    next(error)
+  }
+})
+
 // router.put('/:userId', async (req, res, next) => {
 //   try {
 //     let oldUser = await User.findById(req.params.userId)
@@ -97,24 +120,6 @@ router.put('/:volunteerId', async (req, res, next) => {
 //     await User.destroy({
 //       where: {id: req.body.userId}
 //     })
-//     res.sendStatus(200)
-//   } catch (error) {
-//     next(error)
-//   }
-// })
-
-/**
- *  PATCH promote single user (api/users/:id)
- */
-
-// router.patch('/:userId', isAdmin, async (req, res, next) => {
-//   try {
-//     await User.update(
-//       {
-//         isAdmin: true
-//       },
-//       {where: {id: req.body.userId}}
-//     )
 //     res.sendStatus(200)
 //   } catch (error) {
 //     next(error)

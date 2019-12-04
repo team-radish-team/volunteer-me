@@ -43,6 +43,8 @@ export const LoginStack = createStackNavigator(
 
 //OrgProfileStack Screens
 import OrgProfile from '../components/OrgProfile'
+import OrgEditForm from '../components/OrgEditForm'
+
 //stack for Not Logged In
 // export const NotLoggedInStack = createStackNavigator(
 //   {
@@ -55,7 +57,7 @@ import OrgProfile from '../components/OrgProfile'
 
 //VolunteerProfileStack Screens
 import VolunteerProfile from '../components/VolunteerProfile'
-
+import VolEditForm from '../components/VolEditForm'
 // stack for VolunteerEvents tab
 export const EventsStack = createStackNavigator(
   {
@@ -83,7 +85,8 @@ export const MapStack = createStackNavigator(
 export const OrgProfileStack = createStackNavigator(
   {
     OrgProfile: OrgProfile,
-    OrgEventPage: OrgEventPage
+    OrgEventPage: OrgEventPage,
+    OrgEditForm: OrgEditForm
   },
   {initialRouteName: 'OrgProfile'}
 )
@@ -93,7 +96,8 @@ export const VolunteerProfileStack = createStackNavigator(
   {
     // VolunteerProfile: VolunteerProfile,
     // VolunteerProfileEdit: VolunteerProfileEdit
-    VolunteerProfile: VolunteerProfile
+    VolunteerProfile: VolunteerProfile,
+    VolEditForm: VolEditForm
   },
   {
     initialRouteName: 'VolunteerProfile'

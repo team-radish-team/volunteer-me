@@ -2,7 +2,23 @@ import React from 'react'
 import t from 'tcomb-form-native'
 import {connect} from 'react-redux'
 import {auth} from '../store/singleVolunteer'
-import {Container, Text, Button} from 'native-base'
+
+
+import {
+  Container,
+  Header,
+  Content,
+  Card,
+  CardItem,
+  Thumbnail,
+  Text,
+  Button,
+  Icon,
+  Left,
+  Body,
+  Right
+} from 'native-base'
+
 
 let Form = t.form.Form
 
@@ -33,7 +49,10 @@ class VolLogin extends React.Component {
     const values = this.refs.form.getValue()
     if (values) {
       const email = values.email.toLowerCase()
-      const password = values.password.toLowerCase()
+
+
+      const password = values.password
+
       const type = this.state.type
       this.props.auth(email, password, type)
       this.props.navigation.navigate('Volunteer')
@@ -58,7 +77,9 @@ class VolLogin extends React.Component {
             onChange={this.onChange}
             options={options}
           />
+
           <Button info onPress={() => this.handleSubmit()}>
+
             <Text>Login</Text>
           </Button>
           <Text
@@ -80,9 +101,11 @@ class VolLogin extends React.Component {
     )
   }
 }
+
 const mapDispatch = dispatch => {
   return {
     auth: (email, password, type) => dispatch(auth(email, password, type))
   }
 }
+
 export default connect(null, mapDispatch)(VolLogin)

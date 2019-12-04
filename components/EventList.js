@@ -18,6 +18,7 @@ import {
   Right
 } from 'native-base'
 import EventCard from './EventCard'
+import VolLogoutButton from './VolLogoutButton'
 
 const EventList = props => {
   const handleHeaderChange = value => {
@@ -37,7 +38,6 @@ const EventList = props => {
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
   const [filter, setFilter] = useState('All')
-  console.log('NEOEVENTS!!!!!!!!: ', neoEvents)
   return (
     <React.Fragment>
       <Content>
@@ -62,7 +62,7 @@ const EventList = props => {
               return (
                 <EventCard
                   key={neoId}
-                  event={events[neoId]}
+                  event={events[neoId - 1]}
                   navigation={props.navigation}
                 />
               )

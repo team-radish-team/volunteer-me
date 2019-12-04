@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {StyleSheet, Dimensions, View, Image} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
-import {getEventsThunk} from '../store/allEvents'
+import {addVolunteerThunk} from '../store/allEvents'
 import {
   Container,
   Header,
@@ -19,6 +19,7 @@ import {
 import normalize from '../utilities/timeConverter'
 const EventPage = props => {
   const event = props.navigation.state.params
+  const dispatch = useDispatch()
   return (
     <React.Fragment>
       <Content>
@@ -54,7 +55,21 @@ const EventPage = props => {
             <Text>{event.description}</Text>
           </CardItem>
           <CardItem>
-            <Button>
+            <Button
+              style={{
+                width: 175,
+                marginLeft: 120,
+                marginTop: 10,
+                marginBottom: 20
+              }}
+              rounded
+              iconLeft
+              onPress={() => {
+                dispatch(addVolunteerThunk(event.id))
+                props.navigation.goBack()
+              }}
+            >
+              <Icon name="people" />
               <Text>I'm Attending!</Text>
             </Button>
           </CardItem>

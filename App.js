@@ -3,13 +3,10 @@ import * as Font from 'expo-font'
 import React, {useState} from 'react'
 import {Platform, StatusBar, StyleSheet, View} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
-import {createAppContainer} from 'react-navigation'
 import {Provider} from 'react-redux'
 import store from './store'
-import {EntireApp} from './navigation/navigators'
 import {AppLoading} from 'expo'
-
-const AppContainer = createAppContainer(EntireApp)
+import TimeMiddleware from './components/TimeMiddleware'
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false)
@@ -25,7 +22,7 @@ export default function App(props) {
   } else {
     return (
       <Provider store={store}>
-        <AppContainer />
+        <TimeMiddleware />
       </Provider>
     )
   }
