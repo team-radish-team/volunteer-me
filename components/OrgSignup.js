@@ -33,6 +33,8 @@ function validate(form) {
     alert('Please provide a valid email')
   } else if (form.webUrl.length < 1 || !form.webUrl.includes('.org')) {
     alert('Please provide a valid URL with .org')
+  } else if (form.password !== form.confirmPassword) {
+    alert('Passwords must match!')
   } else {
     validated = true
   }

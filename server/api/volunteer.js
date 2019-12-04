@@ -37,16 +37,30 @@ router.get('/:volunteerId', async (req, res, next) => {
 // POST a single volunteer
 router.post('/', async (req, res, next) => {
   try {
-    let volunteer = await Volunteer.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      phone: req.body.phone,
-      password: req.body.password,
-      interests: req.body.interests ? req.body.interests : null,
-      profilePic: req.body.profilePic ? req.body.profilePic : null
+    console.log('IN THE ROUTE')
+    const volunteer = await Volunteer.findAll({
+      where: {
+        email: req.body.email
+      }
     })
-    res.json(volunteer)
+    console.log('in route, volunteer is', volunteer)
+    console.log('req.body.email', req.body.email)
+    console.log('volunteer data', volunteer.dataValues)
+    if (volunteer.length > 0) {
+      res.json('exists')
+    } else {
+      console.log('IN THE ROUTE ELSE')
+      let volunteer = await Volunteer.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: req.body.password,
+        interests: req.body.interests ? req.body.interests : null,
+        profilePic: req.body.profilePic ? req.body.profilePic : null
+      })
+      res.json(volunteer)
+    }
   } catch (err) {
     next(err)
   }

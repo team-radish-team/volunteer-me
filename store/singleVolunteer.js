@@ -22,6 +22,8 @@ const getVolunteer = volunteer => ({type: GET_VOLUNTEER, volunteer})
 
 const removeVolunteer = () => ({type: REMOVE_VOLUNTEER})
 
+//thunks
+
 export const volunteer = () => {
   return async dispatch => {
     try {
@@ -53,12 +55,13 @@ export const auth = (email, password) => {
   }
 }
 
-//thunks
-
 export const createVolunteerThunk = volunteer => async dispatch => {
   try {
+    console.log('in the thunk', volunteer)
     const {data} = await axios.post(`${ngrokSecret}/api/volunteers`, volunteer)
+    console.log('in the thunk', data)
     dispatch(createVolunteer(data))
+    return data
   } catch (err) {
     console.error(err)
   }
@@ -94,6 +97,7 @@ export const getVolunteerThunk = volunteerId => {
         `${ngrokSecret}/api/volunteers/${volunteerId}`
       )
       dispatch(getVolunteer(data))
+      return data
     } catch (error) {
       console.error('Error getting volunteer', error)
     }
@@ -102,7 +106,7 @@ export const getVolunteerThunk = volunteerId => {
 
 //reducer
 
-const initialState = {signedUpVol: {}}
+const initialState = {signedUpVol: {}, emailExists: {}}
 
 export default function(state = initialState, action) {
   switch (action.type) {

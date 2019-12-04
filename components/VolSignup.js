@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {createVolunteerThunk} from '../store/singleVolunteer'
+import {createVolunteerThunk, getByEmailThunk} from '../store/singleVolunteer'
 import {useDispatch} from 'react-redux'
 import {Text} from 'react-native'
 
@@ -25,6 +25,7 @@ function validate(form) {
     form.password.length < 1 ||
     form.confirmPassword.length < 1
   ) {
+    console.log(form)
     alert(`You're missing a required field`)
   } else if (!form.email.includes('@')) {
     alert('Please provide a valid email')
@@ -37,6 +38,7 @@ function validate(form) {
 
 const VolSignup = props => {
   const dispatch = useDispatch()
+
   const initialState = {
     firstName: '',
     lastName: '',
@@ -51,17 +53,25 @@ const VolSignup = props => {
     if (name === 'email') {
       let newText = event.nativeEvent.text.toLowerCase()
       setForm({...form, [name]: newText})
+    } else if (name === 'phone') {
+      console.log('phone')
+      setForm({...form, [name]: event.nativeEvent.text})
     } else {
       setForm({...form, [name]: event.nativeEvent.text})
     }
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     validate(form)
     if (validated === true) {
-      dispatch(createVolunteerThunk(form))
-      props.navigation.navigate('IconPage')
+      existsVar = await dispatch(createVolunteerThunk(form))
+      console.log('exists', existsVar)
+      if (existsVar === 'exists') {
+        alert('Please use a different email.')
+      } else {
+        props.navigation.navigate('IconPage')
+      }
     }
   }
 
