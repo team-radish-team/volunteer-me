@@ -60,8 +60,7 @@ export const EventsStack = createStackNavigator(
   {
     EventList: EventList,
     EventPage: EventPage,
-    EventCard: EventCard,
-    EventEditForm: EventEditForm
+    EventCard: EventCard
   },
   {
     initialRouteName: 'EventList'
@@ -136,7 +135,8 @@ export const VolunteerTabs = createBottomTabNavigator(
 export const OrgEventsStack = createStackNavigator({
   OrgEventList: OrgEventList,
   OrgEventPage: OrgEventPage,
-  OrgProfile: OrgProfile
+  OrgProfile: OrgProfile,
+  EventEditForm: EventEditForm
 })
 
 export const OrganizationTabs = createBottomTabNavigator({
