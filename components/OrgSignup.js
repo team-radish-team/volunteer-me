@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {createOrganizationThunk} from '../store/singleOrganization'
 import {useDispatch} from 'react-redux'
-import {Text} from 'react-native'
+import {Text, Alert} from 'react-native'
 import {
   Header,
   Container,
@@ -73,13 +73,20 @@ const OrgSignup = props => {
     }
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     validate(form)
     if (validated === true) {
-      dispatch(createOrganizationThunk(form))
-      console.log('submitted')
-      // props.navigation.navigate('Organization')
+      existsVar = await dispatch(createOrganizationThunk(form))
+
+      if (existsVar === 'exists') {
+        alert('Please use a different email.')
+      } else {
+        Alert.alert('Done', 'Thanks for signing up!', [{text: 'OK'}], {
+          cancelable: false
+        })
+        props.navigation.navigate('OrgLogin')
+      }
     }
   }
 

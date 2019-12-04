@@ -66,7 +66,6 @@ const VolSignup = props => {
     validate(form)
     if (validated === true) {
       existsVar = await dispatch(createVolunteerThunk(form))
-      console.log('exists', existsVar)
       if (existsVar === 'exists') {
         alert('Please use a different email.')
       } else {

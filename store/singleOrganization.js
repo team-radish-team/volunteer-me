@@ -90,6 +90,7 @@ export const createOrganizationThunk = organization => async dispatch => {
       organization
     )
     dispatch(createOrganization(data))
+    return data
   } catch (err) {
     console.error(err)
   }

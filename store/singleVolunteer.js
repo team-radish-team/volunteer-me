@@ -57,9 +57,7 @@ export const auth = (email, password) => {
 
 export const createVolunteerThunk = volunteer => async dispatch => {
   try {
-    console.log('in the thunk', volunteer)
     const {data} = await axios.post(`${ngrokSecret}/api/volunteers`, volunteer)
-    console.log('in the thunk', data)
     dispatch(createVolunteer(data))
     return data
   } catch (err) {
