@@ -77,7 +77,7 @@ router.get('/:organizationid', async (req, res, next) => {
 })
 
 /**
- *  GET all volunteer events (api/events/:volunteerId)
+ *  GET all events associated with volunteer (api/events/:volunteerId)
  */
 router.get('/volunteer/:volunteerId', async (req, res, next) => {
   try {
@@ -86,6 +86,21 @@ router.get('/volunteer/:volunteerId', async (req, res, next) => {
     })
 
     res.json(volunteer)
+  } catch (error) {
+    next(error)
+  }
+})
+
+/**
+ *  GET all volunteers associated with event (api/events/event/:eventId)
+ */
+router.get('/event/:eventId', async (req, res, next) => {
+  try {
+    let volunteers = await Event.findByPk(req.params.eventId, {
+      include: [{model: Volunteer}]
+    })
+
+    res.json(volunteers)
   } catch (error) {
     next(error)
   }

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {StyleSheet, Dimensions, View, Image} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
-import {addVolunteerThunk} from '../store/allEvents'
+import {addVolunteerThunk, getEventVolunteersThunk} from '../store/allEvents'
 import {
   Container,
   Header,
@@ -17,9 +17,14 @@ import {
   Right
 } from 'native-base'
 import normalize from '../utilities/timeConverter'
+import VolunteerCard from '../components/VolunteerCard'
 const EventPage = props => {
   const event = props.navigation.state.params
   const dispatch = useDispatch()
+  const volunteers = useSelector(state => state.allEvents.volunteers)
+  useEffect(() => {
+    dispatch(getEventVolunteersThunk(event.id))
+  }, [])
   return (
     <React.Fragment>
       <Content>
@@ -74,6 +79,12 @@ const EventPage = props => {
             </Button>
           </CardItem>
         </Card>
+        <Text style={{marginTop: 30, marginBottom: 20, textAlign: 'center'}}>
+          Who's helping out?
+        </Text>
+        {volunteers.map(volunteer => {
+          return <VolunteerCard key={volunteer.id} volunteer={volunteer} />
+        })}
       </Content>
     </React.Fragment>
   )
