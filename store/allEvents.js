@@ -5,16 +5,31 @@ const GET_ALL_EVENTS = 'GET_ALL_EVENTS'
 const ADD_EVENT = 'ADD_EVENT'
 const GET_NEO_EVENTS = 'GET_NEO_EVENTS'
 const GET_VOLUNTEER_EVENTS = 'GET_VOLUNTEER_EVENTS'
+const GET_EVENT_VOLUNTEERS = 'GET_EVENT_VOLUNTEERS'
 
 const addEvent = event => ({type: ADD_EVENT, event})
 const getEvents = events => ({type: GET_ALL_EVENTS, events})
 const getNeoEvents = eventIds => ({type: GET_NEO_EVENTS, eventIds})
 const getVolunteerEvents = events => ({type: GET_VOLUNTEER_EVENTS, events})
+const getEventVolunteers = volunteers => ({
+  type: GET_EVENT_VOLUNTEERS,
+  volunteers
+})
 
 const defaultState = {
   allEvents: [],
   neoEvents: [],
-  volunteerEvents: []
+  volunteerEvents: [],
+  volunteers: []
+}
+
+export const getEventVolunteersThunk = eventId => async dispatch => {
+  try {
+    const {data} = await axios.get(`${ngrokSecret}/api/events/event/${eventId}`)
+    dispatch(getEventVolunteers(data.volunteers))
+  } catch (error) {
+    console.error('Error getting volunteers for event', error)
+  }
 }
 
 export const getVolunteerEventsThunk = volunteerId => async dispatch => {
@@ -74,7 +89,7 @@ export const addEventThunk = (
     data.organizationId = organizationId
     dispatch(addEvent(data))
   } catch (error) {
-    console.log('Error adding event', error)
+    console.error(error)
   }
 }
 
@@ -83,7 +98,6 @@ export const getNeo4jEventsThunk = (volunteerId, eventId) => async dispatch => {
     const {data} = await axios.get(
       `${ngrokSecret}/api/events/neo4j/${volunteerId}/${eventId}`
     )
-    //console.log(data.records[0]._fields[0])
     dispatch(getNeoEvents(data.records[0]._fields[0]))
   } catch (error) {
     console.error('Error getting neo4j events ', error)
@@ -98,9 +112,11 @@ export const expiredEventThunk = eventId => async dispatch => {
   }
 }
 
-export const addVolunteerThunk = eventId => async dispatch => {
+export const addVolunteerThunk = (eventId, volunteerId) => async dispatch => {
   try {
-    const {data} = await axios.patch(`${ngrokSecret}/api/events/${eventId}`)
+    const {data} = await axios.patch(`${ngrokSecret}/api/events/${eventId}`, {
+      volunteerId
+    })
     dispatch(getEvents(data))
   } catch (error) {
     console.error('Error adding Volunteer', error)
@@ -117,6 +133,8 @@ export default function(state = defaultState, action) {
       return {...state, volunteerEvents: action.events}
     case ADD_EVENT:
       return {...state, allEvents: [...state.allEvents, action.event]}
+    case GET_EVENT_VOLUNTEERS:
+      return {...state, volunteers: action.volunteers}
     default:
       return state
   }

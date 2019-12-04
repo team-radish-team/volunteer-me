@@ -38,6 +38,7 @@ const EventList = props => {
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
   const [filter, setFilter] = useState('All')
+
   return (
     <React.Fragment>
       <Content>
@@ -45,7 +46,7 @@ const EventList = props => {
           ? events.map(event => {
               if (
                 event.isActive &&
-                event.volunteerCount < event.volunteerTargetNum
+                event.volunteers.length < event.volunteerTargetNum
               ) {
                 return (
                   <EventCard
@@ -71,7 +72,7 @@ const EventList = props => {
               if (Number(event.organization.categoryId) === Number(filter)) {
                 if (
                   event.isActive &&
-                  event.volunteerCount < event.volunteerTargetNum
+                  event.volunteers.length < event.volunteerTargetNum
                 ) {
                   return (
                     <EventCard

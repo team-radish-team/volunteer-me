@@ -16,6 +16,7 @@ import EventPage from '../components/EventPage'
 import EventCard from '../components/EventCard'
 import VolSignup from '../components/VolSignup'
 import OrgSignup from '../components/OrgSignup'
+import IconPage from '../components/IconPage'
 
 // MapStack screens
 import ReactMap from '../components/ReactMap'
@@ -30,7 +31,10 @@ export const LoginStack = createStackNavigator(
   {
     UserSelect: UserSelect,
     VolLogin: VolLogin,
-    OrgLogin: OrgLogin
+    OrgLogin: OrgLogin,
+    OrgSignup: OrgSignup,
+    VolSignup: VolSignup,
+    IconPage: IconPage
   },
   {
     initialRouteName: 'UserSelect'
@@ -101,26 +105,6 @@ export const VolunteerProfileStack = createStackNavigator(
   }
 )
 
-//stack for volunteer sign up page
-export const VolSignupStack = createStackNavigator(
-  {
-    VolSignupPage: VolSignup
-  },
-  {
-    initialRouteName: 'VolSignupPage'
-  }
-)
-
-//stack for organization sign up page
-export const OrgSignupStack = createStackNavigator(
-  {
-    OrgSignupPage: OrgSignup
-  },
-  {
-    initialRouteName: 'OrgSignupPage'
-  }
-)
-
 export const VolunteerTabs = createBottomTabNavigator(
   {
     Events: EventsStack,
@@ -148,7 +132,5 @@ export const OrganizationTabs = createBottomTabNavigator({
 export const EntireApp = createSwitchNavigator({
   Login: LoginStack,
   Organization: OrganizationTabs,
-  Volunteer: VolunteerTabs,
-  VolSignup: VolSignupStack,
-  OrgSignup: OrgSignupStack
+  Volunteer: VolunteerTabs
 })

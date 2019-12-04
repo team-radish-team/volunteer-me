@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {createOrganizationThunk} from '../store/singleOrganization'
 import {useDispatch} from 'react-redux'
-import {Text} from 'react-native'
+import {Text, Alert} from 'react-native'
 import {
   Header,
   Container,
@@ -33,6 +33,8 @@ function validate(form) {
     alert('Please provide a valid email')
   } else if (form.webUrl.length < 1 || !form.webUrl.includes('.org')) {
     alert('Please provide a valid URL with .org')
+  } else if (form.password !== form.confirmPassword) {
+    alert('Passwords must match!')
   } else {
     validated = true
   }
@@ -71,12 +73,20 @@ const OrgSignup = props => {
     }
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     validate(form)
     if (validated === true) {
-      dispatch(createOrganizationThunk(form))
-      props.navigation.navigate('Organization')
+      existsVar = await dispatch(createOrganizationThunk(form))
+
+      if (existsVar === 'exists') {
+        alert('Please use a different email.')
+      } else {
+        Alert.alert('Done', 'Thanks for signing up!', [{text: 'OK'}], {
+          cancelable: false
+        })
+        props.navigation.navigate('OrgLogin')
+      }
     }
   }
 
@@ -86,9 +96,9 @@ const OrgSignup = props => {
       <Content>
         <Form style={{paddingBottom: 40}}>
           <Item floatingLabel onChange={() => setFirstName()}>
-            <Icon active name="organization" type="Octicons" />
+            <Icon active name="ios-hand" type="Ionicons" />
             <Input
-              placeholder="Organization name"
+              placeholder="Organization Name"
               onChange={event => handleChange(event, 'name')}
             />
           </Item>
@@ -146,7 +156,7 @@ const OrgSignup = props => {
           <Item floatingLabel>
             <Icon active name="lock" type="Entypo" />
             <Input
-              placeholder="password"
+              placeholder="Password"
               value={secureText(form.password)}
               onChange={event => handleChange(event, 'password')}
             />
@@ -154,7 +164,7 @@ const OrgSignup = props => {
           <Item floatingLabel last>
             <Icon active name="lock" type="Entypo" />
             <Input
-              placeholder="Confirm password"
+              placeholder="Confirm Password"
               value={secureText(form.confirmPassword)}
               onChange={event => handleChange(event, 'confirmPassword')}
             />
