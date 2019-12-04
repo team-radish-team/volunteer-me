@@ -8,7 +8,7 @@ import {Image, StyleSheet} from 'react-native'
 let Form = t.form.Form
 
 const Org = t.struct({
-  'YourEmail  ': t.String,
+  YourEmail: t.String,
   password: t.String
 })
 
