@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import {ScrollView} from 'react-native'
 import {
   Content,
   Thumbnail,
@@ -10,7 +11,8 @@ import {
   Tabs,
   Tab,
   Button,
-  Header
+  Header,
+  View
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getVolunteerThunk} from '../store/singleVolunteer'
@@ -36,64 +38,66 @@ const VolunteerProfile = props => {
   } else {
     return (
       <React.Fragment>
-        <Content style={{flex: 0}}>
-          <Header noShadow>
-            <Title>
-              {volunteer.firstName} {volunteer.lastName}
-            </Title>
-          </Header>
-          <Card style={{flex: 2, flexDirection: 'row'}}>
-            <Thumbnail large source={{uri: volunteer.profilePic}} />
-            <CardItem>
-              <CardItem>
-                <Body>
-                  <Text>Email: {volunteer.email}</Text>
-                  <Text>Phone Number: {volunteer.phone}</Text>
-                  <Text>Interests:</Text>
-                  {volunteer.interests.map(interest => {
-                    return <Text key={interest}>{interest} </Text>
-                  })}
-                </Body>
-              </CardItem>
-            </CardItem>
-          </Card>
-          {volunteer.events ? (
-            <Tabs>
-              <Tab heading="Upcoming Events">
-                <Content>
-                  {volunteer.events.map(event => {
-                    if (event.isActive) {
-                      return (
-                        <EventCard
-                          key={event.id}
-                          event={event}
-                          navigation={props.navigation}
-                        />
-                      )
-                    }
-                  })}
-                </Content>
-              </Tab>
-              <Tab heading="Past Events">
-                <Content>
-                  {events.map(event => {
-                    if (!event.isActive) {
-                      return (
-                        <EventCard
-                          key={event.id}
-                          event={event}
-                          navigation={props.navigation}
-                        />
-                      )
-                    }
-                  })}
-                </Content>
-              </Tab>
-            </Tabs>
-          ) : (
-            <Text>No Events!</Text>
-          )}
-        </Content>
+        {volunteer.events ? (
+          <Tabs>
+            <Tab heading="Your Profile">
+              <Content style={{flex: 0}} scrollEnabled={false}>
+                <Header noShadow>
+                  <Title>
+                    {volunteer.firstName} {volunteer.lastName}
+                  </Title>
+                </Header>
+                <Card style={{flex: 2, flexDirection: 'row'}}>
+                  <Thumbnail large source={{uri: volunteer.profilePic}} />
+                  <CardItem>
+                    <CardItem>
+                      <Body>
+                        <Text>Email: {volunteer.email}</Text>
+                        <Text>Phone Number: {volunteer.phone}</Text>
+                        <Text>Interests:</Text>
+                        {volunteer.interests.map(interest => {
+                          return <Text key={interest}>{interest} </Text>
+                        })}
+                      </Body>
+                    </CardItem>
+                  </CardItem>
+                </Card>
+              </Content>
+            </Tab>
+            <Tab heading="Upcoming Events">
+              <Content>
+                {volunteer.events.map(event => {
+                  if (event.isActive) {
+                    return (
+                      <EventCard
+                        key={event.id}
+                        event={event}
+                        navigation={props.navigation}
+                      />
+                    )
+                  }
+                })}
+              </Content>
+            </Tab>
+            <Tab heading="Past Events">
+              <Content>
+                {events.map(event => {
+                  if (!event.isActive) {
+                    return (
+                      <EventCard
+                        key={event.id}
+                        event={event}
+                        navigation={props.navigation}
+                      />
+                    )
+                  }
+                })}
+              </Content>
+            </Tab>
+          </Tabs>
+        ) : (
+          <Text>No Events!</Text>
+        )}
       </React.Fragment>
     )
   }

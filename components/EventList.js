@@ -41,7 +41,6 @@ const EventList = props => {
 
   return (
     <React.Fragment>
-      {console.log('EVENT LOOKS LIKE ----', events[0])}
       <Content>
         {filter === 'All' || Number(filter) === 10
           ? events.map(event => {
