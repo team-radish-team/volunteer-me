@@ -48,10 +48,9 @@ class OrgLogin extends React.Component {
   handleSubmit = () => {
     const values = this.refs.form.getValue()
     if (values) {
+      const password = values.password
       const email = values.email.toLowerCase()
       const type = this.state.type
-      this.props.auth(email, password, type)
-
       this.props.auth(email, password, type)
 
       this.props.navigation.navigate('Organization')
