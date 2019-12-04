@@ -2,9 +2,7 @@ const router = require('express').Router()
 const {Volunteer} = require('../../db/models')
 module.exports = router
 
-/**
- *  GET all volunteers (api/volunteers)
- */
+//GET all volunteers
 router.get('/', async (req, res, next) => {
   try {
     const volunteers = await Volunteer.findAll({
@@ -26,10 +24,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-/**
- *  GET single volunteer (api/volunteers/:id)
- */
-
+//GET a single volunteer
 router.get('/:volunteerId', async (req, res, next) => {
   try {
     let volunteer = await Volunteer.findByPk(Number(req.params.volunteerId))
@@ -40,27 +35,47 @@ router.get('/:volunteerId', async (req, res, next) => {
 })
 
 // POST a single volunteer
-
 router.post('/', async (req, res, next) => {
   try {
-    let volunteer = await Volunteer.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      phone: req.body.phone,
-      password: req.body.password,
-      interests: req.body.interests ? req.body.interests : null,
-      profilePic: req.body.profilePic ? req.body.profilePic : null
+    const volunteer = await Volunteer.findAll({
+      where: {
+        email: req.body.email
+      }
     })
-    res.json(volunteer)
+
+    if (volunteer.length > 0) {
+      res.json('exists')
+    } else {
+      let volunteer = await Volunteer.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: req.body.password,
+        interests: req.body.interests ? req.body.interests : null,
+        profilePic: req.body.profilePic ? req.body.profilePic : null
+      })
+      res.json(volunteer)
+    }
   } catch (err) {
     next(err)
   }
 })
 
-/**
- *  PUT single user (api/users/:id)
- */
+//PUT a single volunteer
+router.put('/:volunteerId', async (req, res, next) => {
+  try {
+    let oldVol = await Volunteer.findByPk(req.params.volunteerId)
+
+    let updated = await oldVol.update({
+      interests: req.body.interests
+    })
+
+    res.json(updated)
+  } catch (error) {
+    next(error)
+  }
+})
 
 router.patch('/:volunteerId', async (req, res, next) => {
   try {

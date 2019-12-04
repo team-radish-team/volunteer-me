@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
     })
     res.json(allEvents).status(200)
   } catch (error) {
-    console.log('error')
+    console.error('error')
     next(error)
   }
 })
@@ -71,7 +71,7 @@ router.get('/:organizationid', async (req, res, next) => {
     })
     res.json(orgEvents).status(200)
   } catch (error) {
-    console.log(error)
+    console.error(error)
     next(error)
   }
 })
@@ -152,7 +152,7 @@ router.patch('/:eventId', async (req, res, next) => {
     })
     res.json(allEvents)
   } catch (error) {
-    console.log(error)
+    console.error(error)
     next(error)
   }
 })

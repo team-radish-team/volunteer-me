@@ -19,7 +19,10 @@ export const updateVolunteer = volunteer => ({
 })
 
 const getVolunteer = volunteer => ({type: GET_VOLUNTEER, volunteer})
+
 const removeVolunteer = () => ({type: REMOVE_VOLUNTEER})
+
+//thunks
 
 export const volunteer = () => {
   return async dispatch => {
@@ -27,7 +30,7 @@ export const volunteer = () => {
       const res = await axios.get(`${ngrokSecret}/auth/volunteer/`)
       dispatch(getVolunteer(res.data || defaultVolunteer))
     } catch (err) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
@@ -53,12 +56,23 @@ export const auth = (email, password, type) => {
   }
 }
 
-//thunks
-
 export const createVolunteerThunk = volunteer => async dispatch => {
   try {
     const {data} = await axios.post(`${ngrokSecret}/api/volunteers`, volunteer)
     dispatch(createVolunteer(data))
+    return data
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updateVolunteerThunkPut = volunteer => async dispatch => {
+  try {
+    const {data} = await axios.put(
+      `${ngrokSecret}/api/volunteers/${volunteer.id}`,
+      volunteer
+    )
+    dispatch(updateVolunteer(data))
   } catch (err) {
     console.error(err)
   }
@@ -71,6 +85,7 @@ export const updateVolunteerThunk = (
   try {
     const {data} = await axios.patch(
       `${ngrokSecret}/api/volunteers/${volunteerId}`,
+
       volunteer
     )
     dispatch(updateVolunteer(data))
@@ -107,19 +122,19 @@ export const getVolunteerThunk = volunteerId => {
 
 //reducer
 
-const initialState = {}
+const initialState = {signedUpVol: {}}
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_VOLUNTEER:
       return action.volunteer
     case REMOVE_VOLUNTEER:
-      return initialState
+      return state
     case CREATE_VOLUNTEER: {
-      return action.volunteer
+      return {state, signedUpVol: action.volunteer}
     }
     case UPDATE_VOLUNTEER: {
-      return action.volunteer
+      return {state, signedUpVol: action.volunteer}
     }
     default:
       return state

@@ -28,6 +28,8 @@ function validate(form) {
     alert(`You're missing a required field`)
   } else if (!form.email.includes('@')) {
     alert('Please provide a valid email')
+  } else if (form.password !== form.confirmPassword) {
+    alert('Passwords must match!')
   } else {
     validated = true
   }
@@ -35,6 +37,7 @@ function validate(form) {
 
 const VolSignup = props => {
   const dispatch = useDispatch()
+
   const initialState = {
     firstName: '',
     lastName: '',
@@ -54,13 +57,25 @@ const VolSignup = props => {
     }
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     validate(form)
     if (validated === true) {
-      dispatch(createVolunteerThunk(form))
-      props.navigation.navigate('Volunteer')
+      existsVar = await dispatch(createVolunteerThunk(form))
+      if (existsVar === 'exists') {
+        alert('Please use a different email.')
+      } else {
+        props.navigation.navigate('IconPage')
+      }
     }
+  }
+
+  const secureText = password => {
+    let visibleText = ''
+    for (let i = 0; i < password.length; i++) {
+      visibleText += '*'
+    }
+    return visibleText
   }
 
   return (
@@ -71,21 +86,21 @@ const VolSignup = props => {
           <Item floatingLabel onChange={() => setFirstName()}>
             <Icon active name="md-person" type="Ionicons" />
             <Input
-              placeholder="First name"
+              placeholder="First Name"
               onChange={event => handleChange(event, 'firstName')}
             />
           </Item>
           <Item floatingLabel>
             <Icon active name="profile" type="AntDesign" />
             <Input
-              placeholder="Last name"
+              placeholder="Last Name"
               onChange={event => handleChange(event, 'lastName')}
             />
           </Item>
           <Item floatingLabel>
             <Icon active name="email" type="MaterialIcons" />
             <Input
-              placeholder="email"
+              placeholder="Email"
               value={form.email}
               onChange={event => handleChange(event, 'email')}
             />
@@ -93,24 +108,24 @@ const VolSignup = props => {
           <Item floatingLabel>
             <Icon active name="phone" type="FontAwesome" />
             <Input
-              placeholder="phone"
+              placeholder="Phone"
               onChange={event => handleChange(event, 'phone')}
             />
           </Item>
           <Item floatingLabel>
             <Icon active name="lock" type="Entypo" />
             <Input
-              placeholder="password"
-              secureTextEntry={true}
+              placeholder="Password"
               onChange={event => handleChange(event, 'password')}
+              value={secureText(form.password)}
             />
           </Item>
           <Item floatingLabel last>
             <Icon active name="lock" type="Entypo" />
             <Input
-              placeholder="Confirm password"
+              placeholder="Confirm Password"
               onChange={event => handleChange(event, 'confirmPassword')}
-              secureTextEntry={true}
+              value={secureText(form.confirmPassword)}
             />
           </Item>
         </Form>
