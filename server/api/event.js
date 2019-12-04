@@ -14,7 +14,8 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     let allEvents = await Event.findAll({
-      include: [{model: Organization}]
+      include: [{model: Organization}, {model: Volunteer}],
+      order: [['id', 'ASC']]
     })
     res.json(allEvents).status(200)
   } catch (error) {
@@ -49,7 +50,6 @@ router.get('/neo4j/:volunteerId/:eventId', async (req, res, next) => {
 
 router.put('/time/:eventId', async (req, res, next) => {
   try {
-    console.log('reqParmId', req.params.eventId)
     let event = await Event.findByPk(req.params.eventId)
     await event.update({
       isActive: false
@@ -67,7 +67,8 @@ router.get('/:organizationid', async (req, res, next) => {
   try {
     let orgEvents = await Event.findAll({
       where: {organizationId: req.params.organizationid},
-      include: [{model: Organization}]
+      include: [{model: Organization}],
+      order: [['id', 'ASC']]
     })
     res.json(orgEvents).status(200)
   } catch (error) {
@@ -82,7 +83,8 @@ router.get('/:organizationid', async (req, res, next) => {
 router.get('/volunteer/:volunteerId', async (req, res, next) => {
   try {
     let volunteer = await Volunteer.findByPk(req.params.volunteerId, {
-      include: [{model: Event, include: [{model: Organization}]}]
+      include: [{model: Event, include: [{model: Organization}]}],
+      order: [['id', 'ASC']]
     })
 
     res.json(volunteer)
@@ -97,7 +99,8 @@ router.get('/volunteer/:volunteerId', async (req, res, next) => {
 router.get('/event/:eventId', async (req, res, next) => {
   try {
     let volunteers = await Event.findByPk(req.params.eventId, {
-      include: [{model: Volunteer}]
+      include: [{model: Volunteer}],
+      order: [['id', 'ASC']]
     })
 
     res.json(volunteers)
@@ -144,10 +147,12 @@ router.post('/', async (req, res, next) => {
  */
 router.patch('/:eventId', async (req, res, next) => {
   try {
+    let volunteer = await Volunteer.findByPk(req.body.volunteerId)
     let event = await Event.findByPk(req.params.eventId)
     await event.increment('volunteerCount', {by: 1})
+    await volunteer.addEvent(event)
     let allEvents = await Event.findAll({
-      include: [{model: Organization}],
+      include: [{model: Organization}, {model: Volunteer}],
       order: [['id', 'ASC']]
     })
     res.json(allEvents)

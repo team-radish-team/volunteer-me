@@ -57,40 +57,43 @@ const VolunteerProfile = props => {
               </CardItem>
             </CardItem>
           </Card>
-          <Tabs>
-            <Tab heading="Upcoming Events">
-              <Content>
-                {events.map(event => {
-                  if (event.isActive) {
-                    return (
-                      <EventCard
-                        key={event.id}
-                        event={event}
-                        navigation={props.navigation}
-                      />
-                    )
-                  }
-                })}
-              </Content>
-            </Tab>
-            <Tab heading="Past Events">
-              <Content>
-                {events.map(event => {
-                  if (!event.isActive) {
-                    return (
-                      <EventCard
-                        key={event.id}
-                        event={event}
-                        navigation={props.navigation}
-                      />
-                    )
-                  }
-                })}
-              </Content>
-            </Tab>
-          </Tabs>
+          {volunteer.events ? (
+            <Tabs>
+              <Tab heading="Upcoming Events">
+                <Content>
+                  {volunteer.events.map(event => {
+                    if (event.isActive) {
+                      return (
+                        <EventCard
+                          key={event.id}
+                          event={event}
+                          navigation={props.navigation}
+                        />
+                      )
+                    }
+                  })}
+                </Content>
+              </Tab>
+              <Tab heading="Past Events">
+                <Content>
+                  {events.map(event => {
+                    if (!event.isActive) {
+                      return (
+                        <EventCard
+                          key={event.id}
+                          event={event}
+                          navigation={props.navigation}
+                        />
+                      )
+                    }
+                  })}
+                </Content>
+              </Tab>
+            </Tabs>
+          ) : (
+            <Text>No Events!</Text>
+          )}
         </Content>
-        <VolLogoutButton />
       </React.Fragment>
     )
   }

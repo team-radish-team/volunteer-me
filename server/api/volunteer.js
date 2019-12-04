@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Volunteer} = require('../../db/models')
+const {Volunteer, Event, Organization} = require('../../db/models')
 module.exports = router
 
 /**
@@ -32,7 +32,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:volunteerId', async (req, res, next) => {
   try {
-    let volunteer = await Volunteer.findByPk(Number(req.params.volunteerId))
+    let volunteer = await Volunteer.findByPk(Number(req.params.volunteerId), {
+      include: [{model: Event, include: [{model: Organization}]}]
+    })
     res.json(volunteer)
   } catch (err) {
     next(err)
