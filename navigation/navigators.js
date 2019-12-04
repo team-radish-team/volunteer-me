@@ -58,6 +58,7 @@ import OrgEditForm from '../components/OrgEditForm'
 //VolunteerProfileStack Screens
 import VolunteerProfile from '../components/VolunteerProfile'
 import VolEditForm from '../components/VolEditForm'
+import EventEditForm from '../components/EventEditForm'
 // stack for VolunteerEvents tab
 export const EventsStack = createStackNavigator(
   {
@@ -118,7 +119,8 @@ export const VolunteerTabs = createBottomTabNavigator(
 export const OrgEventsStack = createStackNavigator({
   OrgEventList: OrgEventList,
   OrgEventPage: OrgEventPage,
-  OrgProfile: OrgProfile
+  OrgProfile: OrgProfile,
+  EventEditForm: EventEditForm
 })
 
 export const OrganizationTabs = createBottomTabNavigator({

@@ -4,12 +4,14 @@ import allVolunteers from './allVolunteers'
 import allEvents from './allEvents'
 import singleVolunteer from './singleVolunteer'
 import singleOrganization from './singleOrganization'
+import singleEvent from './singleEvent'
 
 const reducer = combineReducers({
   allVolunteers,
   allEvents,
   singleVolunteer,
-  singleOrganization
+  singleOrganization,
+  singleEvent
 })
 
 const middleware = applyMiddleware(thunkMiddleware)

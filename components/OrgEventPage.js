@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {StyleSheet, Dimensions, View, Image} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {getEventsThunk} from '../store/allEvents'
+import {getEventThunk} from '../store/singleEvent'
 import {
   Container,
   Header,
@@ -16,11 +17,26 @@ import {
   Body,
   Right
 } from 'native-base'
+import {withNavigation} from 'react-navigation'
 
 import normalize from '../utilities/timeConverter'
 
 const OrgEventPage = props => {
   const event = props.navigation.state.params
+  const currentEvent = useSelector(state => state.singleEvent)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getEventThunk(currentEvent.id))
+  }, [currentEvent.id])
+
+  handleClick = () => {
+    props.navigation.navigate('EventEditForm', {
+      event: currentEvent,
+      orgEvent: event
+    })
+  }
+
   return (
     <React.Fragment>
       <Content>
@@ -56,7 +72,7 @@ const OrgEventPage = props => {
             <Text>{event.description}</Text>
           </CardItem>
           <CardItem>
-            <Button>
+            <Button onPress={() => handleClick()}>
               <Text>Edit This Event</Text>
             </Button>
           </CardItem>
@@ -72,4 +88,4 @@ OrgEventPage.navigationOptions = ({navigation}) => {
   }
 }
 
-export default OrgEventPage
+export default withNavigation(OrgEventPage)

@@ -77,6 +77,18 @@ router.get('/:organizationid', async (req, res, next) => {
   }
 })
 
+// GET one event
+router.get('/:eventId', async (req, res, next) => {
+  try {
+    let event = await Event.findByPk(Number(req.params.eventId), {
+      include: [{model: Organization}]
+    })
+    res.json(event)
+  } catch (err) {
+    next(err)
+  }
+})
+
 /**
  *  GET all events associated with volunteer (api/events/:volunteerId)
  */
@@ -147,8 +159,10 @@ router.post('/', async (req, res, next) => {
  */
 router.patch('/:eventId', async (req, res, next) => {
   try {
+    let event = await Event.findByPk(Number(req.params.eventId))
+
     let volunteer = await Volunteer.findByPk(req.body.volunteerId)
-    let event = await Event.findByPk(req.params.eventId)
+
     await event.increment('volunteerCount', {by: 1})
     await volunteer.addEvent(event)
     let allEvents = await Event.findAll({
@@ -158,6 +172,34 @@ router.patch('/:eventId', async (req, res, next) => {
     res.json(allEvents)
   } catch (error) {
     console.error(error)
+    next(error)
+  }
+})
+
+// Edit Event Form
+
+router.patch('/:eventId', async (req, res, next) => {
+  try {
+    const date = moment(req.body.dateOfEvent)
+      .format('YYYY MM DD')
+      .split(' ')
+      .join('-')
+    const startTime = req.body.eventStart.toString().slice(11, 19)
+    const endTime = req.body.eventEnd.toString().slice(11, 19)
+    await Event.update(
+      {
+        title: req.body.eventName,
+        description: req.body.description,
+        volunteersTargetNum: req.body.volunteersNeeded,
+        address: req.body.address,
+        startTime: `${date} ${startTime}`,
+        endTime: `${date} ${endTime}`
+      },
+      {where: {id: Number(req.params.eventId)}}
+    )
+    const updatedEvent = await Event.findByPk(Number(req.params.eventId))
+    res.status(200).json(updatedEvent)
+  } catch (error) {
     next(error)
   }
 })
