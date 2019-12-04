@@ -1,24 +1,8 @@
-import React, {useEffect} from 'react'
-import {StyleSheet, Dimensions, View, Image} from 'react-native'
-import {useDispatch, useSelector} from 'react-redux'
-import {getEventsThunk} from '../store/allEvents'
+import React from 'react'
 import t from 'tcomb-form-native'
 import {connect} from 'react-redux'
 import {auth} from '../store/singleOrganization'
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from 'native-base'
+import {Container, Text, Button} from 'native-base'
 
 let Form = t.form.Form
 
@@ -75,13 +59,14 @@ class OrgLogin extends React.Component {
             onChange={this.onChange}
             options={options}
           />
-          <Button info onPress={() => this.handleSubmit()}>
+          <Button style={buttonStyle} info onPress={() => this.handleSubmit()}>
             <Text>Login</Text>
           </Button>
           <Text style={{paddingTop: 30, paddingBottom: 10}}>
             Don't have an account?
           </Text>
           <Button
+            style={buttonStyle}
             info
             onPress={() => this.props.navigation.navigate('OrgSignup')}
           >
@@ -100,3 +85,5 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(null, mapDispatch)(OrgLogin)
+
+const buttonStyle = {backgroundColor: '#F5B39D'}

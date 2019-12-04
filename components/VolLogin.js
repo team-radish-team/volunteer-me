@@ -73,7 +73,7 @@ class VolLogin extends React.Component {
             onChange={this.onChange}
             options={options}
           />
-          <Button info onPress={() => this.handleSubmit()}>
+          <Button style={buttonStyle} info onPress={() => this.handleSubmit()}>
             <Text>Login</Text>
           </Button>
           <Text
@@ -85,6 +85,7 @@ class VolLogin extends React.Component {
             Don't have an account?
           </Text>
           <Button
+            style={buttonStyle}
             info
             onPress={() => this.props.navigation.navigate('VolSignup')}
           >
@@ -101,3 +102,5 @@ const mapDispatch = dispatch => {
   }
 }
 export default connect(null, mapDispatch)(VolLogin)
+
+const buttonStyle = {backgroundColor: '#F16286'}

@@ -130,7 +130,11 @@ const VolSignup = props => {
           </Item>
         </Form>
 
-        <Button block onPress={event => handleSubmit(event)}>
+        <Button
+          style={buttonStyle}
+          block
+          onPress={event => handleSubmit(event)}
+        >
           <Text>Submit</Text>
         </Button>
       </Content>
@@ -140,3 +144,5 @@ const VolSignup = props => {
 }
 
 export default VolSignup
+
+const buttonStyle = {backgroundColor: '#F16286'}

@@ -171,7 +171,11 @@ const OrgSignup = props => {
           </Item>
         </Form>
 
-        <Button block onPress={event => handleSubmit(event)}>
+        <Button
+          style={buttonStyle}
+          block
+          onPress={event => handleSubmit(event)}
+        >
           <Text>Submit</Text>
         </Button>
       </Content>
@@ -181,3 +185,5 @@ const OrgSignup = props => {
 }
 
 export default OrgSignup
+
+const buttonStyle = {backgroundColor: '#F5B39D'}

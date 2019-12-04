@@ -1,21 +1,6 @@
-import React, {useEffect} from 'react'
-import {StyleSheet, Dimensions, View, Image} from 'react-native'
-import {useDispatch, useSelector} from 'react-redux'
-import {getEventsThunk} from '../store/allEvents'
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from 'native-base'
+import React from 'react'
+
+import {Container, Content, Text, Button} from 'native-base'
 
 const UserSelect = props => {
   return (
@@ -32,13 +17,14 @@ const UserSelect = props => {
             block
             info
             onPress={() => props.navigation.navigate('VolLogin')}
+            style={{backgroundColor: '#F16286'}}
           >
             <Text>Volunteer</Text>
           </Button>
           <Button
             block
             warning
-            style={{marginTop: 30}}
+            style={{marginTop: 30, backgroundColor: '#F5B39D'}}
             onPress={() => props.navigation.navigate('OrgLogin')}
           >
             <Text>Organization</Text>

@@ -65,12 +65,14 @@ const IconPage = props => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#FF8E72',
+            backgroundColor: '#F16286',
             paddingTop: 20,
             paddingBottom: 20
           }}
         >
-          <Text style={{fontSize: 15}}>Select Your Top Three Interests</Text>
+          <Text style={{fontSize: 15, color: 'white', fontWeight: 'bold'}}>
+            Select Your Top Three Interests
+          </Text>
         </Card>
 
         <Card>
@@ -191,7 +193,7 @@ const IconPage = props => {
         </Card>
         <Button
           block
-          style={{marginTop: 10, marginBottom: 10}}
+          style={{marginTop: 10, marginBottom: 10, backgroundColor: '#F16286'}}
           onPress={event => handleSubmit(event)}
         >
           <Text>Submit</Text>
@@ -202,7 +204,7 @@ const IconPage = props => {
 }
 
 const activeStyle = {
-  backgroundColor: '#FF8E72',
+  backgroundColor: '#F5B39D',
   paddingTop: 5,
   paddingBottom: 5,
   width: 375,
