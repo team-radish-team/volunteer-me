@@ -32,7 +32,7 @@ export const organization = () => {
       const res = await axios.get(`${ngrokSecret}/auth/organization`)
       dispatch(getOrganization(res.data || defaultOrganization))
     } catch (err) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
@@ -91,6 +91,7 @@ export const createOrganizationThunk = organization => async dispatch => {
       organization
     )
     dispatch(createOrganization(data))
+    return data
   } catch (err) {
     console.error(err)
   }
@@ -101,7 +102,7 @@ export const updateOrganizationThunk = (
   organizationId
 ) => async dispatch => {
   try {
-    const {data} = await axios.put(
+    const {data} = await axios.patch(
       `${ngrokSecret}/api/organizations/${organizationId}`,
       organization
     )

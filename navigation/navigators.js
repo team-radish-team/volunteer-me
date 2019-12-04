@@ -16,6 +16,7 @@ import EventPage from '../components/EventPage'
 import EventCard from '../components/EventCard'
 import VolSignup from '../components/VolSignup'
 import OrgSignup from '../components/OrgSignup'
+import IconPage from '../components/IconPage'
 
 // MapStack screens
 import ReactMap from '../components/ReactMap'
@@ -30,7 +31,10 @@ export const LoginStack = createStackNavigator(
   {
     UserSelect: UserSelect,
     VolLogin: VolLogin,
-    OrgLogin: OrgLogin
+    OrgLogin: OrgLogin,
+    OrgSignup: OrgSignup,
+    VolSignup: VolSignup,
+    IconPage: IconPage
   },
   {
     initialRouteName: 'UserSelect'
@@ -54,6 +58,7 @@ import OrgEditForm from '../components/OrgEditForm'
 //VolunteerProfileStack Screens
 import VolunteerProfile from '../components/VolunteerProfile'
 import VolEditForm from '../components/VolEditForm'
+import EventEditForm from '../components/EventEditForm'
 // stack for VolunteerEvents tab
 export const EventsStack = createStackNavigator(
   {
@@ -100,26 +105,6 @@ export const VolunteerProfileStack = createStackNavigator(
   }
 )
 
-//stack for volunteer sign up page
-export const VolSignupStack = createStackNavigator(
-  {
-    VolSignupPage: VolSignup
-  },
-  {
-    initialRouteName: 'VolSignupPage'
-  }
-)
-
-//stack for organization sign up page
-export const OrgSignupStack = createStackNavigator(
-  {
-    OrgSignupPage: OrgSignup
-  },
-  {
-    initialRouteName: 'OrgSignupPage'
-  }
-)
-
 export const VolunteerTabs = createBottomTabNavigator(
   {
     Events: EventsStack,
@@ -134,7 +119,8 @@ export const VolunteerTabs = createBottomTabNavigator(
 export const OrgEventsStack = createStackNavigator({
   OrgEventList: OrgEventList,
   OrgEventPage: OrgEventPage,
-  OrgProfile: OrgProfile
+  OrgProfile: OrgProfile,
+  EventEditForm: EventEditForm
 })
 
 export const OrganizationTabs = createBottomTabNavigator({
@@ -146,7 +132,5 @@ export const OrganizationTabs = createBottomTabNavigator({
 export const EntireApp = createSwitchNavigator({
   Login: LoginStack,
   Organization: OrganizationTabs,
-  Volunteer: VolunteerTabs,
-  VolSignup: VolSignupStack,
-  OrgSignup: OrgSignupStack
+  Volunteer: VolunteerTabs
 })

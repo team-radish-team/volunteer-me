@@ -14,11 +14,12 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     let allEvents = await Event.findAll({
-      include: [{model: Organization}]
+      include: [{model: Organization}, {model: Volunteer}],
+      order: [['id', 'ASC']]
     })
     res.json(allEvents).status(200)
   } catch (error) {
-    console.log('error')
+    console.error('error')
     next(error)
   }
 })
@@ -49,7 +50,6 @@ router.get('/neo4j/:volunteerId/:eventId', async (req, res, next) => {
 
 router.put('/time/:eventId', async (req, res, next) => {
   try {
-    console.log('reqParmId', req.params.eventId)
     let event = await Event.findByPk(req.params.eventId)
     await event.update({
       isActive: false
@@ -67,25 +67,55 @@ router.get('/:organizationid', async (req, res, next) => {
   try {
     let orgEvents = await Event.findAll({
       where: {organizationId: req.params.organizationid},
-      include: [{model: Organization}]
+      include: [{model: Organization}],
+      order: [['id', 'ASC']]
     })
     res.json(orgEvents).status(200)
   } catch (error) {
-    console.log(error)
+    console.error(error)
+    next(error)
+  }
+})
+
+// GET one event
+router.get('/:eventId', async (req, res, next) => {
+  try {
+    let event = await Event.findByPk(Number(req.params.eventId), {
+      include: [{model: Organization}]
+    })
+    res.json(event)
+  } catch (err) {
+    next(err)
+  }
+})
+
+/**
+ *  GET all events associated with volunteer (api/events/:volunteerId)
+ */
+router.get('/volunteer/:volunteerId', async (req, res, next) => {
+  try {
+    let volunteer = await Volunteer.findByPk(req.params.volunteerId, {
+      include: [{model: Event, include: [{model: Organization}]}],
+      order: [['id', 'ASC']]
+    })
+
+    res.json(volunteer)
+  } catch (error) {
     next(error)
   }
 })
 
 /**
- *  GET all volunteer events (api/events/:volunteerId)
+ *  GET all volunteers associated with event (api/events/event/:eventId)
  */
-router.get('/volunteer/:volunteerId', async (req, res, next) => {
+router.get('/event/:eventId', async (req, res, next) => {
   try {
-    let volunteer = await Volunteer.findByPk(req.params.volunteerId, {
-      include: [{model: Event, include: [{model: Organization}]}]
+    let volunteers = await Event.findByPk(req.params.eventId, {
+      include: [{model: Volunteer}],
+      order: [['id', 'ASC']]
     })
 
-    res.json(volunteer)
+    res.json(volunteers)
   } catch (error) {
     next(error)
   }
@@ -129,15 +159,47 @@ router.post('/', async (req, res, next) => {
  */
 router.patch('/:eventId', async (req, res, next) => {
   try {
-    let event = await Event.findByPk(req.params.eventId)
+    let event = await Event.findByPk(Number(req.params.eventId))
+
+    let volunteer = await Volunteer.findByPk(req.body.volunteerId)
+
     await event.increment('volunteerCount', {by: 1})
+    await volunteer.addEvent(event)
     let allEvents = await Event.findAll({
-      include: [{model: Organization}],
+      include: [{model: Organization}, {model: Volunteer}],
       order: [['id', 'ASC']]
     })
     res.json(allEvents)
   } catch (error) {
-    console.log(error)
+    console.error(error)
+    next(error)
+  }
+})
+
+// Edit Event Form
+
+router.patch('/:eventId', async (req, res, next) => {
+  try {
+    const date = moment(req.body.dateOfEvent)
+      .format('YYYY MM DD')
+      .split(' ')
+      .join('-')
+    const startTime = req.body.eventStart.toString().slice(11, 19)
+    const endTime = req.body.eventEnd.toString().slice(11, 19)
+    await Event.update(
+      {
+        title: req.body.eventName,
+        description: req.body.description,
+        volunteersTargetNum: req.body.volunteersNeeded,
+        address: req.body.address,
+        startTime: `${date} ${startTime}`,
+        endTime: `${date} ${endTime}`
+      },
+      {where: {id: Number(req.params.eventId)}}
+    )
+    const updatedEvent = await Event.findByPk(Number(req.params.eventId))
+    res.status(200).json(updatedEvent)
+  } catch (error) {
     next(error)
   }
 })

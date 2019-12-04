@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {StyleSheet, Dimensions, View} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
-import {getEventsThunk, getNeo4jEventsThunk} from '../store/allEvents'
+import {
+  getEventsThunk,
+  getNeo4jEventsThunk,
+  getVolunteerEventsThunk
+} from '../store/allEvents'
 import ModalDropdown from 'react-native-modal-dropdown'
 import {
   Container,
@@ -19,6 +23,7 @@ import {
 } from 'native-base'
 import EventCard from './EventCard'
 import VolLogoutButton from './VolLogoutButton'
+import {getVolunteerThunk} from '../store/singleVolunteer'
 
 const EventList = props => {
   const handleHeaderChange = value => {
@@ -33,12 +38,19 @@ const EventList = props => {
   const neoEvents = useSelector(state => state.allEvents.neoEvents)
   const volunteer = useSelector(state => state.singleVolunteer)
   const volEvents = useSelector(state => state.allEvents.volunteerEvents)
-  console.log(volEvents)
+  //console.log(volunteer)
+  //console.log('volEvents: ', volEvents)
+  const evId = events[0].id
   useEffect(() => {
     dispatch(getEventsThunk())
-    dispatch(getNeo4jEventsThunk(volunteer.id, volEvents[0]))
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
   }, [])
+  useEffect(() => {
+    dispatch(getVolunteerEventsThunk(volunteer.id))
+  }, [volunteer.id])
+  useEffect(() => {
+    dispatch(getNeo4jEventsThunk(volunteer.id, evId))
+  }, [volunteer.id, volEvents[0]])
   const [filter, setFilter] = useState('All')
 
   return (
@@ -79,7 +91,7 @@ const EventList = props => {
             if (Number(event.organization.categoryId) === Number(filter)) {
               if (
                 event.isActive &&
-                event.volunteerCount < event.volunteerTargetNum
+                event.volunteers.length < event.volunteerTargetNum
               ) {
                 return (
                   <EventCard

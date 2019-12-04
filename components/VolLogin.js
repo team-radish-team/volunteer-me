@@ -1,7 +1,4 @@
-import React, {useEffect} from 'react'
-import {StyleSheet, Dimensions, View, Image} from 'react-native'
-import {useDispatch, useSelector} from 'react-redux'
-import {getEventsThunk} from '../store/allEvents'
+import React from 'react'
 import t from 'tcomb-form-native'
 import {connect} from 'react-redux'
 import {auth} from '../store/singleVolunteer'
@@ -48,8 +45,10 @@ class VolLogin extends React.Component {
   handleSubmit = () => {
     const values = this.refs.form.getValue()
     if (values) {
-      const email = values.email
+      const email = values.email.toLowerCase()
+
       const password = values.password
+
       const type = this.state.type
       this.props.auth(email, password, type)
       this.props.navigation.navigate('Volunteer')
@@ -74,14 +73,18 @@ class VolLogin extends React.Component {
             onChange={this.onChange}
             options={options}
           />
-          <Button rounded info onPress={() => this.handleSubmit()}>
+          <Button info onPress={() => this.handleSubmit()}>
             <Text>Login</Text>
           </Button>
-          <Text style={{paddingTop: 30, paddingBottom: 10}}>
+          <Text
+            style={{
+              paddingTop: 30,
+              paddingBottom: 10
+            }}
+          >
             Don't have an account?
           </Text>
           <Button
-            rounded
             info
             onPress={() => this.props.navigation.navigate('VolSignup')}
           >
@@ -92,11 +95,9 @@ class VolLogin extends React.Component {
     )
   }
 }
-
 const mapDispatch = dispatch => {
   return {
     auth: (email, password, type) => dispatch(auth(email, password, type))
   }
 }
-
 export default connect(null, mapDispatch)(VolLogin)
