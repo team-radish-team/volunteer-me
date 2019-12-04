@@ -54,12 +54,14 @@ import OrgEditForm from '../components/OrgEditForm'
 //VolunteerProfileStack Screens
 import VolunteerProfile from '../components/VolunteerProfile'
 import VolEditForm from '../components/VolEditForm'
+import EventEditForm from '../components/EventEditForm'
 // stack for VolunteerEvents tab
 export const EventsStack = createStackNavigator(
   {
     EventList: EventList,
     EventPage: EventPage,
-    EventCard: EventCard
+    EventCard: EventCard,
+    EventEditForm: EventEditForm
   },
   {
     initialRouteName: 'EventList'
