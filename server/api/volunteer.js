@@ -66,9 +66,11 @@ router.post('/', async (req, res, next) => {
 router.put('/:volunteerId', async (req, res, next) => {
   try {
     let oldVol = await Volunteer.findByPk(req.params.volunteerId)
+
     let updated = await oldVol.update({
       interests: req.body.interests
     })
+
     res.json(updated)
   } catch (error) {
     next(error)

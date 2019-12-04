@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {createVolunteerThunk, getByEmailThunk} from '../store/singleVolunteer'
+import {createVolunteerThunk} from '../store/singleVolunteer'
 import {useDispatch} from 'react-redux'
 import {Text} from 'react-native'
 
@@ -25,7 +25,6 @@ function validate(form) {
     form.password.length < 1 ||
     form.confirmPassword.length < 1
   ) {
-    console.log(form)
     alert(`You're missing a required field`)
   } else if (!form.email.includes('@')) {
     alert('Please provide a valid email')
@@ -53,9 +52,6 @@ const VolSignup = props => {
     if (name === 'email') {
       let newText = event.nativeEvent.text.toLowerCase()
       setForm({...form, [name]: newText})
-    } else if (name === 'phone') {
-      console.log('phone')
-      setForm({...form, [name]: event.nativeEvent.text})
     } else {
       setForm({...form, [name]: event.nativeEvent.text})
     }

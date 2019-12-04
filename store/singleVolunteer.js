@@ -30,7 +30,7 @@ export const volunteer = () => {
       const res = await axios.get(`${ngrokSecret}/auth/volunteer/`)
       dispatch(getVolunteer(res.data || defaultVolunteer))
     } catch (err) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
@@ -66,12 +66,23 @@ export const createVolunteerThunk = volunteer => async dispatch => {
   }
 }
 
+export const updateVolunteerThunkPut = volunteer => async dispatch => {
+  try {
+    const {data} = await axios.put(
+      `${ngrokSecret}/api/volunteers/${volunteer.id}`,
+      volunteer
+    )
+    dispatch(updateVolunteer(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const updateVolunteerThunk = (
   volunteer,
   volunteerId
 ) => async dispatch => {
   try {
-
     const {data} = await axios.patch(
       `${ngrokSecret}/api/volunteers/${volunteerId}`,
 
@@ -97,20 +108,12 @@ export const logout = () => {
 export const getVolunteerThunk = volunteerId => {
   return async dispatch => {
     try {
-<<<<<<< HEAD
-      const {data} = await axios.get(
-        `${ngrokSecret}/api/volunteers/${volunteerId}`
-      )
-      dispatch(getVolunteer(data))
-      return data
-=======
       if (volunteerId) {
         const {data} = await axios.get(
           `${ngrokSecret}/api/volunteers/${volunteerId}`
         )
         dispatch(getVolunteer(data))
       }
->>>>>>> bbbe97f1e20c8f1c40f9de2e19d84627971acfc1
     } catch (error) {
       console.error('Error getting volunteer', error)
     }
@@ -119,7 +122,7 @@ export const getVolunteerThunk = volunteerId => {
 
 //reducer
 
-const initialState = {signedUpVol: {}, emailExists: {}}
+const initialState = {signedUpVol: {}}
 
 export default function(state = initialState, action) {
   switch (action.type) {

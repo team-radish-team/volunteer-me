@@ -32,7 +32,7 @@ export const organization = () => {
       const res = await axios.get(`${ngrokSecret}/auth/organization`)
       dispatch(getOrganization(res.data || defaultOrganization))
     } catch (err) {
-      console.log(error)
+      console.error(error)
     }
   }
 }

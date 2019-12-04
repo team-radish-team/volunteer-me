@@ -89,7 +89,7 @@ export const addEventThunk = (
     data.organizationId = organizationId
     dispatch(addEvent(data))
   } catch (error) {
-    console.log('Error adding event', error)
+    console.error(error)
   }
 }
 
