@@ -9,14 +9,14 @@ import {
   Title,
   Tabs,
   Tab,
-  Button
+  Button,
+  Header
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getVolunteerThunk} from '../store/singleVolunteer'
 import {getVolunteerEventsThunk} from '../store/allEvents'
 import VolLogoutButton from './VolLogoutButton'
 import EventCard from './EventCard'
-import {ScrollView} from 'react-native-gesture-handler'
 import {withNavigation} from 'react-navigation'
 
 const VolunteerProfile = props => {
@@ -57,7 +57,6 @@ const VolunteerProfile = props => {
               </CardItem>
             </CardItem>
           </Card>
-          {/* <VolLogoutButton /> */}
           <Tabs>
             <Tab heading="Upcoming Events">
               <Content>
