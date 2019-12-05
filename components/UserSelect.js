@@ -13,6 +13,12 @@ const UserSelect = props => {
           style={styles.backgroundImage}
         >
           <Content>
+            <Card transparent style={styles.card}>
+              <Text style={styles.title}>CareRing</Text>
+              <Text style={styles.text}>
+                Connecting volunteers with nonprofits
+              </Text>
+            </Card>
             <Button
               block
               info
@@ -63,16 +69,24 @@ UserSelect.navgiationOptions = {
 const styles = StyleSheet.create({
   bottomButton: {
     marginTop: 40,
-    marginBottom: 30,
     backgroundColor: '#F5B39D'
   },
-  topButton: {backgroundColor: '#F16286', marginTop: 360},
+  topButton: {backgroundColor: '#F16286', marginTop: 270},
   backgroundImage: {width: width, height: height},
-
   container: {
-    display: 'flex'
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'row'
   },
-  backgroundImage: {width: width, height: height}
+  backgroundImage: {width: width, height: height},
+  title: {
+    fontWeight: 'bold',
+    fontSize: 50,
+    color: 'white',
+    marginTop: 50
+  },
+  text: {color: 'white'},
+  card: {display: 'flex', flexDirection: 'column', alignItems: 'center'}
 })
 
 export default UserSelect

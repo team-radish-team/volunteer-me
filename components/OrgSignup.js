@@ -60,7 +60,6 @@ const OrgSignup = props => {
     validate(form)
     if (validated === true) {
       existsVar = await dispatch(createOrganizationThunk(form))
-
       if (existsVar === 'exists') {
         alert('Please use a different email.')
       } else {

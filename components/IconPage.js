@@ -41,7 +41,8 @@ const IconPage = props => {
 
   handleSubmit = function(event) {
     event.preventDefault()
-    const volUpdate = {interests: ['animals', 'youth', 'art'], id: thisVol.id}
+    console.log(selected)
+    const volUpdate = {interests: selected, id: thisVol.id}
     dispatch(updateVolunteerThunkPut(volUpdate))
     Alert.alert(
       'Done',
