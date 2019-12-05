@@ -159,6 +159,7 @@ router.post('/', async (req, res, next) => {
  */
 router.patch('/:eventId', async (req, res, next) => {
   try {
+    console.log(req.body)
     let event = await Event.findByPk(Number(req.params.eventId))
 
     let volunteer = await Volunteer.findByPk(req.body.volunteerId)

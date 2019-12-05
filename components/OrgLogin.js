@@ -34,7 +34,9 @@ class OrgLogin extends React.Component {
     const values = this.refs.form.getValue()
     if (values) {
       const password = values.password
+
       const email = values.YourEmail.toLowerCase()
+
       const type = this.state.type
       this.props.auth(email, password, type)
 
