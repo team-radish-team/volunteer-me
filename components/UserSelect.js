@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5B39D'
   },
   topButton: {backgroundColor: '#F16286', marginTop: 360},
+  backgroundImage: {width: width, height: height},
+
   container: {
     display: 'flex'
   },
