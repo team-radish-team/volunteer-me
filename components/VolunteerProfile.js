@@ -33,6 +33,8 @@ const VolunteerProfile = props => {
   handleClick = () => {
     props.navigation.navigate('VolEditForm')
   }
+
+  //create a new component that loads volunteer's events in order to useEffect at correct time
   if (!volunteer) {
     return <React.Fragment></React.Fragment>
   } else {
@@ -62,10 +64,6 @@ const VolunteerProfile = props => {
                         <Text style={{fontFamily: 'Roboto'}}>
                           Phone Number: {volunteer.phone}
                         </Text>
-                        <Text style={{fontFamily: 'Roboto'}}>Interests:</Text>
-                        {volunteer.interests.map(interest => {
-                          return <Text key={interest}>{interest} </Text>
-                        })}
                       </Body>
                     </CardItem>
                   </CardItem>
