@@ -90,10 +90,8 @@ class VolEditForm extends React.Component {
             options={options}
             style={{fontFamily: 'Roboto'}}
           />
-<<<<<<< HEAD
           <Button rounded info onPress={() => this.handleSubmit()}>
             <Text style={{fontFamily: 'Roboto'}}>Submit</Text>
-=======
           <Button
             rounded
             info
@@ -101,7 +99,6 @@ class VolEditForm extends React.Component {
             onPress={() => this.handleSubmit()}
           >
             <Text>Submit</Text>
->>>>>>> 054139c4d39ff1d9de62c7c8f0e1a8c083464a66
           </Button>
         </Container>
       </ScrollView>
