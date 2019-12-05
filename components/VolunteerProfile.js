@@ -107,7 +107,10 @@ VolunteerProfile.navigationOptions = ({navigation}) => {
   return {
     title: 'Profile',
     headerRight: (
-      <Button onPress={() => handleClick()}>
+      <Button
+        style={{backgroundColor: '#F5B39D'}}
+        onPress={() => handleClick()}
+      >
         <Text>Edit</Text>
       </Button>
     )
