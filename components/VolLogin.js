@@ -36,7 +36,7 @@ class VolLogin extends React.Component {
       const email = values.YourEmail.toLowerCase()
       const password = values.password
       const type = this.state.type
-
+      console.log(email)
       this.props.auth(email, password, type)
       this.props.navigation.navigate('Volunteer')
     }

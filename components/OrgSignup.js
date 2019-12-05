@@ -30,14 +30,6 @@ function validate(form) {
   }
 }
 
-function secureText(password) {
-  let visibleText = ''
-  for (let i = 0; i < password.length; i++) {
-    visibleText += '*'
-  }
-  return visibleText
-}
-
 const OrgSignup = props => {
   const dispatch = useDispatch()
   const initialState = {
@@ -150,7 +142,8 @@ const OrgSignup = props => {
             <Icon active name="lock" type="Entypo" />
             <Input
               placeholder="Password"
-              value={secureText(form.password)}
+              value={form.password}
+              secureTextEntry={true}
               onChange={event => handleChange(event, 'password')}
             />
           </Item>
@@ -158,7 +151,8 @@ const OrgSignup = props => {
             <Icon active name="lock" type="Entypo" />
             <Input
               placeholder="Confirm Password"
-              value={secureText(form.confirmPassword)}
+              secureTextEntry={true}
+              value={form.confirmPassword}
               onChange={event => handleChange(event, 'confirmPassword')}
             />
           </Item>
