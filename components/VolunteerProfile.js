@@ -47,8 +47,12 @@ const VolunteerProfile = props => {
                     {volunteer.firstName} {volunteer.lastName}
                   </Title>
                 </Header>
-                <Card style={{flex: 2, flexDirection: 'row'}}>
-                  <Thumbnail large source={{uri: volunteer.profilePic}} />
+                <Card style={{flex: 2, flexDirection: 'row', height: 100}}>
+                  <Thumbnail
+                    large
+                    source={{uri: volunteer.profilePic}}
+                    style={{marginTop: 10, marginLeft: 5}}
+                  />
                   <CardItem>
                     <CardItem>
                       <Body>
