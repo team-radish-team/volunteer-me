@@ -91,11 +91,11 @@ const EventList = props => {
               />
             </Container>
           ) : (
-            neoEvents.map(neoEvent => {
+            neoEvents.map((neoEvent, index) => {
               let neoId = neoEvent.low
               return (
                 <EventCard
-                  key={neoId}
+                  key={index}
                   event={events[neoId - 1]}
                   navigation={props.navigation}
                 />
