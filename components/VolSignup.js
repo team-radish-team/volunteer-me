@@ -51,7 +51,6 @@ const VolSignup = props => {
   const handleSubmit = async event => {
     event.preventDefault()
     validate(form)
-    console.log(form)
     if (validated === true) {
       existsVar = await dispatch(createVolunteerThunk(form))
       if (existsVar === 'exists') {

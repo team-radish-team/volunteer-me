@@ -1,6 +1,6 @@
 import React from 'react'
 import {ImageBackground, StyleSheet, Dimensions} from 'react-native'
-import {Container, Content, Text, Button} from 'native-base'
+import {Container, Content, Text, Button, Card} from 'native-base'
 
 const {height, width} = Dimensions.get('window')
 
@@ -13,6 +13,9 @@ const UserSelect = props => {
           style={styles.backgroundImage}
         >
           <Content>
+            <Card transparent>
+              <Text styles={styles.text}>CareRing</Text>
+            </Card>
             <Button
               block
               info
@@ -50,7 +53,8 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex'
   },
-  backgroundImage: {width: width, height: height}
+  backgroundImage: {width: width, height: height},
+  text: {fontWeight: 'bold', fontSize: 400, color: '#F16286'}
 })
 
 export default UserSelect

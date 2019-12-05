@@ -1,23 +1,9 @@
-import React, {useEffect} from 'react'
-import {StyleSheet, Dimensions, View, Image} from 'react-native'
-import {useDispatch, useSelector} from 'react-redux'
+import React from 'react'
+
 import t from 'tcomb-form-native'
-import {updateEventThunk, getEventThunk} from '../store/singleEvent'
+import {updateEventThunk} from '../store/singleEvent'
 import {connect} from 'react-redux'
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from 'native-base'
+import {Container, Text, Button} from 'native-base'
 
 let Form = t.form.Form
 
@@ -95,7 +81,6 @@ class EventEditForm extends React.Component {
     }
   }
   render() {
-    console.log('props', this.props)
     return (
       <React.Fragment>
         <Container
