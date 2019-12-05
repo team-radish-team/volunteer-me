@@ -1,6 +1,8 @@
 import React from 'react'
-import {ImageBackground, StyleSheet} from 'react-native'
+import {ImageBackground, StyleSheet, Dimensions} from 'react-native'
 import {Container, Content, Text, Button, Card} from 'native-base'
+
+const {height, width} = Dimensions.get('window')
 
 const UserSelect = props => {
   return (
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5B39D'
   },
   topButton: {backgroundColor: '#F16286', marginTop: 360},
-  backgroundImage: {width: 400, height: 625},
+  backgroundImage: {width: width, height: height},
   container: {
     display: 'flex'
   }
