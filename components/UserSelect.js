@@ -1,6 +1,6 @@
 import React from 'react'
 import {ImageBackground, StyleSheet, Dimensions} from 'react-native'
-import {Container, Content, Text, Button, Card} from 'native-base'
+import {Container, Content, Text, Button, Card, Title} from 'native-base'
 
 const {height, width} = Dimensions.get('window')
 
@@ -19,7 +19,17 @@ const UserSelect = props => {
               onPress={() => props.navigation.navigate('VolLogin')}
               style={styles.topButton}
             >
-              <Text>Volunteer</Text>
+              <Title>
+                <Text
+                  style={{
+                    color: 'white',
+                    textShadowColor: 'pink',
+                    textShadowRadius: 1
+                  }}
+                >
+                  Volunteer
+                </Text>
+              </Title>
             </Button>
             <Button
               block
@@ -27,7 +37,17 @@ const UserSelect = props => {
               style={styles.bottomButton}
               onPress={() => props.navigation.navigate('OrgLogin')}
             >
-              <Text>Organization</Text>
+              <Title>
+                <Text
+                  style={{
+                    color: 'white',
+                    textShadowColor: 'orange',
+                    textShadowRadius: 1
+                  }}
+                >
+                  Organization
+                </Text>
+              </Title>
             </Button>
           </Content>
         </ImageBackground>
