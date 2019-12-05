@@ -1,6 +1,6 @@
 import React from 'react'
 import {StyleSheet, Dimensions, View, Image} from 'react-native'
-import {Button, Text} from 'native-base'
+import {Button, Text, Title} from 'native-base'
 import {logout} from '../store/singleVolunteer'
 import {useDispatch} from 'react-redux'
 import {withNavigation} from 'react-navigation'
@@ -14,8 +14,11 @@ const VolLogoutButton = props => {
   }
 
   return (
-    <Button onPress={() => handleLogOut()}>
-      <Text>Sign Out</Text>
+    <Button
+      style={{backgroundColor: '#F5B39D', justifyContent: 'center'}}
+      onPress={() => handleLogOut()}
+    >
+      <Text style={{color: 'white'}}>Sign Out</Text>
     </Button>
   )
 }

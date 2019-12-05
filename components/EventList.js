@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {StyleSheet, Dimensions, View} from 'react-native'
+import {StyleSheet, Dimensions, View, Image} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {
   getEventsThunk,
@@ -19,7 +19,8 @@ import {
   Icon,
   Left,
   Body,
-  Right
+  Right,
+  Title
 } from 'native-base'
 import EventCard from './EventCard'
 import EventPage from './EventPage'
@@ -78,7 +79,17 @@ const EventList = props => {
           })
         ) : Number(filter) === 0 ? (
           !neoEvents.length ? (
-            <Text>Attend an event for recommendations!</Text>
+            <Container style={{justifyContent: 'center'}}>
+              <Title>
+                <Text>Attend an event for recommendations!</Text>
+              </Title>
+              <Image
+                style={{width: 300, height: 300, marginLeft: 50}}
+                source={{
+                  uri: 'http://clipart-library.com/image_gallery/345750.png'
+                }}
+              />
+            </Container>
           ) : (
             neoEvents.map(neoEvent => {
               let neoId = neoEvent.low

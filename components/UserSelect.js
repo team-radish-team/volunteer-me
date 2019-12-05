@@ -1,6 +1,6 @@
 import React from 'react'
 import {ImageBackground, StyleSheet, Dimensions} from 'react-native'
-import {Container, Content, Text, Button, Card} from 'native-base'
+import {Container, Content, Text, Button, Card, Title} from 'native-base'
 
 const {height, width} = Dimensions.get('window')
 
@@ -13,13 +13,29 @@ const UserSelect = props => {
           style={styles.backgroundImage}
         >
           <Content>
+            <Card transparent style={styles.card}>
+              <Text style={styles.title}>CareRing</Text>
+              <Text style={styles.text}>
+                Connecting volunteers with nonprofits
+              </Text>
+            </Card>
             <Button
               block
               info
               onPress={() => props.navigation.navigate('VolLogin')}
               style={styles.topButton}
             >
-              <Text>Volunteer</Text>
+              <Title>
+                <Text
+                  style={{
+                    color: 'white',
+                    textShadowColor: 'pink',
+                    textShadowRadius: 1
+                  }}
+                >
+                  Volunteer
+                </Text>
+              </Title>
             </Button>
             <Button
               block
@@ -27,7 +43,17 @@ const UserSelect = props => {
               style={styles.bottomButton}
               onPress={() => props.navigation.navigate('OrgLogin')}
             >
-              <Text>Organization</Text>
+              <Title>
+                <Text
+                  style={{
+                    color: 'white',
+                    textShadowColor: 'orange',
+                    textShadowRadius: 1
+                  }}
+                >
+                  Organization
+                </Text>
+              </Title>
             </Button>
           </Content>
         </ImageBackground>
@@ -43,16 +69,24 @@ UserSelect.navgiationOptions = {
 const styles = StyleSheet.create({
   bottomButton: {
     marginTop: 40,
-    marginBottom: 30,
     backgroundColor: '#F5B39D'
   },
-  topButton: {backgroundColor: '#F16286', marginTop: 360},
+  topButton: {backgroundColor: '#F16286', marginTop: 270},
   backgroundImage: {width: width, height: height},
-
   container: {
-    display: 'flex'
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'row'
   },
-  backgroundImage: {width: width, height: height}
+  backgroundImage: {width: width, height: height},
+  title: {
+    fontWeight: 'bold',
+    fontSize: 50,
+    color: 'white',
+    marginTop: 50
+  },
+  text: {color: 'white'},
+  card: {display: 'flex', flexDirection: 'column', alignItems: 'center'}
 })
 
 export default UserSelect

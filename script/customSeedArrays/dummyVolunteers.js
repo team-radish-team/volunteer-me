@@ -2,11 +2,11 @@ const faker = require('faker')
 
 const dummyVolunteers = [
   {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
+    firstName: 'Linda',
+    lastName: 'Smith',
     email: 'linda@linda.com',
-    phone: faker.phone.phoneNumber(),
-    interests: ['animals', 'youth'],
+    phone: '847-225-2235',
+    interests: ['animals', 'youth', 'hunger'],
     profilePic: faker.image.avatar(),
     password: '12345'
   },

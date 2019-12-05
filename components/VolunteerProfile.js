@@ -19,6 +19,7 @@ import {getVolunteerEventsThunk} from '../store/allEvents'
 import VolLogoutButton from './VolLogoutButton'
 import EventCard from './EventCard'
 import {withNavigation} from 'react-navigation'
+import InterestCard from './InterestCard'
 
 const VolunteerProfile = props => {
   const dispatch = useDispatch()
@@ -46,21 +47,35 @@ const VolunteerProfile = props => {
                     {volunteer.firstName} {volunteer.lastName}
                   </Title>
                 </Header>
-                <Card style={{flex: 2, flexDirection: 'row'}}>
-                  <Thumbnail large source={{uri: volunteer.profilePic}} />
+                <Card style={{flex: 2, flexDirection: 'row', height: 100}}>
+                  <Thumbnail
+                    large
+                    source={{uri: volunteer.profilePic}}
+                    style={{marginTop: 10, marginLeft: 5}}
+                  />
                   <CardItem>
                     <CardItem>
                       <Body>
                         <Text>Email: {volunteer.email}</Text>
                         <Text>Phone Number: {volunteer.phone}</Text>
-                        <Text>Interests:</Text>
-                        {volunteer.interests.map(interest => {
-                          return <Text key={interest}>{interest} </Text>
-                        })}
                       </Body>
                     </CardItem>
                   </CardItem>
                 </Card>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    fontSize: 20,
+                    marginTop: 15,
+                    marginBottom: 10
+                  }}
+                >
+                  Your Interests
+                </Text>
+                {volunteer.interests.map(interest => {
+                  return <InterestCard key={interest} interest={interest} />
+                })}
                 <VolLogoutButton />
               </Content>
             </Tab>
@@ -107,7 +122,10 @@ VolunteerProfile.navigationOptions = ({navigation}) => {
   return {
     title: 'Profile',
     headerRight: (
-      <Button onPress={() => handleClick()}>
+      <Button
+        style={{backgroundColor: '#F16286'}}
+        onPress={() => handleClick()}
+      >
         <Text>Edit</Text>
       </Button>
     )

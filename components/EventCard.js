@@ -12,7 +12,8 @@ import {
   Icon,
   Left,
   Body,
-  Right
+  Right,
+  Title
 } from 'native-base'
 
 const styles = StyleSheet.create({
@@ -29,7 +30,9 @@ const EventCard = props => {
         onPress={() => props.navigation.navigate('EventPage', props.event)}
       >
         <Left>
-          <Text>{props.event.title}</Text>
+          <Title>
+            <Text>{props.event.title}</Text>
+          </Title>
         </Left>
       </CardItem>
       <CardItem
