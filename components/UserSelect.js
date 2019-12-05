@@ -1,10 +1,17 @@
 import React from 'react'
 import {ImageBackground, StyleSheet, Dimensions} from 'react-native'
 import {Container, Content, Text, Button, Card} from 'native-base'
+import * as Font from 'expo-font'
 
 const {height, width} = Dimensions.get('window')
 
 const UserSelect = props => {
+  useEffect(() => {
+    Font.loadAsync({
+      'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+    })
+  }, [])
+
   return (
     <React.Fragment>
       <Container style={styles.container}>
