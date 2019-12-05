@@ -47,6 +47,7 @@ const Volunteer = db.define('volunteer', {
   },
   profilePic: {
     type: Sequelize.STRING,
+    defaultValue: `https://images-na.ssl-images-amazon.com/images/I/61s4T4fkRBL._SY355_.jpg`,
     validate: {
       isUrl: true
     }
