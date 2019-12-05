@@ -37,7 +37,11 @@ const OrgProfile = props => {
             <Title>{organization.name}</Title>
           </Header>
           <Card style={{flex: 2, flexDirection: 'row'}}>
-            <Thumbnail large source={{uri: organization.orgImage}} />
+            <Thumbnail
+              large
+              source={{uri: organization.orgImage}}
+              style={{marginTop: 20, marginLeft: 5}}
+            />
             <CardItem>
               <CardItem>
                 <Body>
