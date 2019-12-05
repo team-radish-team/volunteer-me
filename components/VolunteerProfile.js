@@ -61,6 +61,7 @@ const VolunteerProfile = props => {
                     </CardItem>
                   </CardItem>
                 </Card>
+                <VolLogoutButton />
               </Content>
             </Tab>
             <Tab heading="Upcoming Events">
