@@ -11,8 +11,7 @@ import {
   Tabs,
   Tab,
   Button,
-  Header,
-  View
+  Header
 } from 'native-base'
 import {useDispatch, useSelector} from 'react-redux'
 import {getVolunteerThunk} from '../store/singleVolunteer'
