@@ -33,6 +33,8 @@ const VolunteerProfile = props => {
   handleClick = () => {
     props.navigation.navigate('VolEditForm')
   }
+
+  //create a new component that loads volunteer's events in order to useEffect at correct time
   if (!volunteer) {
     return <React.Fragment></React.Fragment>
   } else {
