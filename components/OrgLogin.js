@@ -64,7 +64,7 @@ class OrgLogin extends React.Component {
             info
             onPress={() => this.handleSubmit()}
           >
-            <Text>Login</Text>
+            <Text style={styles.allText}>Login</Text>
           </Button>
           <Text style={styles.text}>Don't have an account?</Text>
           <Button
@@ -72,7 +72,7 @@ class OrgLogin extends React.Component {
             info
             onPress={() => this.props.navigation.navigate('OrgSignup')}
           >
-            <Text>Sign Up</Text>
+            <Text style={styles.allText}>Sign Up</Text>
           </Button>
         </Container>
       </React.Fragment>
@@ -100,8 +100,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center'
   },
-  text: {paddingTop: 30, paddingBottom: 10},
+  text: {paddingTop: 30, paddingBottom: 10, fontFamily: 'Roboto'},
   formStyle: {
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+    fontFamily: 'Roboto'
+  },
+  allText: {fontFamily: 'Roboto'}
 })

@@ -114,9 +114,10 @@ class OrgEditForm extends React.Component {
             value={this.state.value}
             onChange={this.onChange}
             options={options}
+            style={{fontFamily: 'Roboto'}}
           />
           <Button rounded info onPress={() => this.handleSubmit()}>
-            <Text>Submit</Text>
+            <Text style={{fontFamily: 'Roboto'}}>Submit</Text>
           </Button>
         </Container>
       </ScrollView>

@@ -119,7 +119,7 @@ const VolSignup = props => {
           block
           onPress={event => handleSubmit(event)}
         >
-          <Text>Submit</Text>
+          <Text style={styles.buttonText}>Submit</Text>
         </Button>
       </Content>
     </Container>
@@ -130,5 +130,7 @@ export default VolSignup
 
 const styles = StyleSheet.create({
   buttonStyle: {backgroundColor: '#F16286'},
-  form: {paddingTop: 0, paddingBottom: 40}
+  form: {paddingTop: 0, paddingBottom: 40},
+  allText: {fontFamily: 'Roboto'},
+  buttonText: {fontFamily: 'Roboto', fontWeight: 'bold'}
 })

@@ -98,7 +98,7 @@ class EventEditForm extends React.Component {
             options={options}
           />
           <Button rounded info onPress={() => this.handleSubmit()}>
-            <Text>Submit</Text>
+            <Text style={{fontFamily: 'Roboto'}}>Submit</Text>
           </Button>
         </Container>
       </React.Fragment>

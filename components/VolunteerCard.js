@@ -17,7 +17,8 @@ import {
 
 const styles = StyleSheet.create({
   name: {
-    fontSize: 30
+    fontSize: 30,
+    fontFamily: 'Roboto'
   }
 })
 

@@ -15,7 +15,7 @@ const OrgLogoutButton = props => {
 
   return (
     <Button onPress={() => handleLogOut()}>
-      <Text>Sign Out</Text>
+      <Text style={{fontFamily: 'Roboto'}}>Sign Out</Text>
     </Button>
   )
 }

@@ -1,17 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {ImageBackground, StyleSheet, Dimensions} from 'react-native'
 import {Container, Content, Text, Button, Card} from 'native-base'
-import * as Font from 'expo-font'
 
 const {height, width} = Dimensions.get('window')
 
 const UserSelect = props => {
-  useEffect(() => {
-    Font.loadAsync({
-      'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
-    })
-  }, [])
-
   return (
     <React.Fragment>
       <Container style={styles.container}>
@@ -22,7 +15,7 @@ const UserSelect = props => {
           <Content>
             <Card transparent style={styles.card}>
               <Text style={styles.title}>CareRing</Text>
-              <Text style={styles.text}>
+              <Text style={styles.subText}>
                 Connecting volunteers with nonprofits
               </Text>
             </Card>
@@ -32,7 +25,7 @@ const UserSelect = props => {
               onPress={() => props.navigation.navigate('VolLogin')}
               style={styles.topButton}
             >
-              <Text>Volunteer</Text>
+              <Text style={styles.allText}>Volunteer</Text>
             </Button>
             <Button
               block
@@ -40,7 +33,7 @@ const UserSelect = props => {
               style={styles.bottomButton}
               onPress={() => props.navigation.navigate('OrgLogin')}
             >
-              <Text>Organization</Text>
+              <Text style={styles.allText}>Organization</Text>
             </Button>
           </Content>
         </ImageBackground>
@@ -54,6 +47,9 @@ UserSelect.navgiationOptions = {
 }
 
 const styles = StyleSheet.create({
+  allText: {
+    fontFamily: 'Roboto'
+  },
   bottomButton: {
     marginTop: 40,
     backgroundColor: '#F5B39D'
@@ -70,9 +66,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 50,
     color: 'white',
-    marginTop: 50
+    marginTop: 50,
+    fontFamily: 'Roboto'
   },
-  text: {color: 'white'},
+  subText: {color: 'white', fontFamily: 'Roboto'},
   card: {display: 'flex', flexDirection: 'column', alignItems: 'center'}
 })
 

@@ -44,26 +44,28 @@ const EventPage = props => {
               />
             </CardItem>
             <CardItem>
-              <Text>{event.organization.name}</Text>
+              <Text style={{fontFamily: 'Roboto'}}>
+                {event.organization.name}
+              </Text>
             </CardItem>
             <CardItem>
-              <Text>
+              <Text style={{fontFamily: 'Roboto'}}>
                 Volunteers Needed: {volunteers.length}/
                 {event.volunteerTargetNum}
               </Text>
             </CardItem>
             <CardItem>
-              <Text>
+              <Text style={{fontFamily: 'Roboto'}}>
                 {event.startTime.slice(5, 10)} from{' '}
                 {normalize(event.startTime.slice(11, 16))} -{' '}
                 {normalize(event.endTime.slice(11, 16))}
               </Text>
             </CardItem>
             <CardItem>
-              <Text>{event.address}</Text>
+              <Text style={{fontFamily: 'Roboto'}}>{event.address}</Text>
             </CardItem>
             <CardItem>
-              <Text>{event.description}</Text>
+              <Text style={{fontFamily: 'Roboto'}}>{event.description}</Text>
             </CardItem>
             <CardItem>
               {volunteers.find(vol => vol.id === volunteer.id) ? (
@@ -76,7 +78,9 @@ const EventPage = props => {
                     marginBottom: 20
                   }}
                 >
-                  <Text>Have fun at this event!</Text>
+                  <Text style={{fontFamily: 'Roboto'}}>
+                    Have fun at this event!
+                  </Text>
                 </Button>
               ) : (
                 <Button
@@ -94,12 +98,19 @@ const EventPage = props => {
                   }}
                 >
                   <Icon name="people" />
-                  <Text>I'm Attending!</Text>
+                  <Text style={{fontFamily: 'Roboto'}}>I'm Attending!</Text>
                 </Button>
               )}
             </CardItem>
           </Card>
-          <Text style={{marginTop: 30, marginBottom: 20, textAlign: 'center'}}>
+          <Text
+            style={{
+              marginTop: 30,
+              marginBottom: 20,
+              textAlign: 'center',
+              fontFamily: 'Roboto'
+            }}
+          >
             Who's helping out?
           </Text>
           {volunteers.map(volunteer => {

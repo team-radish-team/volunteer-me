@@ -55,6 +55,7 @@ class VolLogin extends React.Component {
             value={this.state.value}
             onChange={this.onChange}
             options={options}
+            style={styles.form}
           />
           <Button
             style={styles.buttonColor}
@@ -69,7 +70,7 @@ class VolLogin extends React.Component {
             info
             onPress={() => this.props.navigation.navigate('VolSignup')}
           >
-            <Text>Sign Up</Text>
+            <Text style={styles.allText}>Sign Up</Text>
           </Button>
         </Container>
       </React.Fragment>
@@ -87,7 +88,8 @@ export default connect(null, mapDispatch)(VolLogin)
 const buttonStyle = {backgroundColor: '#F16286'}
 
 var styles = StyleSheet.create({
-  buttonText: {alignSelf: 'center'},
+  allText: {fontFamily: 'Roboto'},
+  buttonText: {alignSelf: 'center', fontFamily: 'Roboto'},
   buttonColor: {backgroundColor: '#F16286'},
   imageStyle: {
     width: 225,
@@ -102,6 +104,8 @@ var styles = StyleSheet.create({
   bottomText: {
     paddingTop: 30,
     paddingBottom: 10,
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+    fontFamily: 'Roboto'
+  },
+  form: {fontFamily: 'Roboto'}
 })

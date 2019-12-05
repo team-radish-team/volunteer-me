@@ -41,20 +41,28 @@ const OrgProfile = props => {
             <CardItem>
               <CardItem>
                 <Body>
-                  <Text>
+                  <Text style={{fontFamily: 'Roboto'}}>
                     Name: {organization.contactFirstName}{' '}
                     {organization.contactLastName}
                   </Text>
-                  <Text>Email: {organization.contactEmail}</Text>
-                  <Text>Phone Number: {organization.contactPhone}</Text>
-                  <Text>Website: {organization.webUrl}</Text>
+                  <Text style={{fontFamily: 'Roboto'}}>
+                    Email: {organization.contactEmail}
+                  </Text>
+                  <Text style={{fontFamily: 'Roboto'}}>
+                    Phone Number: {organization.contactPhone}
+                  </Text>
+                  <Text style={{fontFamily: 'Roboto'}}>
+                    Website: {organization.webUrl}
+                  </Text>
                 </Body>
               </CardItem>
             </CardItem>
           </Card>
           <Card>
             <CardItem header bordered style={{justifyContent: 'center'}}>
-              <Text>{organization.missionStatement}</Text>
+              <Text style={{fontFamily: 'Roboto'}}>
+                {organization.missionStatement}
+              </Text>
             </CardItem>
           </Card>
         </Content>

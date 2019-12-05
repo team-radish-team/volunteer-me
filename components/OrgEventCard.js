@@ -28,7 +28,7 @@ const OrgEventCard = props => {
         onPress={() => props.navigation.navigate('OrgEventPage', props.event)}
       >
         <Left>
-          <Text>{props.event.title}</Text>
+          <Text style={{fontFamily: 'Roboto'}}>{props.event.title}</Text>
         </Left>
       </CardItem>
       <CardItem
@@ -51,7 +51,7 @@ const OrgEventCard = props => {
             justifyContent: 'center'
           }}
         >
-          <Text>{props.event.address}</Text>
+          <Text style={{fontFamily: 'Roboto'}}>{props.event.address}</Text>
         </Body>
       </CardItem>
     </Card>
