@@ -24,6 +24,9 @@ const EventPage = props => {
   const volunteers = useSelector(state => state.allEvents.volunteers)
   const volunteer = useSelector(state => state.singleVolunteer)
 
+  const titleStyle = {fontWeight: 'bold', fontSize: 20, textAlign: 'center'}
+  const labelStyle = {fontWeight: 'bold', fontSize: 15}
+
   useEffect(() => {
     dispatch(getEventVolunteersThunk(event.id))
   }, [])
@@ -44,22 +47,30 @@ const EventPage = props => {
               />
             </CardItem>
             <CardItem>
+              <Text style={titleStyle}>{event.title}</Text>
+            </CardItem>
+            <CardItem>
+              <Text style={labelStyle}>Who's Hosting: </Text>
               <Text>{event.organization.name}</Text>
             </CardItem>
             <CardItem>
+              <Text style={labelStyle}>Volunteers Needed: </Text>
               <Text>
-                Volunteers Needed: {volunteers.length}/
-                {event.volunteerTargetNum}
+                {volunteers.length}/{event.volunteerTargetNum}
               </Text>
             </CardItem>
             <CardItem>
+              <Text style={labelStyle}>Date and Time: </Text>
+              <Text>{event.startTime.slice(5, 10)}</Text>
+            </CardItem>
+            <CardItem>
               <Text>
-                {event.startTime.slice(5, 10)} from{' '}
-                {normalize(event.startTime.slice(11, 16))} -{' '}
+                {normalize(event.startTime.slice(11, 16))} to<Text> </Text>
                 {normalize(event.endTime.slice(11, 16))}
               </Text>
             </CardItem>
             <CardItem>
+              <Text style={labelStyle}>Address: </Text>
               <Text>{event.address}</Text>
             </CardItem>
             <CardItem>
@@ -82,7 +93,7 @@ const EventPage = props => {
                 <Button
                   style={{
                     width: 175,
-                    marginLeft: 120,
+                    marginLeft: 100,
                     marginTop: 10,
                     marginBottom: 20
                   }}
@@ -99,7 +110,15 @@ const EventPage = props => {
               )}
             </CardItem>
           </Card>
-          <Text style={{marginTop: 30, marginBottom: 20, textAlign: 'center'}}>
+          <Text
+            style={{
+              marginTop: 30,
+              marginBottom: 20,
+              textAlign: 'center',
+              fontSize: 20,
+              fontWeight: 'bold'
+            }}
+          >
             Who's helping out?
           </Text>
           {volunteers.map(volunteer => {
