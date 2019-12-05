@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {ImageBackground, StyleSheet, Dimensions} from 'react-native'
 import {Container, Content, Text, Button, Card, Title} from 'native-base'
 
@@ -15,7 +15,7 @@ const UserSelect = props => {
           <Content>
             <Card transparent style={styles.card}>
               <Text style={styles.title}>CareRing</Text>
-              <Text style={styles.text}>
+              <Text style={styles.subText}>
                 Connecting volunteers with nonprofits
               </Text>
             </Card>
@@ -30,7 +30,8 @@ const UserSelect = props => {
                   style={{
                     color: 'white',
                     textShadowColor: 'pink',
-                    textShadowRadius: 1
+                    textShadowRadius: 1,
+                    fontFamily: 'Roboto'
                   }}
                 >
                   Volunteer
@@ -48,7 +49,8 @@ const UserSelect = props => {
                   style={{
                     color: 'white',
                     textShadowColor: 'orange',
-                    textShadowRadius: 1
+                    textShadowRadius: 1,
+                    fontFamily: 'Roboto'
                   }}
                 >
                   Organization
@@ -67,6 +69,9 @@ UserSelect.navgiationOptions = {
 }
 
 const styles = StyleSheet.create({
+  allText: {
+    fontFamily: 'Roboto'
+  },
   bottomButton: {
     marginTop: 40,
     backgroundColor: '#F5B39D'
@@ -83,9 +88,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 50,
     color: 'white',
-    marginTop: 50
+    marginTop: 50,
+    fontFamily: 'Roboto'
   },
-  text: {color: 'white'},
+  subText: {color: 'white', fontFamily: 'Roboto'},
   card: {display: 'flex', flexDirection: 'column', alignItems: 'center'}
 })
 

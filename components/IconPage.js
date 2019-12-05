@@ -41,7 +41,6 @@ const IconPage = props => {
 
   handleSubmit = function(event) {
     event.preventDefault()
-    console.log(selected)
     const volUpdate = {interests: selected, id: thisVol.id}
     dispatch(updateVolunteerThunkPut(volUpdate))
     Alert.alert(
@@ -214,7 +213,7 @@ const IconPage = props => {
           style={styles.buttonStyle}
           onPress={event => handleSubmit(event)}
         >
-          <Text>Submit</Text>
+          <Text style={styles.allText}>Submit</Text>
         </Button>
       </Content>
     </Container>
@@ -243,9 +242,15 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20
   },
-  cardText: {fontSize: 15, color: 'white', fontWeight: 'bold'},
+  cardText: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: 'bold',
+    fontFamily: 'Roboto'
+  },
   buttonStyle: {marginTop: 10, marginBottom: 10, backgroundColor: '#F16286'},
-  textStyle: {fontSize: 15}
+  textStyle: {fontSize: 15, fontFamily: 'Roboto'},
+  allText: {fontFamily: 'Roboto'}
 })
 
 export default IconPage

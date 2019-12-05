@@ -162,7 +162,7 @@ const OrgSignup = props => {
           block
           onPress={event => handleSubmit(event)}
         >
-          <Text>Submit</Text>
+          <Text style={styles.allText}>Submit</Text>
         </Button>
       </Content>
     </Container>
@@ -173,5 +173,6 @@ export default OrgSignup
 
 const styles = StyleSheet.create({
   buttonStyle: {backgroundColor: '#F5B39D', fontWeight: 'bold'},
-  form: {paddingBottom: 40}
+  form: {paddingBottom: 40, fontFamily: 'Roboto'},
+  allText: {fontFamily: 'Roboto'}
 })

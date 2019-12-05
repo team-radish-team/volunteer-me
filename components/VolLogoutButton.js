@@ -18,7 +18,7 @@ const VolLogoutButton = props => {
       style={{backgroundColor: '#F5B39D', justifyContent: 'center'}}
       onPress={() => handleLogOut()}
     >
-      <Text style={{color: 'white'}}>Sign Out</Text>
+      <Text style={{color: 'white', fontFamily: 'Roboto'}}>Sign Out</Text>
     </Button>
   )
 }

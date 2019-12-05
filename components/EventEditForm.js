@@ -103,7 +103,7 @@ class EventEditForm extends React.Component {
             style={{backgroundColor: '#F5B39D'}}
             onPress={() => this.handleSubmit()}
           >
-            <Text>Submit</Text>
+            <Text style={{fontFamily: 'Roboto'}}>Submit</Text>
           </Button>
         </Container>
       </React.Fragment>

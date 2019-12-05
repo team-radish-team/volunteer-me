@@ -101,13 +101,14 @@ class AddEvent extends React.Component {
             onChange={this.onChange}
             options={options}
           />
+
           <Button
             rounded
             info
             style={{backgroundColor: '#F5B39D'}}
             onPress={() => this.handleSubmit()}
           >
-            <Text>Add Event</Text>
+            <Text style={{fontFamily: 'Roboto'}}>Add Event</Text>
           </Button>
         </Container>
       </React.Fragment>

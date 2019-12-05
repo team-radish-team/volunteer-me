@@ -30,7 +30,7 @@ const OrgEventCard = props => {
       >
         <Left>
           <Title>
-            <Text>{props.event.title}</Text>
+            <Text style={{fontFamily: 'Roboto'}}>{props.event.title}</Text>
           </Title>
         </Left>
       </CardItem>
@@ -54,7 +54,7 @@ const OrgEventCard = props => {
             justifyContent: 'center'
           }}
         >
-          <Text>{props.event.address}</Text>
+          <Text style={{fontFamily: 'Roboto'}}>{props.event.address}</Text>
         </Body>
       </CardItem>
     </Card>
