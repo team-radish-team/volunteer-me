@@ -58,7 +58,17 @@ const VolunteerProfile = props => {
                     </CardItem>
                   </CardItem>
                 </Card>
-                <Text>Interests</Text>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    fontSize: 20,
+                    marginTop: 15,
+                    marginBottom: 10
+                  }}
+                >
+                  Your Interests
+                </Text>
                 {volunteer.interests.map(interest => {
                   return <InterestCard key={interest} interest={interest} />
                 })}
