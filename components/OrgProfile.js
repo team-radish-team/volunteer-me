@@ -69,7 +69,7 @@ OrgProfile.navigationOptions = ({navigation}) => {
     title: 'Profile',
     headerRight: (
       <Button
-        style={{backgroundColor: '#F5B39D'}}
+        style={{backgroundColor: '#F16286'}}
         onPress={() => handleClick()}
       >
         <Text>Edit</Text>
