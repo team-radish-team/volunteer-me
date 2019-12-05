@@ -53,13 +53,13 @@ const OrgEventPage = props => {
             <Text>{event.organization.name}</Text>
           </CardItem>
           <CardItem>
-            <Text>
+            <Text style={{fontFamily: 'Roboto'}}>
               Volunteers Needed: {event.volunteerCount}/
               {event.volunteerTargetNum}
             </Text>
           </CardItem>
           <CardItem>
-            <Text>
+            <Text style={{fontFamily: 'Roboto'}}>
               {event.startTime.slice(5, 10)} from{' '}
               {normalize(event.startTime.slice(11, 16))} -{' '}
               {normalize(event.endTime.slice(11, 16))}
@@ -72,6 +72,8 @@ const OrgEventPage = props => {
             <Text>{event.description}</Text>
           </CardItem>
           <CardItem>
+            <Button onPress={() => handleClick()}>
+              <Text style={{fontFamily: 'Roboto'}}>Edit This Event</Text>
             <Button
               style={{backgroundColor: '#F5B39D'}}
               onPress={() => handleClick()}

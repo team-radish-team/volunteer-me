@@ -45,7 +45,7 @@ const VolunteerProfile = props => {
             <Tab heading="Your Profile">
               <Content style={{flex: 0}} scrollEnabled={false}>
                 <Header noShadow>
-                  <Title>
+                  <Title style={{fontFamily: 'Roboto'}}>
                     {volunteer.firstName} {volunteer.lastName}
                   </Title>
                 </Header>
@@ -58,8 +58,16 @@ const VolunteerProfile = props => {
                   <CardItem>
                     <CardItem>
                       <Body>
-                        <Text>Email: {volunteer.email}</Text>
-                        <Text>Phone Number: {volunteer.phone}</Text>
+                        <Text style={{fontFamily: 'Roboto'}}>
+                          Email: {volunteer.email}
+                        </Text>
+                        <Text style={{fontFamily: 'Roboto'}}>
+                          Phone Number: {volunteer.phone}
+                        </Text>
+                        <Text style={{fontFamily: 'Roboto'}}>Interests:</Text>
+                        {volunteer.interests.map(interest => {
+                          return <Text key={interest}>{interest} </Text>
+                        })}
                       </Body>
                     </CardItem>
                   </CardItem>

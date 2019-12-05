@@ -23,6 +23,7 @@ import {
   Title
 } from 'native-base'
 import EventCard from './EventCard'
+import EventPage from './EventPage'
 import VolLogoutButton from './VolLogoutButton'
 import {getVolunteerThunk} from '../store/singleVolunteer'
 
@@ -41,7 +42,7 @@ const EventList = props => {
   const volEvents = useSelector(state => state.allEvents.volunteerEvents)
   //console.log(volunteer)
   //console.log('volEvents: ', volEvents)
-  const evId = events[0].id
+  //console.log('VOL EVENTS', volEvents)
   useEffect(() => {
     dispatch(getEventsThunk())
     props.navigation.setParams({handleHeaderChange, handleFilterChange})
@@ -49,10 +50,14 @@ const EventList = props => {
   useEffect(() => {
     dispatch(getVolunteerEventsThunk(volunteer.id))
   }, [volunteer.id])
+
   useEffect(() => {
-    dispatch(getNeo4jEventsThunk(volunteer.id, evId))
-  }, [volunteer.id, volEvents[0]])
+    dispatch(getNeo4jEventsThunk(volunteer.id, volEvents))
+  }, [volEvents.length])
+
   const [filter, setFilter] = useState('All')
+
+  //console.log('volEvent length ', volEvents.length)
 
   return (
     <React.Fragment>

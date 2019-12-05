@@ -24,8 +24,13 @@ const EventPage = props => {
   const volunteers = useSelector(state => state.allEvents.volunteers)
   const volunteer = useSelector(state => state.singleVolunteer)
 
-  const titleStyle = {fontWeight: 'bold', fontSize: 20, textAlign: 'center'}
-  const labelStyle = {fontWeight: 'bold', fontSize: 15}
+  const titleStyle = {
+    fontWeight: 'bold',
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: 'Roboto'
+  }
+  const labelStyle = {fontWeight: 'bold', fontSize: 15, fontFamily: 'Roboto'}
 
   useEffect(() => {
     dispatch(getEventVolunteersThunk(event.id))
@@ -71,10 +76,10 @@ const EventPage = props => {
             </CardItem>
             <CardItem>
               <Text style={labelStyle}>Address: </Text>
-              <Text>{event.address}</Text>
+              <Text style={{fontFamily: 'Roboto'}}>{event.address}</Text>
             </CardItem>
             <CardItem>
-              <Text>{event.description}</Text>
+              <Text style={{fontFamily: 'Roboto'}}>{event.description}</Text>
             </CardItem>
             <CardItem>
               {volunteers.find(vol => vol.id === volunteer.id) ? (
@@ -87,7 +92,9 @@ const EventPage = props => {
                     marginBottom: 20
                   }}
                 >
-                  <Text>Have fun at this event!</Text>
+                  <Text style={{fontFamily: 'Roboto'}}>
+                    Have fun at this event!
+                  </Text>
                 </Button>
               ) : (
                 <Button
@@ -106,7 +113,7 @@ const EventPage = props => {
                   }}
                 >
                   <Icon name="people" />
-                  <Text>I'm Attending!</Text>
+                  <Text style={{fontFamily: 'Roboto'}}>I'm Attending!</Text>
                 </Button>
               )}
             </CardItem>
@@ -117,7 +124,8 @@ const EventPage = props => {
               marginBottom: 20,
               textAlign: 'center',
               fontSize: 20,
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              fontFamily: 'Roboto'
             }}
           >
             Who's helping out?
