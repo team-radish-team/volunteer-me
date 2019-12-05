@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {createOrganizationThunk} from '../store/singleOrganization'
 import {useDispatch} from 'react-redux'
-import {Text, Alert} from 'react-native'
+import {Text, Alert, StyleSheet} from 'react-native'
 import {Container, Content, Button, Icon, Form, Item, Input} from 'native-base'
 
 let validated = false
@@ -28,14 +28,6 @@ function validate(form) {
   } else {
     validated = true
   }
-}
-
-function secureText(password) {
-  let visibleText = ''
-  for (let i = 0; i < password.length; i++) {
-    visibleText += '*'
-  }
-  return visibleText
 }
 
 const OrgSignup = props => {
@@ -87,7 +79,7 @@ const OrgSignup = props => {
   return (
     <Container>
       <Content>
-        <Form style={{paddingBottom: 40}}>
+        <Form style={styles.form}>
           <Item floatingLabel onChange={() => setFirstName()}>
             <Icon active name="ios-hand" type="Ionicons" />
             <Input
@@ -150,7 +142,8 @@ const OrgSignup = props => {
             <Icon active name="lock" type="Entypo" />
             <Input
               placeholder="Password"
-              value={secureText(form.password)}
+              value={form.password}
+              secureTextEntry={true}
               onChange={event => handleChange(event, 'password')}
             />
           </Item>
@@ -158,7 +151,8 @@ const OrgSignup = props => {
             <Icon active name="lock" type="Entypo" />
             <Input
               placeholder="Confirm Password"
-              value={secureText(form.confirmPassword)}
+              secureTextEntry={true}
+              value={form.confirmPassword}
               onChange={event => handleChange(event, 'confirmPassword')}
             />
           </Item>
@@ -178,6 +172,7 @@ const OrgSignup = props => {
 
 export default OrgSignup
 
-const styles = {
-  buttonStyle: {backgroundColor: '#F5B39D'}
-}
+const styles = StyleSheet.create({
+  buttonStyle: {backgroundColor: '#F5B39D', fontWeight: 'bold'},
+  form: {paddingBottom: 40}
+})
