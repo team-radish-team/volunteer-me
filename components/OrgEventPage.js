@@ -72,7 +72,10 @@ const OrgEventPage = props => {
             <Text>{event.description}</Text>
           </CardItem>
           <CardItem>
-            <Button onPress={() => handleClick()}>
+            <Button
+              style={{backgroundColor: '#F5B39D'}}
+              onPress={() => handleClick()}
+            >
               <Text>Edit This Event</Text>
             </Button>
           </CardItem>

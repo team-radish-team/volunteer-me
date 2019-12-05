@@ -112,7 +112,12 @@ class EventEditForm extends React.Component {
             onChange={this.onChange}
             options={options}
           />
-          <Button rounded info onPress={() => this.handleSubmit()}>
+          <Button
+            rounded
+            info
+            style={{backgroundColor: '#F5B39D'}}
+            onPress={() => this.handleSubmit()}
+          >
             <Text>Submit</Text>
           </Button>
         </Container>

@@ -84,7 +84,8 @@ const EventPage = props => {
                     width: 175,
                     marginLeft: 120,
                     marginTop: 10,
-                    marginBottom: 20
+                    marginBottom: 20,
+                    backgroundColor: '#F5B39D'
                   }}
                   rounded
                   iconLeft
