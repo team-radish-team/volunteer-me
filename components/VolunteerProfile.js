@@ -19,6 +19,7 @@ import {getVolunteerEventsThunk} from '../store/allEvents'
 import VolLogoutButton from './VolLogoutButton'
 import EventCard from './EventCard'
 import {withNavigation} from 'react-navigation'
+import InterestCard from './InterestCard'
 
 const VolunteerProfile = props => {
   const dispatch = useDispatch()
@@ -53,14 +54,14 @@ const VolunteerProfile = props => {
                       <Body>
                         <Text>Email: {volunteer.email}</Text>
                         <Text>Phone Number: {volunteer.phone}</Text>
-                        <Text>Interests:</Text>
-                        {volunteer.interests.map(interest => {
-                          return <Text key={interest}>{interest} </Text>
-                        })}
                       </Body>
                     </CardItem>
                   </CardItem>
                 </Card>
+                <Text>Interests</Text>
+                {volunteer.interests.map(interest => {
+                  return <InterestCard key={interest} interest={interest} />
+                })}
                 <VolLogoutButton />
               </Content>
             </Tab>
