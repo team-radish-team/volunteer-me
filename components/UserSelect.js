@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {ImageBackground, StyleSheet, Dimensions} from 'react-native'
-import {Container, Content, Text, Button, Card} from 'native-base'
+import {Container, Content, Text, Button, Card, Title} from 'native-base'
 
 const {height, width} = Dimensions.get('window')
 
@@ -25,7 +25,18 @@ const UserSelect = props => {
               onPress={() => props.navigation.navigate('VolLogin')}
               style={styles.topButton}
             >
-              <Text style={styles.allText}>Volunteer</Text>
+              <Title>
+                <Text
+                  style={{
+                    color: 'white',
+                    textShadowColor: 'pink',
+                    textShadowRadius: 1,
+                    fontFamily: 'Roboto'
+                  }}
+                >
+                  Volunteer
+                </Text>
+              </Title>
             </Button>
             <Button
               block
@@ -33,7 +44,18 @@ const UserSelect = props => {
               style={styles.bottomButton}
               onPress={() => props.navigation.navigate('OrgLogin')}
             >
-              <Text style={styles.allText}>Organization</Text>
+              <Title>
+                <Text
+                  style={{
+                    color: 'white',
+                    textShadowColor: 'orange',
+                    textShadowRadius: 1,
+                    fontFamily: 'Roboto'
+                  }}
+                >
+                  Organization
+                </Text>
+              </Title>
             </Button>
           </Content>
         </ImageBackground>

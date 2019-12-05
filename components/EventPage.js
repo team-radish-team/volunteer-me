@@ -24,6 +24,14 @@ const EventPage = props => {
   const volunteers = useSelector(state => state.allEvents.volunteers)
   const volunteer = useSelector(state => state.singleVolunteer)
 
+  const titleStyle = {
+    fontWeight: 'bold',
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: 'Roboto'
+  }
+  const labelStyle = {fontWeight: 'bold', fontSize: 15, fontFamily: 'Roboto'}
+
   useEffect(() => {
     dispatch(getEventVolunteersThunk(event.id))
   }, [])
@@ -44,24 +52,30 @@ const EventPage = props => {
               />
             </CardItem>
             <CardItem>
-              <Text style={{fontFamily: 'Roboto'}}>
-                {event.organization.name}
+              <Text style={titleStyle}>{event.title}</Text>
+            </CardItem>
+            <CardItem>
+              <Text style={labelStyle}>Who's Hosting: </Text>
+              <Text>{event.organization.name}</Text>
+            </CardItem>
+            <CardItem>
+              <Text style={labelStyle}>Volunteers Needed: </Text>
+              <Text>
+                {volunteers.length}/{event.volunteerTargetNum}
               </Text>
             </CardItem>
             <CardItem>
-              <Text style={{fontFamily: 'Roboto'}}>
-                Volunteers Needed: {volunteers.length}/
-                {event.volunteerTargetNum}
-              </Text>
+              <Text style={labelStyle}>Date and Time: </Text>
+              <Text>{event.startTime.slice(5, 10)}</Text>
             </CardItem>
             <CardItem>
-              <Text style={{fontFamily: 'Roboto'}}>
-                {event.startTime.slice(5, 10)} from{' '}
-                {normalize(event.startTime.slice(11, 16))} -{' '}
+              <Text>
+                {normalize(event.startTime.slice(11, 16))} to<Text> </Text>
                 {normalize(event.endTime.slice(11, 16))}
               </Text>
             </CardItem>
             <CardItem>
+              <Text style={labelStyle}>Address: </Text>
               <Text style={{fontFamily: 'Roboto'}}>{event.address}</Text>
             </CardItem>
             <CardItem>
@@ -86,9 +100,10 @@ const EventPage = props => {
                 <Button
                   style={{
                     width: 175,
-                    marginLeft: 120,
+                    marginLeft: 100,
                     marginTop: 10,
-                    marginBottom: 20
+                    marginBottom: 20,
+                    backgroundColor: '#F5B39D'
                   }}
                   rounded
                   iconLeft
@@ -108,6 +123,8 @@ const EventPage = props => {
               marginTop: 30,
               marginBottom: 20,
               textAlign: 'center',
+              fontSize: 20,
+              fontWeight: 'bold',
               fontFamily: 'Roboto'
             }}
           >

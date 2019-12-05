@@ -11,7 +11,8 @@ import {
   Button,
   Icon,
   Left,
-  Body
+  Body,
+  Title
 } from 'native-base'
 
 const styles = StyleSheet.create({
@@ -28,7 +29,9 @@ const OrgEventCard = props => {
         onPress={() => props.navigation.navigate('OrgEventPage', props.event)}
       >
         <Left>
-          <Text style={{fontFamily: 'Roboto'}}>{props.event.title}</Text>
+          <Title>
+            <Text style={{fontFamily: 'Roboto'}}>{props.event.title}</Text>
+          </Title>
         </Left>
       </CardItem>
       <CardItem
