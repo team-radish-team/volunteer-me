@@ -6,6 +6,7 @@ import {Text, StyleSheet} from 'react-native'
 import {Container, Content, Button, Icon, Form, Item, Input} from 'native-base'
 
 let validated = false
+
 function validate(form) {
   if (
     form.firstName.length < 1 ||
@@ -50,6 +51,7 @@ const VolSignup = props => {
   const handleSubmit = async event => {
     event.preventDefault()
     validate(form)
+    console.log(form)
     if (validated === true) {
       existsVar = await dispatch(createVolunteerThunk(form))
       if (existsVar === 'exists') {
@@ -58,14 +60,6 @@ const VolSignup = props => {
         props.navigation.navigate('IconPage')
       }
     }
-  }
-
-  const secureText = password => {
-    let visibleText = ''
-    for (let i = 0; i < password.length; i++) {
-      visibleText += '*'
-    }
-    return visibleText
   }
 
   return (
@@ -106,7 +100,8 @@ const VolSignup = props => {
             <Input
               placeholder="Password"
               onChange={event => handleChange(event, 'password')}
-              value={secureText(form.password)}
+              value={form.password}
+              secureTextEntry={true}
             />
           </Item>
           <Item floatingLabel last>
@@ -114,7 +109,8 @@ const VolSignup = props => {
             <Input
               placeholder="Confirm Password"
               onChange={event => handleChange(event, 'confirmPassword')}
-              value={secureText(form.confirmPassword)}
+              value={form.confirmPassword}
+              secureTextEntry={true}
             />
           </Item>
         </Form>

@@ -48,9 +48,11 @@ const styles = StyleSheet.create({
   },
   topButton: {backgroundColor: '#F16286', marginTop: 360},
   backgroundImage: {width: width, height: height},
+
   container: {
     display: 'flex'
-  }
+  },
+  backgroundImage: {width: width, height: height}
 })
 
 export default UserSelect

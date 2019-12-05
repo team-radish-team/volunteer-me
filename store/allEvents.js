@@ -34,10 +34,12 @@ export const getEventVolunteersThunk = eventId => async dispatch => {
 
 export const getVolunteerEventsThunk = volunteerId => async dispatch => {
   try {
-    const {data} = await axios.get(
-      `${ngrokSecret}/api/events/volunteer/${volunteerId}`
-    )
-    dispatch(getVolunteerEvents(data.events))
+    if (volunteerId) {
+      const {data} = await axios.get(
+        `${ngrokSecret}/api/events/volunteer/${volunteerId}`
+      )
+      dispatch(getVolunteerEvents(data.events))
+    }
   } catch (error) {
     console.error('Error getting volunteer events', error)
   }
@@ -95,10 +97,14 @@ export const addEventThunk = (
 
 export const getNeo4jEventsThunk = (volunteerId, eventId) => async dispatch => {
   try {
-    const {data} = await axios.get(
-      `${ngrokSecret}/api/events/neo4j/${volunteerId}/${eventId}`
-    )
-    dispatch(getNeoEvents(data.records[0]._fields[0]))
+    if (eventId && volunteerId) {
+      const {data} = await axios.get(
+        `${ngrokSecret}/api/events/neo4j/${volunteerId}/${eventId}`
+      )
+      if (data.records[0]._fields[0]) {
+        dispatch(getNeoEvents(data.records[0]._fields[0]))
+      }
+    }
   } catch (error) {
     console.error('Error getting neo4j events ', error)
   }
