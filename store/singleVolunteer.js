@@ -134,7 +134,6 @@ export default function(state = initialState, action) {
       return action.volunteer
     case UPDATE_VOLUNTEER:
       return action.volunteer
-
     default:
       return state
   }
