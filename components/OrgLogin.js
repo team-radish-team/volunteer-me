@@ -35,7 +35,6 @@ class OrgLogin extends React.Component {
     if (values) {
       const password = values.password
       const email = values.email.toLowerCase()
-      const password = values.password
       const type = this.state.type
       this.props.auth(email, password, type)
 
