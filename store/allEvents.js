@@ -100,9 +100,10 @@ export const getNeo4jEventsThunk = (
   volEvents
 ) => async dispatch => {
   try {
-    if (volunteerId && volEvents.length) {
+    if (volunteerId) {
       const {data} = await axios.get(
-        `${ngrokSecret}/api/events/neo4j/${volunteerId}/${volEvents[0].VolunteerEvent.eventId}`
+        //`${ngrokSecret}/api/events/neo4j/${volunteerId}/${volEvents[0].VolunteerEvent.eventId}`
+        `${ngrokSecret}/api/events/neo4j/${volunteerId}`
       )
 
       if (data.records[0]._fields[0]) {
