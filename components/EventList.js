@@ -52,8 +52,8 @@ const EventList = props => {
   }, [volunteer.id])
 
   useEffect(() => {
-    dispatch(getNeo4jEventsThunk(volunteer.id, volEvents))
-  }, [volEvents.length])
+    dispatch(getNeo4jEventsThunk(volunteer.id))
+  }, [volunteer.id])
 
   const [filter, setFilter] = useState('All')
 

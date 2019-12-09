@@ -37,11 +37,15 @@ driver.onCompleted = () => {
 }
 const session = driver.session()
 
-router.get('/neo4j/:volunteerId/:eventId', async (req, res, next) => {
+router.get('/neo4j/:volunteerId/', async (req, res, next) => {
   try {
-    let data = await session.run(`MATCH (me:Volunteer {volunteerId: ${req.params.volunteerId}})-[:HAS_ATTENDED]->(e:Event{eventId: ${req.params.eventId}}),
-    (newEv:Event)<-[:HAS_ATTENDED]-(other:Volunteer)-[:HAS_ATTENDED]->(e)
-    RETURN collect(newEv.eventId)`)
+    // let data = await session.run(`MATCH (me:Volunteer {volunteerId: ${req.params.volunteerId}})-[:HAS_ATTENDED]->(e:Event{eventId: ${req.params.eventId}}),
+    // (newEv:Event)<-[:HAS_ATTENDED]-(other:Volunteer)-[:HAS_ATTENDED]->(e)
+    // RETURN collect(newEv.eventId)`)
+    let data = await session.run(`MATCH (me:Volunteer {volunteerId: ${req.params.volunteerId}})-[:HAS_ATTENDED]->(myEv),
+(newEv:Event)<-[:HAS_ATTENDED]-(other:Volunteer)-[:HAS_ATTENDED]->(myEv:Event)
+WHERE NOT (newEv)--(me)
+RETURN  collect(newEv.eventId) AS newEvList`)
     res.json(data).status(200)
   } catch (error) {
     next(error)
