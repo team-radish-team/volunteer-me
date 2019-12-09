@@ -42,8 +42,8 @@ router.get('/neo4j/:volunteerId/', async (req, res, next) => {
     // let data = await session.run(`MATCH (me:Volunteer {volunteerId: ${req.params.volunteerId}})-[:HAS_ATTENDED]->(e:Event{eventId: ${req.params.eventId}}),
     // (newEv:Event)<-[:HAS_ATTENDED]-(other:Volunteer)-[:HAS_ATTENDED]->(e)
     // RETURN collect(newEv.eventId)`)
-    let data = await session.run(`MATCH (me:Volunteer {volunteerId: ${req.params.volunteerId}})-[:HAS_ATTENDED]->(myEv),
-(newEv:Event)<-[:HAS_ATTENDED]-(other:Volunteer)-[:HAS_ATTENDED]->(myEv:Event)
+    let data = await session.run(`MATCH (me:Volunteer {volunteerId: ${req.params.volunteerId}})-[:HAS_ATTENDED]->(myEv:Event),
+(newEv:Event)<-[:HAS_ATTENDED]-(other:Volunteer)-[:HAS_ATTENDED]->(myEv)
 WHERE NOT (newEv)--(me)
 RETURN  collect(newEv.eventId) AS newEvList`)
     res.json(data).status(200)
