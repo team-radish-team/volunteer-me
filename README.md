@@ -16,7 +16,7 @@ Built with:
 - Express
 - Sequelize
 
-##Installation
+## Installation
 
 If you have succeeded you should see the following!
 
@@ -46,11 +46,11 @@ $ npm run server
 $ expo start
 ```
 
-##Features
+## Features
 
-![Volunteer Interests](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576167770/capstone/screen_shot_2019-12-12_at_10.11.04_am_kunl33.png)
-![Events List](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576167771/capstone/screen_shot_2019-12-12_at_10.11.38_am_xuq4ax.png)
-![Events Map](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576167771/capstone/screen_shot_2019-12-12_at_10.12.00_am_j0mffp.png)
+![Volunteer Interests](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576168864/capstone/screen_shot_2019-12-12_at_10.11.04_am_rspogz.png)   
+![Events List](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576168864/capstone/screen_shot_2019-12-12_at_10.11.38_am_eqtah0.png)  
+![Events Map](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576168864/capstone/screen_shot_2019-12-12_at_10.12.00_am_v7ilki.png)  
 
 - Two distinct user flows for nonprofits and volunteers
 - Tabular and Stack navigation flow through React Native Navigation
@@ -59,12 +59,14 @@ $ expo start
 - Clean UI/UX design with React Native and NativeBase
 - Custom account validation
 
-##Team
+## Team
 
 ##### [Andrew Pratt](https://github.com/apratt957)
 ##### [Chris Pietka](https://github.com/CrispyQ7)
 ##### [Kate Murray](https://github.com/katemm11)
 ##### [Lihan Chen](https://github.com/lchen90)
+
+## Wiki
 
 Documentation and technologies used can be found in our Wiki. 
 
