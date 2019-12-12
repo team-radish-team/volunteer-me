@@ -48,9 +48,9 @@ $ expo start
 
 ## Features
 
-![Volunteer Interests](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576168864/capstone/screen_shot_2019-12-12_at_10.11.04_am_rspogz.png)   
-![Events List](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576168864/capstone/screen_shot_2019-12-12_at_10.11.38_am_eqtah0.png)  
-![Events Map](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576168864/capstone/screen_shot_2019-12-12_at_10.12.00_am_v7ilki.png)  
+![Volunteer Interests](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576168864/capstone/screen_shot_2019-12-12_at_10.11.04_am_rspogz.png) 
+![Events List](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576168864/capstone/screen_shot_2019-12-12_at_10.11.38_am_eqtah0.png) 
+![Events Map](https://res.cloudinary.com/dssu5deur/image/upload/c_thumb,w_200,g_face/v1576168864/capstone/screen_shot_2019-12-12_at_10.12.00_am_v7ilki.png) 
 
 - Two distinct user flows for nonprofits and volunteers
 - Tabular and Stack navigation flow through React Native Navigation
